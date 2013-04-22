@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  belongs_to :survey, :inverse_of => :questions
+  belongs_to :question_group, :inverse_of => :questions
   default_scope order(:position)
 
   validates :survey, :question_text, :presence => true

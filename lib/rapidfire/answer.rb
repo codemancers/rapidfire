@@ -1,6 +1,6 @@
 class Answer < ActiveRecord::Base
   belongs_to :question
-  belongs_to :user_survey
+  belongs_to :answer_group
 
   validate :verify_answer_text
   attr_accessible :answer_text, :question_id
