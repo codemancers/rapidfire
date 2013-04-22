@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'gfi/survey/version'
+require 'rapidfire/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "gfi-survey"
-  spec.version       = Gfi::Survey::VERSION
+  spec.name          = "rapidfire"
+  spec.version       = Rapidfire::VERSION
   spec.authors       = ["Yuva"]
   spec.email         = ["yuva@codemancers.com"]
   spec.description   = %q{TODO: Write a gem description}

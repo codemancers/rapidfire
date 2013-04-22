@@ -1,6 +1,6 @@
 require 'rails/generators/active_record'
 
-module Survey
+module Rapidfire
   module Generators
     class InstallGenerator < Rails::Generators::Base
       include Rails::Generators::Migration
