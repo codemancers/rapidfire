@@ -1,0 +1,23 @@
+<h1>
+  Question Groups
+  <div class="pull-right">
+    <%= link_to "New Group", question_groups_path, :method => :post %>
+  </div>
+</h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>Question Group</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @question_groups.each do |group| %>
+      <tr>
+        <td><%= group.id %></td>
+        <td><%= link_to "Answer", "#" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
