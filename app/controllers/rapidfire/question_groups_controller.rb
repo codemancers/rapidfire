@@ -1,23 +1,34 @@
 module Rapidfire
   class QuestionGroupsController < ApplicationController
-    respond_to :html
+    respond_to :html, :js
 
     def index
       @question_groups = QuestionGroup.all
       respond_with(@question_groups)
     end
 
-    def show
-      @question_group = QuestionGroup.find(params[:id])
+    def new
+      @question_group = QuestionGroup.new
       respond_with(@question_group)
     end
 
     def create
-      @question_group = QuestionGroup.new
+      @question_group = QuestionGroup.new(question_group_params)
       @question_group.save
 
-      location = question_group_questions_path(@question_group)
-      respond_with(@question_group, :location => location)
+      respond_with(@question_group)
+    end
+
+    def destroy
+      @question_group = QuestionGroup.find(params[:id])
+      @question_group.destroy
+
+      respond_with(@question_group)
+    end
+
+    private
+    def question_group_params
+      params.require(:question_group).permit(:name)
     end
   end
 end

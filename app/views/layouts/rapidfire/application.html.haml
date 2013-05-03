@@ -1,0 +1,22 @@
+!!!
+
+%html
+  %head
+    %title Rapidfire
+    = stylesheet_link_tag    "rapidfire/application", :media => "all"
+    = javascript_include_tag "rapidfire/application"
+    = csrf_meta_tags
+
+  %body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to "Rapidfire", root_path, :class => "brand"
+          .nav-collapse.collapse
+            %ul.nav
+              %li= link_to "Question Groups", question_groups_path
+
+    .container
+      .row-fluid
+        .span12
+          = yield

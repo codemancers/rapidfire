@@ -1,0 +1,12 @@
+%h1
+  Questions
+
+%table
+  %thead
+    %tr
+      %td Questions
+      %td
+  %tbody
+    - @questions.each do |question|
+      %tr
+        %td= question.id

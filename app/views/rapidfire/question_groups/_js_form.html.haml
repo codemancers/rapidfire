@@ -1,0 +1,13 @@
+.modal.hide
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3= question_group.new_record? ? "New Group" : "Edit Group"
+
+  .modal-body
+    = simple_form_for question_group, :remote => true do |f|
+      = f.input :name, :input_html => { :class => "input-block-level" }
+      .control-inputs
+        .controls
+          = f.submit :class => "btn btn-primary"
+
+  .modal-footer
