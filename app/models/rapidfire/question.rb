@@ -4,7 +4,7 @@ module Rapidfire
     default_scope order(:position)
 
     validates :survey, :question_text, :presence => true
-    serialize :validation_rules, ActiveRecord::Coders::Hstore
+    serialize :validation_rules
 
     def rules
       validation_rules || {}
