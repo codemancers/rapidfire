@@ -1,7 +1,6 @@
-%td= link_to question_group.name, question_group_questions_path(question_group)
+%td= question.question_text
 %td
   %ul.horizontal-list
-    %li= link_to "Answer Questions", "#", :class => "btn btn-small btn-info"
     %li
       = link_to "Delete", [question_group], :method => :delete, :remote => true,
         :class => "btn btn-small btn-danger"

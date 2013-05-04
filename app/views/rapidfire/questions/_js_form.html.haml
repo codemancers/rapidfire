@@ -1,0 +1,16 @@
+.modal.hide
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3= "Question"
+
+  .modal-body
+    = simple_form_for [@question_group, question], :remote => true do |f|
+      = f.input :type, :collection => ::Rapidfire::QuestionProxy::QUESTION_TYPES,
+        :include_blank => false, :input_html => { :class => "input-block-level" }
+      = f.input :question_text, :input_html => { :class => "input-block-level" }
+      = f.input :answer_presence, :as => :boolean
+      .control-inputs
+        .controls
+          = f.submit :class => "btn btn-primary"
+
+  .modal-footer

@@ -1,12 +1,20 @@
-%h1
+%h2
   Questions
+  .pull-right
+    = link_to "New Question", new_question_group_question_path(@question_group),
+      :remote => true, :class => "btn btn-primary btn-small"
+%hr
 
-%table
+%table.table.table-striped.table-bordered
+  %colgroup
+    %col
+    %col{ :width => 250 }
   %thead
     %tr
-      %td Questions
-      %td
+      %th Question
+      %th
   %tbody
     - @questions.each do |question|
-      %tr
-        %td= question.id
+      %tr{ :id => "question_#{question.id}" }
+        = render :partial => "question", :locals => { :question => question }
+#js-modal
