@@ -8,7 +8,19 @@
       = f.input :type, :collection => ::Rapidfire::QuestionProxy::QUESTION_TYPES,
         :include_blank => false, :input_html => { :class => "input-block-level" }
       = f.input :question_text, :input_html => { :class => "input-block-level" }
+      = f.input :answer_options, :as => :text, :input_html => { :class => "input-block-level", :rows => 5 },
+        :wrapper_html => { :id => "question_answer_options_wrapper" }
+      %h4 Other options
+      %hr
       = f.input :answer_presence, :as => :boolean
+      = f.input :answer_minimum_length, :input_html => { :class => "input-block-level" },
+        :wrapper_html => { :id => "question_answer_minimum_length_wrapper", :class => "hide" }
+      = f.input :answer_maximum_length, :input_html => { :class => "input-block-level" },
+        :wrapper_html => { :id => "question_answer_maximum_length_wrapper", :class => "hide" }
+      = f.input :answer_greater_than_or_equal_to, :input_html => { :class => "input-block-level" },
+        :wrapper_html => { :id => "question_answer_greater_than_or_equal_to_wrapper", :class => "hide" }
+      = f.input :answer_less_than_or_equal_to, :input_html => { :class => "input-block-level" },
+        :wrapper_html => { :id => "question_answer_less_than_or_equal_to", :class => "hide" }
       .control-inputs
         .controls
           = f.submit :class => "btn btn-primary"

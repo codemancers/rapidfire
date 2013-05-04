@@ -1,7 +1,7 @@
 $("#js-modal .modal").modal('hide');
 
 - if @question.errors.empty?
-  $("<tr>").attr("id", "question_{@question.id}").appendTo("tbody").html("#{escape_javascript(render :partial => 'question', :locals => {:question => @question})}")
+  $("<tr>").attr("id", "question_{@question.id}").appendTo("tbody").html("#{escape_javascript(render :partial => 'question', :locals => {:question_group => @question_group, :question => @question})}")
 - else
   $("#js-modal").html("#{escape_javascript(render :partial => 'js_form', :locals => {:question => @question})}");
   $("#js-modal .modal").modal();

@@ -35,7 +35,7 @@ module Rapidfire
         permit(:type, :question_text,
                :answer_options, :answer_presence,
                :answer_minimum_length, :answer_maximum_length,
-               :answer_greater_than_or_equal, :answer_less_than_or_equal)
+               :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to)
     end
 
     def find_question_group!

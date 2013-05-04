@@ -36,4 +36,3 @@ module Rapidfire
     end
   end
 end
-

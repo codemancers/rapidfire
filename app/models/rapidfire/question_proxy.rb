@@ -23,7 +23,7 @@ module Rapidfire
     attr_accessor :question_group, :question,
       :type, :question_text, :answer_options, :answer_presence,
       :answer_minimum_length, :answer_maximum_length,
-      :answer_greater_than_or_equal, :answer_less_than_or_equal
+      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
 
     delegate :valid?, :errors, :id, :to => :question
 
@@ -70,14 +70,15 @@ module Rapidfire
 
     def to_question_params
       {
+        :question_group => question_group,
         :question_text  => question_text,
         :answer_options => answer_options,
         :validation_rules => {
           :presence => answer_presence,
           :minimum  => answer_minimum_length,
           :maximum  => answer_maximum_length,
-          :greater_than_or_equal_to => answer_greater_than_or_equal,
-          :less_than_or_equal_to    => answer_less_than_or_equal
+          :greater_than_or_equal_to => answer_greater_than_or_equal_to,
+          :less_than_or_equal_to    => answer_less_than_or_equal_to
         }
       }
     end
@@ -89,8 +90,8 @@ module Rapidfire
       answer_presence = question.rules[:presence]
       answer_minimum_length = question.rules[:minimum]
       answer_maximum_length = question.rules[:maximum]
-      answer_greater_than_or_equal = question.rules[:greater_than_or_equal_to]
-      answer_less_than_or_equal    = question.rules[:less_than_or_equal_to]
+      answer_greater_than_or_equal_to = question.rules[:greater_than_or_equal_to]
+      answer_less_than_or_equal_to    = question.rules[:less_than_or_equal_to]
     end
   end
 end

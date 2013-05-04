@@ -16,5 +16,5 @@
   %tbody
     - @questions.each do |question|
       %tr{ :id => "question_#{question.id}" }
-        = render :partial => "question", :locals => { :question => question }
+        = render :partial => "question", :locals => { :question_group => @question_group, :question => question }
 #js-modal
