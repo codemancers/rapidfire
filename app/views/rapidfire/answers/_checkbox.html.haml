@@ -1,0 +1,3 @@
+= f.input :answer_text, :label => answer.question.question_text, :as => :check_boxes,
+  :collection => answer.question.options, :checked => f.object.answer_text.try(:split, ","),
+  :input_html => { :class => "input-block-level" }

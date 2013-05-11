@@ -4,7 +4,6 @@ module Rapidfire
     belongs_to :answer_group
 
     validate :verify_answer_text
-    attr_accessible :answer_text, :question_id
 
     private
     def verify_answer_text

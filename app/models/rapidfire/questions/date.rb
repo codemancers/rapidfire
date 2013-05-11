@@ -5,7 +5,7 @@ module Rapidfire
         super(answer)
 
         if rules[:presence]
-          begin  Date.parse(answer.answer_text)
+          begin  ::Date.parse(answer.answer_text.to_s)
           rescue ArgumentError => e
             answer.errors.add(:answer_text, :invalid)
           end

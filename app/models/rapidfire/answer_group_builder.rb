@@ -12,6 +12,10 @@ module Rapidfire
       build_answer_group
     end
 
+    def to_model
+      @answer_group
+    end
+
     def build_answer_group
       @answer_group = AnswerGroup.new(:question_group => question_group)
       @answers = @question_group.questions.collect do |question|
@@ -21,16 +25,16 @@ module Rapidfire
 
     def save(options = {})
       params.each do |question_id, answer_attributes|
-        text = answer_attributes[:answer_text]
         if answer = @answer_group.answers.find { |a| a.question_id.to_s == question_id.to_s }
+          text = answer_attributes[:answer_text]
           answer.answer_text = text.is_a?(Array) ? text.join(',') : text
         end
       end
 
       @answer_group.save!(options)
-    rescue
+    rescue Exception => e
       # repopulate answers here in case of failure as they are not getting updated
-      @answers = @questions.collect do |question|
+      @answers = @question_group.questions.collect do |question|
         @answer_group.answers.find { |a| a.question_id == question.id }
       end
       false

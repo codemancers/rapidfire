@@ -30,7 +30,7 @@ module Rapidfire
         answer.validates_presence_of :answer_text
       end
 
-      if rules[:mininum] || rules[:maximum]
+      if rules[:mininum].present? || rules[:maximum].present?
         answer.validates_length_of :answer_text, rules.slice(:mininum, :maximum)
       end
     end
