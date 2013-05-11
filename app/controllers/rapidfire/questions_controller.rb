@@ -3,6 +3,7 @@ module Rapidfire
     respond_to :html, :js
 
     before_filter :find_question_group!
+    before_filter :find_question!, :only => [:edit, :update, :destroy]
 
     def index
       @questions = @question_group.questions
@@ -22,8 +23,20 @@ module Rapidfire
       respond_with(@question)
     end
 
+    def edit
+      @question = QuestionProxy.new(:question => @question)
+      respond_with(@question)
+    end
+
+    def update
+      proxy_params = question_params.merge(:question => @question)
+      @question = QuestionProxy.new(proxy_params)
+      @question.save
+
+      respond_with(@question)
+    end
+
     def destroy
-      @question = @question_group.questions.find(params[:id])
       @question.destroy
 
       respond_with(@question)
@@ -40,6 +53,10 @@ module Rapidfire
 
     def find_question_group!
       @question_group = QuestionGroup.find(params[:question_group_id])
+    end
+
+    def find_question!
+      @question = @question_group.questions.find(params[:id])
     end
   end
 end

@@ -35,16 +35,10 @@ module Rapidfire
       question
     end
 
-    def initialize(attributes = {})
-      attributes.each do |name, value|
-        send("#{name}=", value)
-      end
-
-      if question
-        from_question_to_attributes(question)
-      else
-        @question = question_group.questions.new
-      end
+    def initialize(params = {})
+      from_question_to_attributes(params[:question]) if params[:question]
+      params.each { |k, v| send("#{k}=", v) }
+      @question ||= question_group.questions.new
     end
 
     def save
@@ -84,14 +78,15 @@ module Rapidfire
     end
 
     def from_question_to_attributes(question)
-      type = question.type
-      question_text   = question.question_text
-      answer_options  = question.answer_options
-      answer_presence = question.rules[:presence]
-      answer_minimum_length = question.rules[:minimum]
-      answer_maximum_length = question.rules[:maximum]
-      answer_greater_than_or_equal_to = question.rules[:greater_than_or_equal_to]
-      answer_less_than_or_equal_to    = question.rules[:less_than_or_equal_to]
+      self.type = question.type
+      self.question_group  = question.question_group
+      self.question_text   = question.question_text
+      self.answer_options  = question.answer_options
+      self.answer_presence = question.rules[:presence]
+      self.answer_minimum_length = question.rules[:minimum]
+      self.answer_maximum_length = question.rules[:maximum]
+      self.answer_greater_than_or_equal_to = question.rules[:greater_than_or_equal_to]
+      self.answer_less_than_or_equal_to    = question.rules[:less_than_or_equal_to]
     end
   end
 end
