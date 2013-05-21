@@ -21,7 +21,7 @@ FactoryGirl.define do
     end
 
     factory :q_select, :class => "Rapidfire::Questions::Select" do
-      answer_options  "mac\r\nwnidows\r\n"
+      answer_options  "mac\r\nwindows\r\n"
     end
 
     factory :q_short, :class => "Rapidfire::Questions::Short" do
