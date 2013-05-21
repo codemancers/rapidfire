@@ -20,18 +20,18 @@ module Rapidfire
       validation_rules || {}
     end
 
-    VALIDATION_OPTIONS = %w[
-      presence  minimum_length  maximum_length
-      greater_than_or_equal_to  less_than_or_equal_to
-    ]
-
+    # answer will delegate its validation to question, and question
+    # will inturn add validations on answer on the fly!
     def validate_answer(answer)
       if rules[:presence]
         answer.validates_presence_of :answer_text
       end
 
-      if rules[:mininum].present? || rules[:maximum].present?
-        answer.validates_length_of :answer_text, rules.slice(:mininum, :maximum)
+      if rules[:minimum].present? || rules[:maximum].present?
+        min_max = { minimum: rules[:minimum].to_i }
+        min_max[:maximum] = rules[:maximum].to_i if rules[:maximum].present?
+
+        answer.validates_length_of :answer_text, min_max
       end
     end
   end
