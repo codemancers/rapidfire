@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Rapidfire::Questions::Select do
+describe Rapidfire::Questions::Checkbox do
   describe "Validations" do
     it { should validate_presence_of(:answer_options) }
   end
@@ -14,7 +14,7 @@ describe Rapidfire::Questions::Select do
   end
 
   describe "validate_answer" do
-    let(:question)  { FactoryGirl.create(:q_select, validation_rules: validation_rules) }
+    let(:question)  { FactoryGirl.create(:q_checkbox, validation_rules: validation_rules) }
     let(:answer)    { FactoryGirl.build(:answer, question: question, answer_text: answer_text) }
     before(:each)   { answer.valid? }
 
@@ -28,7 +28,7 @@ describe Rapidfire::Questions::Select do
 
       context "when there is an answer" do
         context "when answer is valid option" do
-          let(:answer_text)   { "windows" }
+          let(:answer_text)   { "hindi,telugu" }
 
           it "passes validation" do
             answer.errors.should be_empty
@@ -43,7 +43,7 @@ describe Rapidfire::Questions::Select do
           end
 
           it "says answer is invalid" do
-            answer.errors[:answer_text].should include("is not included in the list")
+            answer.errors[:answer_text].should include("is invalid")
           end
         end
       end
@@ -66,7 +66,7 @@ describe Rapidfire::Questions::Select do
 
       context "when answer is not empty" do
         context "when answer is valid option" do
-          let(:answer_text)   { "mac" }
+          let(:answer_text)   { "kannada" }
 
           it "passes validation" do
             answer.errors.should be_empty
@@ -81,7 +81,7 @@ describe Rapidfire::Questions::Select do
           end
 
           it "says answer is invalid" do
-            answer.errors[:answer_text].should include("is not included in the list")
+            answer.errors[:answer_text].should include("is invalid")
           end
         end
       end

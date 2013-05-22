@@ -54,8 +54,7 @@ module Rapidfire
         return false
       end
 
-      @question = klass.new(to_question_params)
-      @question.save
+      @question = klass.create(to_question_params)
     end
 
     def update_question

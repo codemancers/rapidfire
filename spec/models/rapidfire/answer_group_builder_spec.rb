@@ -4,7 +4,7 @@ describe Rapidfire::AnswerGroupBuilder do
   let(:question_group)  { FactoryGirl.create(:question_group) }
   let(:question1)  { FactoryGirl.create(:q_short, question_group: question_group) }
   let(:question2)  { FactoryGirl.create(:q_long, question_group: question_group,
-                                        validation_rules: { presence: true }) }
+                                        validation_rules: { presence: "1" }) }
 
   describe "Creation" do
     let(:builder)  { described_class.new(question_group) }

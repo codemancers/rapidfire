@@ -20,7 +20,7 @@ module Rapidfire
       params.each do |question_id, answer_attributes|
         if answer = @answer_group.answers.find { |a| a.question_id.to_s == question_id.to_s }
           text = answer_attributes[:answer_text]
-          answer.answer_text = text.is_a?(Array) ? text.join(',') : text
+          answer.answer_text = text.is_a?(Array) ? text.reject(&:blank?).join(',') : text
         end
       end
 
@@ -30,6 +30,7 @@ module Rapidfire
     def save(options = {})
       save!(options)
     rescue Exception => e
+      p e
       # repopulate answers here in case of failure as they are not getting updated
       @answers = @question_group.questions.collect do |question|
         @answer_group.answers.find { |a| a.question_id == question.id }

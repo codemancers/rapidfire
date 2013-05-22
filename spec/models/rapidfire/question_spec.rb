@@ -23,7 +23,7 @@ describe Rapidfire::Question do
 
     context "when validation rules are present" do
       let(:validation_rules) do
-        { :presence => true }
+        { :presence => "1" }
       end
 
       it "returns those rules" do
@@ -47,7 +47,7 @@ describe Rapidfire::Question do
     end
 
     context "when question should have an answer" do
-      let(:validation_rules) { { presence: true } }
+      let(:validation_rules) { { presence: "1" } }
 
       context "when answer is empty" do
         let(:answer_text)  { "" }

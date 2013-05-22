@@ -38,7 +38,7 @@ describe Rapidfire::Questions::Numeric do
     end
 
     context "when question should have an answer" do
-      let(:validation_rules) { { presence: true } }
+      let(:validation_rules) { { presence: "1" } }
 
       context "when answer is empty" do
         let(:answer_text)  { "" }

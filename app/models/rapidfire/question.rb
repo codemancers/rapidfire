@@ -23,7 +23,7 @@ module Rapidfire
     # answer will delegate its validation to question, and question
     # will inturn add validations on answer on the fly!
     def validate_answer(answer)
-      if rules[:presence]
+      if rules[:presence] == "1"
         answer.validates_presence_of :answer_text
       end
 
