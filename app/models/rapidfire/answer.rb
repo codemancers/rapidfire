@@ -1,7 +1,7 @@
 module Rapidfire
   class Answer < ActiveRecord::Base
     belongs_to :question
-    belongs_to :answer_group
+    belongs_to :answer_group, inverse_of: :answers
 
     validates :question, :answer_group, presence: true
     validate  :verify_answer_text, :if => "question.present?"
