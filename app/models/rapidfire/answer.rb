@@ -3,7 +3,8 @@ module Rapidfire
     belongs_to :question
     belongs_to :answer_group
 
-    validate :verify_answer_text
+    validates :question, :answer_group, presence: true
+    validate  :verify_answer_text, :if => "question.present?"
 
     private
     def verify_answer_text
