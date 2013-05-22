@@ -45,6 +45,7 @@ module Rapidfire
       @question.new_record? ? create_question : update_question
     end
 
+    private
     def create_question
       klass = nil
       if QUESTION_TYPES.values.include?(type)
