@@ -11,10 +11,6 @@ Capybara.javascript_driver = :webkit
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-# Checks for pending migrations before tests are run.
-# If you are not using ActiveRecord, you can remove this line.
-# ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
-
 RAPIDFIRE_ROOT = File.join(File.dirname(__FILE__), '..')
 FactoryGirl.definition_file_paths = [RAPIDFIRE_ROOT + "/spec/factories"]
 FactoryGirl.find_definitions

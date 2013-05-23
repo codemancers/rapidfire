@@ -28,5 +28,6 @@ gem 'shoulda'
 gem 'sqlite3'
 gem 'database_cleaner'
 gem "factory_girl_rails"
-gem 'capybara'
+gem 'capybara', '2.0.3'
 gem 'capybara-webkit'
+gem 'launchy'
