@@ -7,7 +7,8 @@ module Rapidfire
     end
 
     def create
-      @answer_group_builder = AnswerGroupBuilder.new(@question_group, params)
+      @answer_group_builder =
+        AnswerGroupBuilder.new(@question_group, params[:answer_group])
 
       if @answer_group_builder.save
         redirect_to question_groups_path

@@ -30,7 +30,6 @@ module Rapidfire
     def save(options = {})
       save!(options)
     rescue Exception => e
-      p e
       # repopulate answers here in case of failure as they are not getting updated
       @answers = @question_group.questions.collect do |question|
         @answer_group.answers.find { |a| a.question_id == question.id }
