@@ -19,7 +19,6 @@ gem 'uglifier',     '>= 1.0.3'
 
 gem 'haml-rails'
 gem 'quiet_assets'
-gem 'simple_form'
 gem 'strong_parameters'
 
 gem 'rspec-rails'

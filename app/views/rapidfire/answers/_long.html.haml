@@ -1,2 +1,4 @@
-= f.input :answer_text, :label => answer.question.question_text, :as => :text,
-  :input_html => { :rows => 5 }
+= render partial: "rapidfire/answers/errors", locals: {answer: answer}
+
+= f.label :answer_text, answer.question.question_text
+= f.text_area :answer_text, :rows => 5

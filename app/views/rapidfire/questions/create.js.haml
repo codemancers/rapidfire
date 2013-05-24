@@ -4,4 +4,4 @@ $("#js-form").empty();
   $("tbody").append("#{escape_javascript(render partial: 'question', locals: {question: @question})}")
 - else
   $("#js-form").html("#{escape_javascript(render partial: 'js_form', locals: {question: @question})}");
-  new Rapidfire.QuestionForm($("#js-form #new_question"));
+  new Rapidfire.QuestionForm($("#js-form #ja-question-form"));

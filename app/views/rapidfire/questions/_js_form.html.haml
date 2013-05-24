@@ -1,20 +1,37 @@
 %h3= "Question"
 
-= simple_form_for [@question_group, question], :remote => true do |f|
-  = f.input :type, :collection => ::Rapidfire::QuestionProxy::QUESTION_TYPES,
-    :include_blank => false, :input_html => { :id => "question_type" }
-  = f.input :question_text
-  = f.input :answer_options, :as => :text, :input_html => { :rows => 5 },
-    :wrapper_html => { :id => "question_answer_options_wrapper" }
+= form_for [@question_group, question], remote: true, html: {id: "js-question-form"} do |f|
+  - unless question.errors.empty?
+    %ul
+      - question.errors.full_messages.each do |message|
+        %li= message
+
+  #question_type_wrapper
+    = f.label :type
+    = f.select :type, ::Rapidfire::QuestionProxy::QUESTION_TYPES, {}, id: "question_type"
+  #question_text_wrapper
+    = f.label :question_text
+    = f.text_field :question_text
+  #question_answer_options_wrapper
+    = f.label :answer_options
+    = f.text_area :answer_options, rows: 5
+
   %h4 Other options
   %hr
-  = f.input :answer_presence, :as => :boolean
-  = f.input :answer_minimum_length,
-    :wrapper_html => { :id => "question_answer_minimum_length_wrapper", :class => "hide" }
-  = f.input :answer_maximum_length,
-    :wrapper_html => { :id => "question_answer_maximum_length_wrapper", :class => "hide" }
-  = f.input :answer_greater_than_or_equal_to,
-    :wrapper_html => { :id => "question_answer_greater_than_or_equal_to_wrapper", :class => "hide" }
-  = f.input :answer_less_than_or_equal_to,
-    :wrapper_html => { :id => "question_answer_less_than_or_equal_to_wrapper", :class => "hide" }
+  #answer_presence_wrapper
+    = f.label :answer_presence
+    = f.check_box :answer_presence
+  #question_answer_minimum_length_wrapper.hide
+    = f.label :answer_minimum_length
+    = f.text_field :answer_minimum_length
+  #question_answer_maximum_length_wrapper.hide
+    = f.label :answer_maximum_length
+    = f.text_field :answer_maximum_length
+  #question_answer_greater_than_or_equal_to_wrapper.hide
+    = f.label :answer_greater_than_or_equal_to
+    = f.text_field :answer_greater_than_or_equal_to
+  #question_answer_less_than_or_equal_to_wrapper.hide
+    = f.label :answer_less_than_or_equal_to
+    = f.text_field :answer_less_than_or_equal_to
+
   = f.submit

@@ -79,7 +79,7 @@ describe "Question Groups" do
 
       context "when name is present" do
         before(:each) do
-          page.within("#new_question") do
+          page.within("#js-question-form") do
             fill_in "question_question_text",  with: "Which OS?"
             fill_in "question_answer_options", with: "mac\r\nwindows"
             click_button "Create Question"
@@ -93,13 +93,13 @@ describe "Question Groups" do
 
       context "when name is not present" do
         before(:each) do
-          page.within("#new_question") do
+          page.within("#js-question-form") do
             click_button "Create Question"
           end
         end
 
         it "fails to create question group" do
-          page.within("#new_question") do
+          page.within("#js-question-form") do
             page.should have_content "can't be blank"
           end
         end
@@ -115,7 +115,7 @@ describe "Question Groups" do
 
       context "when name is modified" do
         before(:each) do
-          page.within("#edit_question_#{question1.id}") do
+          page.within("#js-question-form") do
             fill_in "question_question_text",  with: "Updated Question"
             click_button "Update Question"
           end
@@ -130,14 +130,14 @@ describe "Question Groups" do
 
       context "when name is not present" do
         before(:each) do
-          page.within("#edit_question_#{question1.id}") do
+          page.within("#js-question-form") do
             fill_in "question_question_text",  with: ""
             click_button "Update Question"
           end
         end
 
         it "fails to update question" do
-          page.within("#edit_question_#{question1.id}") do
+          page.within("#js-question-form") do
             page.should have_content "can't be blank"
           end
         end

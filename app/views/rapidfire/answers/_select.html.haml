@@ -1,2 +1,4 @@
-= f.input :answer_text, :label => answer.question.question_text, :as => :select,
-  :collection => answer.question.options
+= render partial: "rapidfire/answers/errors", locals: {answer: answer}
+
+= f.label :answer_text, answer.question.question_text
+= f.select :answer_text, answer.question.options, include_blank: true

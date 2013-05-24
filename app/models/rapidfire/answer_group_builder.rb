@@ -20,7 +20,8 @@ module Rapidfire
       params.each do |question_id, answer_attributes|
         if answer = @answer_group.answers.find { |a| a.question_id.to_s == question_id.to_s }
           text = answer_attributes[:answer_text]
-          answer.answer_text = text.is_a?(Array) ? text.reject(&:blank?).join(',') : text
+          answer.answer_text =
+            text.is_a?(Array) ? strip_checkbox_answers(text).join(',') : text
         end
       end
 
@@ -43,6 +44,10 @@ module Rapidfire
       @answers = @question_group.questions.collect do |question|
         @answer_group.answers.build(question_id: question.id)
       end
+    end
+
+    def strip_checkbox_answers(text)
+      text.reject(&:blank?).reject { |t| t == "0" }
     end
   end
 end

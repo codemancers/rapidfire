@@ -2,8 +2,8 @@
   Please answer these Questions
 %hr
 
-= simple_form_for([@question_group, @answer_group_builder]) do |f|
+= form_for([@question_group, @answer_group_builder]) do |f|
   - @answer_group_builder.answers.each do |answer|
-    = f.simple_fields_for("#{answer.question.id}", answer) do |answer_form|
+    = f.fields_for("#{answer.question.id}", answer) do |answer_form|
       = render_answer_form_helper(answer, answer_form)
   = f.submit "Save"

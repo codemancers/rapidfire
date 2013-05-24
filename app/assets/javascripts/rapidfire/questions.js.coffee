@@ -9,7 +9,6 @@ class Rapidfire.QuestionForm
     @$form.on "change", "#question_type", @onTypeChange
 
   onTypeChange: (e)=>
-    console.info @$form.find("#question_type option:selected").text()
     switch @$form.find("#question_type option:selected").text()
       when "Select", "Checkbox", "Radio"
         @$form.find("#question_answer_options_wrapper").show()
