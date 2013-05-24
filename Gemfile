@@ -15,8 +15,6 @@ gem "jquery-rails"
 
 gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier',     '>= 1.0.3'
-
-gem 'quiet_assets'
 gem 'strong_parameters'
 
 gem 'rspec-rails'
