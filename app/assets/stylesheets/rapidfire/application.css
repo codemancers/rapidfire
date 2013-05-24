@@ -8,20 +8,8 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require bootstrap
  *= require_self
  */
-
-body {
-  padding-top: 40px;
-}
-
-.navbar-inverse .brand {
-  float: right;
-  color: black;
-  font-weight: bold;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
-}
 
 .horizontal-list {
   list-style: none;

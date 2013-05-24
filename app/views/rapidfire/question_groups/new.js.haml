@@ -1,4 +1,1 @@
-$("#js-modal .modal").modal('hide');
-
-$("#js-modal").html("#{escape_javascript(render :partial => 'js_form', :locals => {:question_group => @question_group})}");
-$("#js-modal .modal").modal();
+$("#js-form").html("#{escape_javascript(render partial: 'js_form', locals: {question_group: @question_group})}");

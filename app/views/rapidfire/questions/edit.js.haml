@@ -1,5 +1,2 @@
-$("#js-modal .modal").modal('hide');
-
-$("#js-modal").html("#{escape_javascript(render :partial => 'js_form', :locals => {:question => @question})}");
-$("#js-modal .modal").modal();
+$("#js-form").html("#{escape_javascript(render partial: 'js_form', locals: {question: @question})}");
 new Rapidfire.QuestionForm($("#js-modal #new_question"));

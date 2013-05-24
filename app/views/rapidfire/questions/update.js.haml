@@ -1,8 +1,7 @@
-$("#js-modal .modal").modal('hide');
+$("#js-form").empty();
 
 - if @question.errors.empty?
-  $("#question_#{@question.id}").replaceWith("#{escape_javascript(render :partial => 'question', :locals => {:question => @question})}")
+  $("#question_#{@question.id}").replaceWith("#{escape_javascript(render partial: 'question', locals: {question: @question})}")
 - else
-  $("#js-modal").html("#{escape_javascript(render :partial => 'js_form', :locals => {:question => @question})}");
-  $("#js-modal .modal").modal();
-  new Rapidfire.QuestionForm($("#js-modal #new_question"));
+  $("#js-form").html("#{escape_javascript(render partial: 'js_form', locals: {question: @question})}");
+  new Rapidfire.QuestionForm($("#js-form #new_question"));

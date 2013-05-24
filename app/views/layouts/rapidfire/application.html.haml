@@ -8,15 +8,6 @@
     = csrf_meta_tags
 
   %body
-    .navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
-        .container
-          = link_to "Rapidfire", root_path, :class => "brand"
-          .nav-collapse.collapse
-            %ul.nav
-              %li= link_to "Question Groups", question_groups_path
-
-    .container
-      .row-fluid
-        .span12
-          = yield
+    %ul
+      %li= link_to "Question Groups", question_groups_path
+    = yield

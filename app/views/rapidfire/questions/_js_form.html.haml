@@ -1,28 +1,20 @@
-.modal.hide
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3= "Question"
+%h3= "Question"
 
-  .modal-body
-    = simple_form_for [@question_group, question], :remote => true do |f|
-      = f.input :type, :collection => ::Rapidfire::QuestionProxy::QUESTION_TYPES,
-        :include_blank => false, :input_html => { :class => "input-block-level", :id => "question_type" }
-      = f.input :question_text, :input_html => { :class => "input-block-level" }
-      = f.input :answer_options, :as => :text, :input_html => { :class => "input-block-level", :rows => 5 },
-        :wrapper_html => { :id => "question_answer_options_wrapper" }
-      %h4 Other options
-      %hr
-      = f.input :answer_presence, :as => :boolean
-      = f.input :answer_minimum_length, :input_html => { :class => "input-block-level" },
-        :wrapper_html => { :id => "question_answer_minimum_length_wrapper", :class => "hide" }
-      = f.input :answer_maximum_length, :input_html => { :class => "input-block-level" },
-        :wrapper_html => { :id => "question_answer_maximum_length_wrapper", :class => "hide" }
-      = f.input :answer_greater_than_or_equal_to, :input_html => { :class => "input-block-level" },
-        :wrapper_html => { :id => "question_answer_greater_than_or_equal_to_wrapper", :class => "hide" }
-      = f.input :answer_less_than_or_equal_to, :input_html => { :class => "input-block-level" },
-        :wrapper_html => { :id => "question_answer_less_than_or_equal_to_wrapper", :class => "hide" }
-      .control-inputs
-        .controls
-          = f.submit :class => "btn btn-primary"
-
-  .modal-footer
+= simple_form_for [@question_group, question], :remote => true do |f|
+  = f.input :type, :collection => ::Rapidfire::QuestionProxy::QUESTION_TYPES,
+    :include_blank => false, :input_html => { :id => "question_type" }
+  = f.input :question_text
+  = f.input :answer_options, :as => :text, :input_html => { :rows => 5 },
+    :wrapper_html => { :id => "question_answer_options_wrapper" }
+  %h4 Other options
+  %hr
+  = f.input :answer_presence, :as => :boolean
+  = f.input :answer_minimum_length,
+    :wrapper_html => { :id => "question_answer_minimum_length_wrapper", :class => "hide" }
+  = f.input :answer_maximum_length,
+    :wrapper_html => { :id => "question_answer_maximum_length_wrapper", :class => "hide" }
+  = f.input :answer_greater_than_or_equal_to,
+    :wrapper_html => { :id => "question_answer_greater_than_or_equal_to_wrapper", :class => "hide" }
+  = f.input :answer_less_than_or_equal_to,
+    :wrapper_html => { :id => "question_answer_less_than_or_equal_to_wrapper", :class => "hide" }
+  = f.submit

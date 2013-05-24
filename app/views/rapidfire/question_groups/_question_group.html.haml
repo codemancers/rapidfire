@@ -1,9 +1,8 @@
-%td= link_to question_group.name, question_group_questions_path(question_group)
-%td
-  %ul.horizontal-list
-    %li
-      = link_to "Answer Questions", new_question_group_answer_group_path(question_group),
-        :class => "btn btn-small btn-info"
-    %li
-      = link_to "Delete", [question_group], :method => :delete, :remote => true,
-        :class => "btn btn-small btn-danger"
+%tr{ :id => "question_group_#{question_group.id}" }
+  %td= link_to question_group.name, question_group_questions_path(question_group)
+  %td
+    %ul.horizontal-list
+      %li
+        = link_to "Answer Questions", new_question_group_answer_group_path(question_group)
+      %li
+        = link_to "Delete", [question_group], method: :delete, remote: true

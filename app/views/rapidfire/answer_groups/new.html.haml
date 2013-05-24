@@ -2,14 +2,8 @@
   Please answer these Questions
 %hr
 
-.row-fluid
-  .span8.offset2
-    = simple_form_for([@question_group, @answer_group_builder]) do |f|
-      - @answer_group_builder.answers.each do |answer|
-        = f.simple_fields_for("#{answer.question.id}", answer) do |answer_form|
-          .row-fluid
-            .span12
-              = render_answer_form_helper(answer, answer_form)
-      .control-group
-        .controls
-          = f.submit "Save", :class => "btn btn-primary"
+= simple_form_for([@question_group, @answer_group_builder]) do |f|
+  - @answer_group_builder.answers.each do |answer|
+    = f.simple_fields_for("#{answer.question.id}", answer) do |answer_form|
+      = render_answer_form_helper(answer, answer_form)
+  = f.submit "Save"
