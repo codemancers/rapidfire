@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Rapidfire</title>
+    <%= stylesheet_link_tag    "rapidfire/application", media: "all" %>
+    <%= javascript_include_tag "rapidfire/application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <ul>
+      <li><%= link_to "Question Groups", question_groups_path %></li>
+    </ul>
+
+    <%= yield %>
+  </body>
+</html>

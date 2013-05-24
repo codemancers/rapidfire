@@ -13,11 +13,9 @@ gem "jquery-rails"
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier',     '>= 1.0.3'
 
-gem 'haml-rails'
 gem 'quiet_assets'
 gem 'strong_parameters'
 

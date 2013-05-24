@@ -1,0 +1,23 @@
+<h2>
+  Question Groups
+  <%= link_to "New Group", new_question_group_path, remote: true %>
+</h2>
+<hr/>
+
+<div id="js-form"></div>
+
+<table>
+  <colgroup>
+    <col>
+    <col width="250">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Question Group</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "question_group", collection: @question_groups %>
+  </tbody>
+</table>
