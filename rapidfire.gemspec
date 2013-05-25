@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.add_dependency "rails",        "~> 3.2.13"
   s.add_dependency "jquery-rails", "~> 2.2.1"
   s.add_dependency "coffee-rails", "~> 3.2.1"
-  s.add_dependency "uglifier",     ">= 1.0.3"
   s.add_dependency "strong_parameters", "~> 0.2.1"
 
   s.add_development_dependency "sqlite3"
