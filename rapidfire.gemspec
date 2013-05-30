@@ -7,13 +7,13 @@ require "rapidfire/version"
 Gem::Specification.new do |s|
   s.name        = "rapidfire"
   s.version     = Rapidfire::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Rapidfire."
-  s.description = "TODO: Description of Rapidfire."
+  s.authors     = ["Yuva Kumar"]
+  s.email       = ["yuva@codemancers.com"]
+  s.homepage    = "https://github.com/code-mancers/rapidfire"
+  s.summary     = "Surveys made easy."
+  s.description = "One stop solution for all survey related requirements! Its tad easy!."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails",        "~> 3.2.13"
