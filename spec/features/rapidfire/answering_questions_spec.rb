@@ -6,8 +6,7 @@ describe "Question Groups" do
   let(:question2)  { FactoryGirl.create(:q_short, question_group: question_group, question_text: "Short Question") }
   before(:each) do
     [question1, question2]
-    visit rapidfire.root_path
-    click_link "Answer Questions"
+    visit rapidfire.new_question_group_answer_group_path(question_group)
   end
 
   describe "Answering Questions" do

@@ -1,5 +1,6 @@
 module Rapidfire
   class QuestionsController < ApplicationController
+    before_filter :authenticate_administrator!
     respond_to :html, :js
 
     before_filter :find_question_group!

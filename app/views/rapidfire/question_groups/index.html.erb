@@ -1,6 +1,8 @@
 <h2>
   Question Groups
-  <%= link_to "New Group", new_question_group_path, remote: true %>
+  <% if can_administer? %>
+    <%= link_to "New Group", new_question_group_path, remote: true %>
+  <% end %>
 </h2>
 <hr/>
 

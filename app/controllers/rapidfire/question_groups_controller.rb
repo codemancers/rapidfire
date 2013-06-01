@@ -1,5 +1,6 @@
 module Rapidfire
   class QuestionGroupsController < ApplicationController
+    before_filter :authenticate_administrator!, except: :index
     respond_to :html, :js
 
     def index

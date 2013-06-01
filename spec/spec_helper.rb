@@ -3,7 +3,12 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../dummy/config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+
 require 'capybara/rails'
+require 'capybara-webkit'
+require 'factory_girl_rails'
+require 'database_cleaner'
+require 'shoulda'
 
 Capybara.javascript_driver = :webkit
 
@@ -12,8 +17,6 @@ Capybara.javascript_driver = :webkit
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RAPIDFIRE_ROOT = File.join(File.dirname(__FILE__), '..')
-FactoryGirl.definition_file_paths = [RAPIDFIRE_ROOT + "/spec/factories"]
-FactoryGirl.find_definitions
 
 RSpec.configure do |config|
   # ## Mock Framework

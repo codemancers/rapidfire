@@ -4,4 +4,6 @@ require "coffee-rails"
 require "strong_parameters"
 
 module Rapidfire
+  class AccessDenied < StandardError
+  end
 end
