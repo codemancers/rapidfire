@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   end
 
   def can_administer?
-    false
+    true
   end
 end

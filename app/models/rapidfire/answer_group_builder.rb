@@ -5,10 +5,10 @@ module Rapidfire
     include ActiveModel::Conversion
     def persisted?; false end
 
-    attr_accessor :question_group, :questions, :answers, :params
+    attr_accessor :user, :question_group, :questions, :answers, :params
 
-    def initialize(question_group, params = {})
-      @question_group, @params = question_group, params
+    def initialize(user, question_group, params = {})
+      @user, @question_group, @params = user, question_group, params
       build_answer_group
     end
 
@@ -40,7 +40,7 @@ module Rapidfire
 
     private
     def build_answer_group
-      @answer_group = AnswerGroup.new(:question_group => question_group)
+      @answer_group = AnswerGroup.new(user: user, question_group: question_group)
       @answers = @question_group.questions.collect do |question|
         @answer_group.answers.build(question_id: question.id)
       end

@@ -3,12 +3,12 @@ module Rapidfire
     before_filter :find_question_group!
 
     def new
-      @answer_group_builder = AnswerGroupBuilder.new(@question_group)
+      @answer_group_builder = AnswerGroupBuilder.new(current_user, @question_group)
     end
 
     def create
       @answer_group_builder =
-        AnswerGroupBuilder.new(@question_group, params[:answer_group])
+        AnswerGroupBuilder.new(current_user, @question_group, params[:answer_group])
 
       if @answer_group_builder.save
         redirect_to question_groups_path
