@@ -14,7 +14,7 @@ module Rapidfire
     end
 
     def create
-      @question_group = QuestionGroup.new(question_group_params)
+      @question_group = QuestionGroup.new(params[:question_group])
       @question_group.save
 
       respond_with(@question_group)
@@ -25,11 +25,6 @@ module Rapidfire
       @question_group.destroy
 
       respond_with(@question_group)
-    end
-
-    private
-    def question_group_params
-      params.require(:question_group).permit(:name)
     end
   end
 end

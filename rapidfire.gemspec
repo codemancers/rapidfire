@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.add_dependency "rails",        ">= 3.0"
   s.add_dependency "jquery-rails", ">= 2.2"
   s.add_dependency "coffee-rails", ">= 3.0"
-  s.add_dependency "strong_parameters", ">= 0.2"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency 'quiet_assets'

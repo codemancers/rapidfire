@@ -8,7 +8,7 @@ module Rapidfire
 
     def create
       @answer_group_builder =
-        AnswerGroupBuilder.new(@question_group, answer_group_params)
+        AnswerGroupBuilder.new(@question_group, params[:answer_group])
 
       if @answer_group_builder.save
         redirect_to question_groups_path
@@ -20,10 +20,6 @@ module Rapidfire
     private
     def find_question_group!
       @question_group = QuestionGroup.find(params[:question_group_id])
-    end
-
-    def answer_group_params
-      params.require(:answer_group)
     end
   end
 end

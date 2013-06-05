@@ -17,7 +17,7 @@ module Rapidfire
     end
 
     def create
-      proxy_params = question_params.merge(:question_group => @question_group)
+      proxy_params = params[:question].merge(:question_group => @question_group)
       @question = QuestionProxy.new(proxy_params)
       @question.save
 
@@ -30,7 +30,7 @@ module Rapidfire
     end
 
     def update
-      proxy_params = question_params.merge(:question => @question)
+      proxy_params = params[:question].merge(:question => @question)
       @question = QuestionProxy.new(proxy_params)
       @question.save
 
@@ -44,14 +44,6 @@ module Rapidfire
     end
 
     private
-    def question_params
-      params.require(:question).
-        permit(:type, :question_text,
-               :answer_options, :answer_presence,
-               :answer_minimum_length, :answer_maximum_length,
-               :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to)
-    end
-
     def find_question_group!
       @question_group = QuestionGroup.find(params[:question_group_id])
     end
