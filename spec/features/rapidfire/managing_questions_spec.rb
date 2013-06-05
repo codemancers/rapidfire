@@ -9,39 +9,26 @@ describe "Questions" do
   end
 
   describe "DELETE Question", js: true do
-    context "when user can delete question" do
-      before(:each) do
-        ApplicationController.any_instance.stub(:can_administer?).and_return(false)
-        visit question_group_questions_path(question_group)
+    before(:each) do
+      ApplicationController.any_instance.stub(:can_administer?).and_return(true)
+      visit rapidfire.question_group_questions_path(question_group)
 
-        page.within("#question_#{question1.id}") do
-          click_link "Delete"
-        end
-      end
-
-      it "deletes the questions" do
-        page.should_not have_content question1.question_text
+      page.within("#question_#{question1.id}") do
+        click_link "Delete"
       end
     end
 
-    context "when user cannot delete question" do
-      before(:each) do
-        ApplicationController.any_instance.stub(:can_administer?).and_return(false)
-        visit question_group_questions_path(question_group)
-
-        page.within("#question_#{question1.id}") do
-          click_link "Delete"
-        end
-      end
-
-      it "deletes the questions" do
-        page.should_not have_content question1.question_text
-      end
+    it "deletes the questions" do
+      expect(page).not_to have_content question1.question_text
     end
   end
 
   describe "CREATING Question", js: true do
-    before(:each)  { click_link "New Question" }
+    before(:each) do
+      ApplicationController.any_instance.stub(:can_administer?).and_return(true)
+      visit rapidfire.question_group_questions_path(question_group)
+      click_link "New Question"
+    end
 
     context "when name is present" do
       before(:each) do
@@ -74,6 +61,8 @@ describe "Questions" do
 
   describe "UPDATING Question", js: true do
     before(:each) do
+      ApplicationController.any_instance.stub(:can_administer?).and_return(true)
+      visit rapidfire.question_group_questions_path(question_group)
       page.within("#question_#{question1.id}") do
         click_link "Edit"
       end
