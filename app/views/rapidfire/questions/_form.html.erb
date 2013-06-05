@@ -1,6 +1,6 @@
 <h3>Question</h3>
 
-<%= form_for [@question_group, question], remote: true, html: {id: "js-question-form"} do |f| %>
+<%= form_for [@question_group, question], remote: true do |f| %>
   <%- unless question.errors.empty? %>
     <ul>
       <%- question.errors.full_messages.each do |message| %>
@@ -29,19 +29,19 @@
     <%= f.label :answer_presence %>
     <%= f.check_box :answer_presence %>
   </div>
-  <div id="question_answer_minimum_length_wrapper" class="hide">
+  <div id="question_answer_minimum_length_wrapper">
     <%= f.label :answer_minimum_length %>
     <%= f.text_field :answer_minimum_length %>
   </div>
-  <div id="question_answer_maximum_length_wrapper" class="hide">
+  <div id="question_answer_maximum_length_wrapper">
     <%= f.label :answer_maximum_length %>
     <%= f.text_field :answer_maximum_length %>
   </div>
-  <div id="question_answer_greater_than_or_equal_to_wrapper" class="hide">
+  <div id="question_answer_greater_than_or_equal_to_wrapper">
     <%= f.label :answer_greater_than_or_equal_to %>
     <%= f.text_field :answer_greater_than_or_equal_to %>
   </div>
-  <div id="question_answer_less_than_or_equal_to_wrapper" class="hide">
+  <div id="question_answer_less_than_or_equal_to_wrapper">
     <%= f.label :answer_less_than_or_equal_to %>
     <%= f.text_field :answer_less_than_or_equal_to %>
   </div>

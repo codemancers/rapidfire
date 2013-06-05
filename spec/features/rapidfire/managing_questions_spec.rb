@@ -8,7 +8,7 @@ describe "Questions" do
     [question1, question2]
   end
 
-  describe "DELETE Question", js: true do
+  describe "DELETE Question" do
     before(:each) do
       ApplicationController.any_instance.stub(:can_administer?).and_return(true)
       visit rapidfire.question_group_questions_path(question_group)
@@ -23,7 +23,7 @@ describe "Questions" do
     end
   end
 
-  describe "CREATING Question", js: true do
+  describe "CREATING Question" do
     before(:each) do
       ApplicationController.any_instance.stub(:can_administer?).and_return(true)
       visit rapidfire.question_group_questions_path(question_group)
@@ -32,7 +32,7 @@ describe "Questions" do
 
     context "when name is present" do
       before(:each) do
-        page.within("#js-question-form") do
+        page.within("#new_question") do
           fill_in "question_question_text",  with: "Which OS?"
           fill_in "question_answer_options", with: "mac\r\nwindows"
           click_button "Create Question"
@@ -46,20 +46,20 @@ describe "Questions" do
 
     context "when name is not present" do
       before(:each) do
-        page.within("#js-question-form") do
+        page.within("#new_question") do
           click_button "Create Question"
         end
       end
 
       it "fails to create question group" do
-        page.within("#js-question-form") do
+        page.within("#new_question") do
           page.should have_content "can't be blank"
         end
       end
     end
   end
 
-  describe "UPDATING Question", js: true do
+  describe "UPDATING Question" do
     before(:each) do
       ApplicationController.any_instance.stub(:can_administer?).and_return(true)
       visit rapidfire.question_group_questions_path(question_group)
@@ -70,7 +70,7 @@ describe "Questions" do
 
     context "when name is modified" do
       before(:each) do
-        page.within("#js-question-form") do
+        page.within("#edit_question_#{question1.id}") do
           fill_in "question_question_text",  with: "Updated Question"
           click_button "Update Question"
         end
@@ -85,14 +85,14 @@ describe "Questions" do
 
     context "when name is not present" do
       before(:each) do
-        page.within("#js-question-form") do
+        page.within("#edit_question_#{question1.id}") do
           fill_in "question_question_text",  with: ""
           click_button "Update Question"
         end
       end
 
       it "fails to update question" do
-        page.within("#js-question-form") do
+        page.within("#edit_question_#{question1.id}") do
           page.should have_content "can't be blank"
         end
       end

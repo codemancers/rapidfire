@@ -1,7 +1,7 @@
 module Rapidfire
   class QuestionsController < ApplicationController
     before_filter :authenticate_administrator!
-    respond_to :html, :js
+    respond_to :html
 
     before_filter :find_question_group!
     before_filter :find_question!, :only => [:edit, :update, :destroy]
@@ -21,7 +21,8 @@ module Rapidfire
       @question = QuestionProxy.new(proxy_params)
       @question.save
 
-      respond_with(@question)
+      location = rapidfire.question_group_questions_path(@question_group)
+      respond_with(@question, location: location)
     end
 
     def edit
@@ -34,13 +35,15 @@ module Rapidfire
       @question = QuestionProxy.new(proxy_params)
       @question.save
 
-      respond_with(@question)
+      location = rapidfire.question_group_questions_path(@question_group)
+      respond_with(@question, location: location)
     end
 
     def destroy
       @question.destroy
 
-      respond_with(@question)
+      location = rapidfire.question_group_questions_path(@question_group)
+      respond_with(@question, location: location)
     end
 
     private

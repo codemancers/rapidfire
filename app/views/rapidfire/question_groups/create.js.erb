@@ -1,7 +1,0 @@
-$("#js-form").empty();
-
-<%- if @question_group.errors.empty? %>
-  $("tbody").append("<%= escape_javascript(render partial: 'question_group', locals: {question_group: @question_group}) %>")
-<%- else %>
-  $("#js-form").html("<%= escape_javascript(render partial: 'js_form', locals: {question_group: @question_group}) %>");
-<% end %>

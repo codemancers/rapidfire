@@ -44,7 +44,7 @@ describe "Question Groups" do
     end
   end
 
-  describe "CREATING Question Group", js: true do
+  describe "CREATING Question Group" do
     context "when user can create groups" do
       before(:each) do
         ApplicationController.any_instance.stub(:can_administer?).and_return(true)
