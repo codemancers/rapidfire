@@ -6,6 +6,8 @@ module Rapidfire
     validates :question_group, :question_text, :presence => true
     serialize :validation_rules
 
+    attr_accessible :question_group, :question_text, :validation_rules, :answer_options
+
     def self.inherited(child)
       child.instance_eval do
         def model_name
