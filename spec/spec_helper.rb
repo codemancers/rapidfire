@@ -10,6 +10,8 @@ require 'factory_girl_rails'
 require 'database_cleaner'
 require 'shoulda'
 
+require 'pry-rails'
+
 Capybara.javascript_driver = :webkit
 
 # Requires supporting ruby files with custom matchers and macros, etc,
