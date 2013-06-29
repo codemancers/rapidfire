@@ -24,8 +24,11 @@ Add this line to your routes will and you will be good to go!
 
 And point your browser to [http://localhost:3000/rapidfire](http://localhost:3000/rapidfire)
 
-NOTE: This gem depends on [strong_parameters](https://github.com/rails/strong_parameters),
-make sure that you disable mass assignment protection in your `application.rb` file
+Define these 2 methods on your controller on which this gem depends
+
+1. `current_user` : the user who is answering the survey. can be `nil`
+2. `can_administer?` : a method which determines whether current user can
+   create/update survey questions.
 
 ## How it works
 This gem gives you access to create questions in a groups, something similar to
