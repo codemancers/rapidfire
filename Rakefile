@@ -27,3 +27,10 @@ load 'rails/tasks/engine.rake'
 
 Bundler::GemHelper.install_tasks
 
+desc 'Default: run rspec tests.'
+task :default => :rspec
+
+desc 'Run rspec unit and integration tests'
+task :rspec do |t|
+  exec('bundle exec rspec spec')
+end

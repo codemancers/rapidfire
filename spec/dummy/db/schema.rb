@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605192954) do
+ActiveRecord::Schema.define(:version => 20130502195504) do
 
   create_table "rapidfire_answer_groups", :force => true do |t|
     t.integer  "question_group_id"
