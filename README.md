@@ -1,5 +1,6 @@
 # Rapidfire
 One stop solution for all survey related requirements! Its tad easy!
+[![Code Climate](https://codeclimate.com/repos/51a70089f3ea000534070811/badges/aedc90c3b5481e7569bb/gpa.png)](https://codeclimate.com/repos/51a70089f3ea000534070811/feed)
 
 ## Installation
 Add this line to your application's Gemfile:
