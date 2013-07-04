@@ -4,6 +4,9 @@
 
 One stop solution for all survey related requirements! Its tad easy!
 
+You can see a demo of this gem [here](https://rapidfire.herokuapp.com).
+And the source code of demo [here](https://github.com/code-mancers/rapidfire-demo).
+
 ## Installation
 Add this line to your application's Gemfile:
 
@@ -110,6 +113,7 @@ The typical flow about how to use this gem is:
 ## TODO
 1. Provide a way for admin to see survey results
 2. Add support for rails-4
+3. Add ability to sort questions, so that order is preserved.
 
 ## Contributing
 
