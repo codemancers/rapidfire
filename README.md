@@ -1,4 +1,7 @@
-# Rapidfire [![Code Climate](https://codeclimate.com/repos/51a70089f3ea000534070811/badges/aedc90c3b5481e7569bb/gpa.png)](https://codeclimate.com/repos/51a70089f3ea000534070811/feed)
+# Rapidfire
+[![Code Climate](https://codeclimate.com/repos/51a70089f3ea000534070811/badges/aedc90c3b5481e7569bb/gpa.png)](https://codeclimate.com/repos/51a70089f3ea000534070811/feed)
+[![Build Status](https://travis-ci.org/code-mancers/rapidfire.png?branch=master)](https://travis-ci.org/code-mancers/rapidfire)
+
 One stop solution for all survey related requirements! Its tad easy!
 
 ## Installation
@@ -48,6 +51,22 @@ Typical implementation would be:
 If you are using authentication gems like devise, you get `current_user` for free
 and you don't have to define it.
 
+### Routes Information
+Once this gem is mounted on, say at 'rapidfire', it generates several routes
+You can see them by running `bundle exec rake routes`.
+
+1. The `root_path` i.e `localhost:3000/rapidfire` always points to list of
+   surveys {they are called question groups}. Admin can manage surveys, and
+   any user {who cannot administer} can see list of surveys.
+2. Optionally, each survey can by answered by visiting this path:
+
+   ```
+     localhost:3000/rapidfire/question_groups/<survey-id>/answer_groups/new
+   ```
+
+   You can distribute this url so that survey takers can answer a particular survey
+   of your interest.
+
 
 ## How it works
 This gem gives you access to create questions in a groups, something similar to
@@ -87,6 +106,10 @@ The typical flow about how to use this gem is:
 6. Note that answers fail to persist of the criteria that you have provided while
    creating questions fail.
 
+
+## TODO
+1. Provide a way for admin to see survey results
+2. Add support for rails-4
 
 ## Contributing
 
