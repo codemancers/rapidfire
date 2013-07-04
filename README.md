@@ -1,6 +1,5 @@
-# Rapidfire
+# Rapidfire [![Code Climate](https://codeclimate.com/repos/51a70089f3ea000534070811/badges/aedc90c3b5481e7569bb/gpa.png)](https://codeclimate.com/repos/51a70089f3ea000534070811/feed)
 One stop solution for all survey related requirements! Its tad easy!
-[![Code Climate](https://codeclimate.com/repos/51a70089f3ea000534070811/badges/aedc90c3b5481e7569bb/gpa.png)](https://codeclimate.com/repos/51a70089f3ea000534070811/feed)
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -25,11 +24,30 @@ Add this line to your routes will and you will be good to go!
 
 And point your browser to [http://localhost:3000/rapidfire](http://localhost:3000/rapidfire)
 
-Define these 2 methods on your controller on which this gem depends
+All rapidfire controllers inherit from your `ApplicationController`. So define 2
+methods `current_user` and `can_administer?` on your `ApplicationController`
 
 1. `current_user` : the user who is answering the survey. can be `nil`
 2. `can_administer?` : a method which determines whether current user can
    create/update survey questions.
+
+Typical implementation would be:
+
+```ruby
+  class ApplicationController < ActionController::Base
+    def current_user
+      @current_user ||= User.find(session[:user_id])
+    end
+
+    def can_administer?
+      current_user.try(:admin?)
+    end
+  end
+```
+
+If you are using authentication gems like devise, you get `current_user` for free
+and you don't have to define it.
+
 
 ## How it works
 This gem gives you access to create questions in a groups, something similar to
