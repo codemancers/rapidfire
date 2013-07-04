@@ -1,6 +1,6 @@
 <h3>Question</h3>
 
-<%= form_for [@question_group, question], remote: true do |f| %>
+<%= form_for [@question_group, question] do |f| %>
   <%- unless question.errors.empty? %>
     <ul>
       <%- question.errors.full_messages.each do |message| %>
@@ -9,42 +9,32 @@
     </ul>
   <% end %>
 
-  <div id="question_type_wrapper">
-    <%= f.label :type %>
-    <%= f.select :type, ::Rapidfire::QuestionProxy::QUESTION_TYPES, {}, id: "question_type" %>
-  </div>
-  <div id="question_text_wrapper">
-    <%= f.label :question_text %>
-    <%= f.text_field :question_text %>
-  </div>
-  <div id="question_answer_options_wrapper">
-    <%= f.label :answer_options %>
-    <%= f.text_area :answer_options, rows: 5 %>
-  </div>
+  <%= f.label :type %>
+  <%= f.select :type, ::Rapidfire::QuestionProxy::QUESTION_TYPES, {}, id: "question_type" %>
+
+  <%= f.label :question_text %>
+  <%= f.text_field :question_text %>
+
+  <%= f.label :answer_options %>
+  <%= f.text_area :answer_options, rows: 5 %>
 
   <h4>Other options</h4>
   <hr/>
 
-  <div id="answer_presence_wrapper">
-    <%= f.label :answer_presence %>
-    <%= f.check_box :answer_presence %>
-  </div>
-  <div id="question_answer_minimum_length_wrapper">
-    <%= f.label :answer_minimum_length %>
-    <%= f.text_field :answer_minimum_length %>
-  </div>
-  <div id="question_answer_maximum_length_wrapper">
-    <%= f.label :answer_maximum_length %>
-    <%= f.text_field :answer_maximum_length %>
-  </div>
-  <div id="question_answer_greater_than_or_equal_to_wrapper">
-    <%= f.label :answer_greater_than_or_equal_to %>
-    <%= f.text_field :answer_greater_than_or_equal_to %>
-  </div>
-  <div id="question_answer_less_than_or_equal_to_wrapper">
-    <%= f.label :answer_less_than_or_equal_to %>
-    <%= f.text_field :answer_less_than_or_equal_to %>
-  </div>
+  <%= f.label :answer_presence %>
+  <%= f.check_box :answer_presence %>
+
+  <%= f.label :answer_minimum_length %>
+  <%= f.text_field :answer_minimum_length %>
+
+  <%= f.label :answer_maximum_length %>
+  <%= f.text_field :answer_maximum_length %>
+
+  <%= f.label :answer_greater_than_or_equal_to %>
+  <%= f.text_field :answer_greater_than_or_equal_to %>
+
+  <%= f.label :answer_less_than_or_equal_to %>
+  <%= f.text_field :answer_less_than_or_equal_to %>
 
   <%= f.submit %>
 <% end %>
