@@ -1,7 +1,7 @@
 module Rapidfire
   class QuestionGroupsController < ApplicationController
     before_filter :authenticate_administrator!, except: :index
-    respond_to :html
+    respond_to :html, :js
 
     def index
       @question_groups = QuestionGroup.all
@@ -17,7 +17,7 @@ module Rapidfire
       @question_group = QuestionGroup.new(question_group_params)
       @question_group.save
 
-      respond_with(@question_group, location: rapidfire.question_groups_path)
+      respond_with(@question_group, location: rapidfire.question_groups_url)
     end
 
     def destroy
