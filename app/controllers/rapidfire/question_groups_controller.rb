@@ -14,7 +14,7 @@ module Rapidfire
     end
 
     def create
-      @question_group = QuestionGroup.new(params[:question_group])
+      @question_group = QuestionGroup.new(question_group_params)
       @question_group.save
 
       respond_with(@question_group, location: rapidfire.question_groups_path)
@@ -25,6 +25,15 @@ module Rapidfire
       @question_group.destroy
 
       respond_with(@question_group)
+    end
+
+    private
+    def question_group_params
+      if Rails.version == "4.0.0"
+        params.require(:question_group).permit(:name)
+      else
+        params[:question_group]
+      end
     end
   end
 end
