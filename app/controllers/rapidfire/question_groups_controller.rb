@@ -29,7 +29,7 @@ module Rapidfire
 
     private
     def question_group_params
-      if Rails.version == "4.0.0"
+      if Rails::VERSION::MAJOR == 4
         params.require(:question_group).permit(:name)
       else
         params[:question_group]

@@ -6,7 +6,7 @@ module Rapidfire
     validates :question_group, :question_text, :presence => true
     serialize :validation_rules
 
-    if Rails.version != "4.0.0"
+    if Rails::VERSION::MAJOR == 3
       attr_accessible :question_group, :question_text, :validation_rules, :answer_options
     end
 

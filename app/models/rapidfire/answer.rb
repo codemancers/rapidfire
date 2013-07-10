@@ -6,7 +6,7 @@ module Rapidfire
     validates :question, :answer_group, presence: true
     validate  :verify_answer_text, :if => "question.present?"
 
-    if Rails.version != "4.0.0"
+    if Rails::VERSION::MAJOR == 3
       attr_accessible :question_id, :answer_group, :answer_text
     end
 

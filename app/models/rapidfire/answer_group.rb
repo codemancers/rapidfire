@@ -4,7 +4,7 @@ module Rapidfire
     belongs_to :user, polymorphic: true
     has_many   :answers, inverse_of: :answer_group, autosave: true
 
-    if Rails.version != "4.0.0"
+    if Rails::VERSION::MAJOR == 3
       attr_accessible :question_group, :user
     end
   end
