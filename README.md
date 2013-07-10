@@ -10,7 +10,7 @@ And the source code of demo [here](https://github.com/code-mancers/rapidfire-dem
 ## Installation
 Add this line to your application's Gemfile:
 
-    gem 'rapidfire', git: "git@github.com:code-mancers/rapidfire.git"
+    gem 'rapidfire'
 
 And then execute:
 
@@ -112,8 +112,7 @@ The typical flow about how to use this gem is:
 
 ## TODO
 1. Provide a way for admin to see survey results
-2. Add support for rails-4
-3. Add ability to sort questions, so that order is preserved.
+2. Add ability to sort questions, so that order is preserved.
 
 ## Contributing
 

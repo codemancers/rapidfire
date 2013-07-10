@@ -3,6 +3,8 @@ module Rapidfire
     has_many  :questions
     validates :name, :presence => true
 
-    attr_accessible :name
+    if Rails::VERSION::MAJOR == 3
+      attr_accessible :name
+    end
   end
 end
