@@ -1,5 +1,5 @@
 module Rapidfire
-  class AnswerGroupsController < ApplicationController
+  class AnswerGroupsController < Rapidfire::ApplicationController
     before_filter :find_question_group!
 
     def new

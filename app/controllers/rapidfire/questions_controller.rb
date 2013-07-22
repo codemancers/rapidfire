@@ -1,5 +1,5 @@
 module Rapidfire
-  class QuestionsController < ApplicationController
+  class QuestionsController < Rapidfire::ApplicationController
     before_filter :authenticate_administrator!
     respond_to :html, :js
 
