@@ -27,6 +27,14 @@ module Rapidfire
       respond_with(@question_group)
     end
 
+    def results
+      @question_group = QuestionGroup.find(params[:id])
+      @question_group_results = QuestionGroupResults(@question_group)
+      @question_group_results.extract
+
+      respond_with(@question_group_results)
+    end
+
     private
     def question_group_params
       if Rails::VERSION::MAJOR == 4
