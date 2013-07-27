@@ -22,10 +22,11 @@ module Rapidfire
     def extract
       @question_group.questions.collect do |question|
         results =
-          case question.class
+          case question
           when Rapidfire::Questions::Select, Rapidfire::Questions::Radio,
             Rapidfire::Questions::Checkbox
-            question.answers.group(:answer_text).count
+            answers = question.answers.map(&:answer_text).map { |text| text.split(',') }.flatten
+            answers.inject(Hash.new(0)) { |total, e| total[e] += 1; total }
 
           when Rapidfire::Questions::Short, Rapidfire::Questions::Date,
             Rapidfire::Questions::Long, Rapidfire::Questions::Numeric
