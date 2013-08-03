@@ -1,11 +1,14 @@
 require 'spec_helper'
 
 describe Rapidfire::QuestionGroupResults do
+  include Rapidfire::QuestionSpecHelper
+  include Rapidfire::AnswerSpecHelper
+
   let(:question_group) { FactoryGirl.create(:question_group) }
 
   describe '#extract' do
     before do
-      create_questions
+      create_questions(question_group)
       create_answers
       @question_group_results = Rapidfire::QuestionGroupResults.new(question_group)
       @results = @question_group_results.extract
@@ -56,33 +59,4 @@ describe Rapidfire::QuestionGroupResults do
     end
   end
 
-  def create_questions
-    @question_checkbox = FactoryGirl.create(:q_checkbox, :question_group => question_group)
-    @question_date = FactoryGirl.create(:q_date, :question_group => question_group)
-    @question_long = FactoryGirl.create(:q_long, :question_group => question_group)
-    @question_numeric = FactoryGirl.create(:q_numeric, :question_group => question_group)
-    @question_radio = FactoryGirl.create(:q_radio, :question_group => question_group)
-    @question_select = FactoryGirl.create(:q_select, :question_group => question_group)
-    @question_short = FactoryGirl.create(:q_short, :question_group => question_group)
-  end
-
-  def create_answers
-    FactoryGirl.create(:answer, :question => @question_checkbox, :answer_text => 'hindi')
-    FactoryGirl.create(:answer, :question => @question_checkbox, :answer_text => 'hindi,telugu')
-    FactoryGirl.create(:answer, :question => @question_checkbox, :answer_text => 'hindi,kannada')
-
-    FactoryGirl.create(:answer, :question => @question_select, :answer_text => 'mac')
-    FactoryGirl.create(:answer, :question => @question_select, :answer_text => 'mac')
-    FactoryGirl.create(:answer, :question => @question_select, :answer_text => 'windows')
-
-    FactoryGirl.create(:answer, :question => @question_radio, :answer_text => 'male')
-    FactoryGirl.create(:answer, :question => @question_radio, :answer_text => 'female')
-
-    3.times do
-      FactoryGirl.create(:answer, :question => @question_date, :answer_text => Date.today.to_s)
-      FactoryGirl.create(:answer, :question => @question_long, :answer_text => 'really long answer')
-      FactoryGirl.create(:answer, :question => @question_numeric, :answer_text => 999)
-      FactoryGirl.create(:answer, :question => @question_short, :answer_text => 'short answer')
-    end
-  end
 end
