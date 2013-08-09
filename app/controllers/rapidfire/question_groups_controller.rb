@@ -29,8 +29,7 @@ module Rapidfire
 
     def results
       @question_group = QuestionGroup.find(params[:id])
-      @question_group_results = QuestionGroupResults(@question_group)
-      @question_group_results.extract
+      @question_group_results = QuestionGroupResults(@question_group).extract
 
       respond_with(@question_group_results)
     end

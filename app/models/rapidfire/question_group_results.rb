@@ -1,13 +1,5 @@
 module Rapidfire
   class QuestionGroupResults
-    class Result
-      def initialize(question, results)
-        @question, @results = question, results
-      end
-      attr_accessor :question, :results
-    end
-
-
     def initialize(question_group)
       @question_group = question_group
     end
@@ -33,7 +25,7 @@ module Rapidfire
             question.answers.pluck(:answer_text)
           end
 
-        Result.new(question, results)
+        QuestionResult.new(question, results)
       end
     end
   end
