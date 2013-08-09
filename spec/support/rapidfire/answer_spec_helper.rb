@@ -14,9 +14,9 @@ module Rapidfire
 
       3.times do
         FactoryGirl.create(:answer, :question => @question_date, :answer_text => Date.today.to_s)
-        FactoryGirl.create(:answer, :question => @question_long, :answer_text => 'really long answer')
+        FactoryGirl.create(:answer, :question => @question_long, :answer_text => 'my bio goes on and on!')
         FactoryGirl.create(:answer, :question => @question_numeric, :answer_text => 999)
-        FactoryGirl.create(:answer, :question => @question_short, :answer_text => 'short answer')
+        FactoryGirl.create(:answer, :question => @question_short, :answer_text => 'this is cool')
       end
     end
   end
