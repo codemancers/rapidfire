@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe "Question Groups" do
+  include Rapidfire::QuestionSpecHelper
+  include Rapidfire::AnswerSpecHelper
+
   let(:question_group)  { FactoryGirl.create(:question_group, name: "Question Set") }
   let(:question1)  { FactoryGirl.create(:q_long,  question_group: question_group, question_text: "Long Question")  }
   let(:question2)  { FactoryGirl.create(:q_short, question_group: question_group, question_text: "Short Question") }
@@ -116,6 +119,23 @@ describe "Question Groups" do
       it "fails to access the page" do
         expect(page).not_to have_link question_group.name
       end
+    end
+  end
+
+  describe "GET Question Group results" do
+    before(:each) do
+      create_questions(question_group)
+      create_answers
+
+      visit rapidfire.root_path
+      page.within("#question_group_#{question_group.id}") do
+        click_link "Results"
+      end
+    end
+
+    it "shows results for particular question group" do
+      expect(page).to have_content "Results"
+      expect(page).to have_content "hindi 3"
     end
   end
 end

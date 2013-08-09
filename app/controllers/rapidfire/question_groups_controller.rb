@@ -2,6 +2,7 @@ module Rapidfire
   class QuestionGroupsController < Rapidfire::ApplicationController
     before_filter :authenticate_administrator!, except: :index
     respond_to :html, :js
+    respond_to :json, only: :results
 
     def index
       @question_groups = QuestionGroup.all
@@ -29,7 +30,7 @@ module Rapidfire
 
     def results
       @question_group = QuestionGroup.find(params[:id])
-      @question_group_results = QuestionGroupResults(@question_group).extract
+      @question_group_results = QuestionGroupResults.new(@question_group).extract
 
       respond_with(@question_group_results)
     end
