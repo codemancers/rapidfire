@@ -1,15 +1,6 @@
 module Rapidfire
-  class QuestionResult
+  class QuestionResult < Rapidfire::BaseService
     include ActiveModel::Serialization
-
-    if Rails::VERSION::MAJOR == 4
-      include ActiveModel::Model
-    else
-      extend  ActiveModel::Naming
-      include ActiveModel::Conversion
-
-      def persisted; false end
-    end
 
     def initialize(question, results)
       @question, @results = question, results

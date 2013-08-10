@@ -1,5 +1,5 @@
 module Rapidfire
-  class QuestionGroupResults
+  class QuestionGroupResults < Rapidfire::BaseService
     def initialize(question_group)
       @question_group = question_group
     end

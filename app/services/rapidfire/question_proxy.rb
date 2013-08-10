@@ -1,8 +1,5 @@
 module Rapidfire
-  class QuestionProxy
-    extend  ActiveModel::Naming
-    include ActiveModel::Conversion
-
+  class QuestionProxy < Rapidfire::BaseService
     AVAILABLE_QUESTIONS =
       [
        Rapidfire::Questions::Checkbox,
@@ -26,10 +23,6 @@ module Rapidfire
       :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
 
     delegate :valid?, :errors, :id, :to => :question
-
-    def persisted?
-      false
-    end
 
     def to_model
       question
