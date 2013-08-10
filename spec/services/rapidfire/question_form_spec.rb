@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Rapidfire::QuestionProxy do
+describe Rapidfire::QuestionForm do
   let(:question_group)  { FactoryGirl.create(:question_group) }
 
   describe "Creation" do

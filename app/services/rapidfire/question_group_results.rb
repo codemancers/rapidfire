@@ -25,7 +25,7 @@ module Rapidfire
             question.answers.pluck(:answer_text)
           end
 
-        QuestionResult.new(question, results)
+        QuestionResult.new(question: question, results: results)
       end
     end
   end
