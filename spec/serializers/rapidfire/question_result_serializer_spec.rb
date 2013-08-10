@@ -5,7 +5,9 @@ describe Rapidfire::QuestionResultSerializer do
   include Rapidfire::AnswerSpecHelper
 
   let(:question_group) { FactoryGirl.create(:question_group) }
-  let(:results)  { Rapidfire::QuestionGroupResults.new(question_group).extract }
+  let(:results) do
+    Rapidfire::QuestionGroupResults.new(question_group: question_group).extract
+  end
 
   before do
     create_questions(question_group)

@@ -1,8 +1,5 @@
 module Rapidfire
   class QuestionGroupResults < Rapidfire::BaseService
-    def initialize(question_group)
-      @question_group = question_group
-    end
     attr_accessor :question_group
 
     # extracts question along with results

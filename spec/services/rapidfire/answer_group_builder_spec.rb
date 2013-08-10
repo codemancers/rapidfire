@@ -7,7 +7,7 @@ describe Rapidfire::AnswerGroupBuilder do
                                         validation_rules: { presence: "1" }) }
 
   describe "Creation" do
-    let(:builder)  { described_class.new(nil, question_group) }
+    let(:builder)  { described_class.new(question_group: question_group) }
     before(:each)  { [question1, question2] }
 
     it "builds answer group with answers" do
@@ -22,7 +22,10 @@ describe Rapidfire::AnswerGroupBuilder do
 
   describe "#save" do
     let(:question_ids)  { question_group.questions.map(&:id) }
-    let(:builder)       { described_class.new(nil, question_group, answer_params) }
+    let(:builder) do
+      params = { params: answer_params }.merge(question_group: question_group)
+      described_class.new(params)
+    end
     let(:save_answers)  { builder.save }
 
     before(:each) do

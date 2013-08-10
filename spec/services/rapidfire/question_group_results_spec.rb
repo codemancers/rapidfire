@@ -10,7 +10,8 @@ describe Rapidfire::QuestionGroupResults do
     before do
       create_questions(question_group)
       create_answers
-      @question_group_results = Rapidfire::QuestionGroupResults.new(question_group)
+      @question_group_results =
+        Rapidfire::QuestionGroupResults.new(question_group: question_group)
       @results = @question_group_results.extract
     end
 
