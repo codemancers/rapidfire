@@ -1,7 +1,16 @@
 module Rapidfire
   class QuestionGroup < ActiveRecord::Base
-    has_many  :questions
-    validates :name, :presence => true
+    belongs_to :tenant
+    has_many   :questions
+    validates  :name, :presence => true
+
+    def self.by_tenant(current_tenant)
+      if current_tenant
+        where(tenant_id: current_tenant.id, tenant_type: current_tenant.type)
+      else
+        self
+      end
+    end
 
     if Rails::VERSION::MAJOR == 3
       attr_accessible :name

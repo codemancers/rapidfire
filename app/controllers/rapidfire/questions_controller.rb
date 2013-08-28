@@ -44,7 +44,8 @@ module Rapidfire
 
     private
     def find_question_group!
-      @question_group = QuestionGroup.find(params[:question_group_id])
+      @question_group = QuestionGroup.by_tenant(current_tenant).
+        find(params[:question_group_id])
     end
 
     def find_question!
