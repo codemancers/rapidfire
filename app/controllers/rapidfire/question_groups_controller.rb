@@ -33,7 +33,7 @@ module Rapidfire
       @question_group_results =
         QuestionGroupResults.new(question_group: @question_group).extract
 
-      respond_with(@question_group_results)
+      respond_with(@question_group_results, root: false)
     end
 
     private
