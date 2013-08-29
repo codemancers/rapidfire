@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails",    ">= 3.2.13"
+  s.add_dependency "active_model_serializers", "~> 0.8.1"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency 'quiet_assets'

@@ -1,8 +1,5 @@
 module Rapidfire
-  class QuestionProxy
-    extend  ActiveModel::Naming
-    include ActiveModel::Conversion
-
+  class QuestionForm < Rapidfire::BaseService
     AVAILABLE_QUESTIONS =
       [
        Rapidfire::Questions::Checkbox,
@@ -27,17 +24,13 @@ module Rapidfire
 
     delegate :valid?, :errors, :id, :to => :question
 
-    def persisted?
-      false
-    end
-
     def to_model
       question
     end
 
     def initialize(params = {})
       from_question_to_attributes(params[:question]) if params[:question]
-      params.each { |k, v| send("#{k}=", v) }
+      super(params)
       @question ||= question_group.questions.new
     end
 

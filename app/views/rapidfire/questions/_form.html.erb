@@ -10,7 +10,7 @@
   <% end %>
 
   <%= f.label :type %>
-  <%= f.select :type, ::Rapidfire::QuestionProxy::QUESTION_TYPES, {}, id: "question_type" %>
+  <%= f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type" %>
 
   <%= f.label :question_text %>
   <%= f.text_field :question_text %>

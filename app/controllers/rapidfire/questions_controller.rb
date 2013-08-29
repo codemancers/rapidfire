@@ -1,5 +1,5 @@
 module Rapidfire
-  class QuestionsController < ApplicationController
+  class QuestionsController < Rapidfire::ApplicationController
     before_filter :authenticate_administrator!
     respond_to :html, :js
 
@@ -12,26 +12,26 @@ module Rapidfire
     end
 
     def new
-      @question = QuestionProxy.new(:question_group => @question_group)
+      @question = QuestionForm.new(:question_group => @question_group)
       respond_with(@question)
     end
 
     def create
-      proxy_params = params[:question].merge(:question_group => @question_group)
-      @question = QuestionProxy.new(proxy_params)
+      form_params = params[:question].merge(:question_group => @question_group)
+      @question = QuestionForm.new(form_params)
       @question.save
 
       respond_with(@question, location: index_location)
     end
 
     def edit
-      @question = QuestionProxy.new(:question => @question)
+      @question = QuestionForm.new(:question => @question)
       respond_with(@question)
     end
 
     def update
-      proxy_params = params[:question].merge(:question => @question)
-      @question = QuestionProxy.new(proxy_params)
+      form_params = params[:question].merge(:question => @question)
+      @question = QuestionForm.new(form_params)
       @question.save
 
       respond_with(@question, location: index_location)

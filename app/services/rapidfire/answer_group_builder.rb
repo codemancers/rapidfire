@@ -1,14 +1,9 @@
 module Rapidfire
-  class AnswerGroupBuilder
-    extend  ActiveModel::Naming
-    include ActiveModel::Validations
-    include ActiveModel::Conversion
-    def persisted?; false end
-
+  class AnswerGroupBuilder < Rapidfire::BaseService
     attr_accessor :user, :question_group, :questions, :answers, :params
 
-    def initialize(user, question_group, params = {})
-      @user, @question_group, @params = user, question_group, params
+    def initialize(params = {})
+      super(params)
       build_answer_group
     end
 

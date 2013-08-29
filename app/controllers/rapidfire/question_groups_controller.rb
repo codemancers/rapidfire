@@ -1,7 +1,8 @@
 module Rapidfire
-  class QuestionGroupsController < ApplicationController
+  class QuestionGroupsController < Rapidfire::ApplicationController
     before_filter :authenticate_administrator!, except: :index
     respond_to :html, :js
+    respond_to :json, only: :results
 
     def index
       @question_groups = QuestionGroup.all
@@ -25,6 +26,14 @@ module Rapidfire
       @question_group.destroy
 
       respond_with(@question_group)
+    end
+
+    def results
+      @question_group = QuestionGroup.find(params[:id])
+      @question_group_results =
+        QuestionGroupResults.new(question_group: @question_group).extract
+
+      respond_with(@question_group_results, root: false)
     end
 
     private
