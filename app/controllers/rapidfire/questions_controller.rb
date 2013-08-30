@@ -12,7 +12,7 @@ module Rapidfire
     end
 
     def new
-      @question = QuestionForm.new(:question_group => @question_group)
+      @question = QuestionForm.new(new_question_params)
       respond_with(@question)
     end
 
@@ -54,6 +54,10 @@ module Rapidfire
 
     def index_location
       rapidfire.question_group_questions_url(@question_group)
+    end
+
+    def new_question_params
+      params.slice(:type).merge(question_group: @question_group)
     end
   end
 end
