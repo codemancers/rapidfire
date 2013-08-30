@@ -2,6 +2,7 @@ module Rapidfire
   class QuestionGroup < ActiveRecord::Base
     belongs_to :tenant
     has_many   :questions
+    has_many   :answer_groups
     validates  :name, :presence => true
 
     def self.by_tenant(current_tenant)
