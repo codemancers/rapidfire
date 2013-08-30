@@ -7,7 +7,7 @@ module Rapidfire
 
     def self.by_tenant(current_tenant)
       if current_tenant
-        where(tenant_id: current_tenant.id, tenant_type: current_tenant.type)
+        where(tenant_id: current_tenant.id, tenant_type: current_tenant.class.to_s)
       else
         self
       end
