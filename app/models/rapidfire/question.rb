@@ -26,10 +26,14 @@ module Rapidfire
       validation_rules || {}
     end
 
+    def required?
+      rules[:presence] == "1"
+    end
+
     # answer will delegate its validation to question, and question
     # will inturn add validations on answer on the fly!
     def validate_answer(answer)
-      if rules[:presence] == "1"
+      if required?
         answer.validates_presence_of :answer_text
       end
 

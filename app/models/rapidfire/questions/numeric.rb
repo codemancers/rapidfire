@@ -4,7 +4,7 @@ module Rapidfire
       def validate_answer(answer)
         super(answer)
 
-        if rules[:presence] == "1" || answer.answer_text.present?
+        if required? || answer.answer_text.present?
           gt_or_lt = {}
           if rules[:greater_than_or_equal_to].present?
             gt_or_lt[:greater_than_or_equal_to] = rules[:greater_than_or_equal_to].to_i
