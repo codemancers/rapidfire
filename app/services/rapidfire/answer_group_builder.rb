@@ -12,14 +12,6 @@ module Rapidfire
     end
 
     def save!(options = {})
-      params.each do |question_id, answer_attributes|
-        if answer = @answer_group.answers.find { |a| a.question_id.to_s == question_id.to_s }
-          text = answer_attributes[:answer_text]
-          answer.answer_text =
-            text.is_a?(Array) ? strip_checkbox_answers(text).join(',') : text
-        end
-      end
-
       @answer_group.save!(options)
     end
 
@@ -38,6 +30,20 @@ module Rapidfire
       @answer_group = AnswerGroup.new(user: user, question_group: question_group)
       @answers = @question_group.questions.collect do |question|
         @answer_group.answers.build(question_id: question.id)
+      end
+      populate_answers_from_params
+    end
+
+    def populate_answers_from_params
+      return if params.nil? || params.empty?
+
+      params.each do |question_id, answer_attributes|
+        answer = @answer_group.answers.find { |a| a.question_id.to_s == question_id.to_s }
+        next unless answer
+
+        text = answer_attributes[:answer_text]
+        answer.answer_text =
+          text.is_a?(Array) ? strip_checkbox_answers(text).join(',') : text
       end
     end
 
