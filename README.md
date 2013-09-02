@@ -4,6 +4,8 @@
 
 One stop solution for all survey related requirements! Its tad easy!
 
+This gem supports both **rails 3.2.13+** and **rails4** versions.
+
 You can see a demo of this gem [here](https://rapidfire.herokuapp.com).
 And the source code of demo [here](https://github.com/code-mancers/rapidfire-demo).
 
@@ -70,6 +72,79 @@ You can see them by running `bundle exec rake routes`.
    You can distribute this url so that survey takers can answer a particular survey
    of your interest.
 
+### Survey Results
+A new api is released which helps in seeing results for each survey. The api is:
+
+```
+  GET /rapidfire/question_groups/<survey-id>/results
+```
+This new api supports two formats: `html` and `json`. The `json` format is supported
+so that end user can use any javascript based chart solutions and render results
+in the format they pleased. An example can be seen [here](https://github.com/code-mancers/rapidfire-demo),
+which uses chart.js to display results.
+
+Diving into details of `json` format, all the questions can be categorized into
+one of the two categories:
+1. **aggregatable**: questions like checkboxes, selects, radio buttons fall into
+   this category.
+2. **non-aggregatable**: questions like long answers, short answers, date, numeric
+   etc.
+
+All the aggregatable answers will be returned in the form of hash, and the
+non-aggregatable answers will be returned in the form of an array. A typical json
+output will be like this:
+
+```json
+[
+{
+    "question_type": "Rapidfire::Questions::Radio",
+    "question_text": "Who is author of Waiting for godot?",
+    "results": {
+        "Sublime": 1,
+        "Emacs": 1,
+        "Vim": 1
+    }
+},
+{
+    "question_type": "Rapidfire::Questions::Checkbox",
+    "question_text": "Best rock band?",
+    "results": {
+        "Led Zeppelin": 2
+    }
+},
+{
+    "question_type": "Rapidfire::Questions::Date",
+    "question_text": "When is your birthday?",
+    "results": [
+        "04-02-1983",
+        "01/01/1970"
+    ]
+},
+{
+    "question_type": "Rapidfire::Questions::Long",
+    "question_text": "If Apple made a android phone what it will be called?",
+    "results": [
+        "Idude",
+        "apdroid"
+    ]
+},
+{
+    "question_type": "Rapidfire::Questions::Numeric",
+    "question_text": "Answer of life, universe and everything?",
+    "results": [
+        "42",
+        "0"
+    ]
+},
+{
+    "question_type": "Rapidfire::Questions::Select",
+    "question_text": "Places you want to visit after death",
+    "results": {
+        "Iran": 2
+    }
+}
+]
+```
 
 ## How it works
 This gem gives you access to create questions in a groups, something similar to
@@ -111,8 +186,9 @@ The typical flow about how to use this gem is:
 
 
 ## TODO
-1. Provide a way for admin to see survey results
-2. Add ability to sort questions, so that order is preserved.
+1. Add ability to sort questions, so that order is preserved.
+2. Add multi tenant support.
+3. Rename question-groups to surveys, and change routes accordingly.
 
 ## Contributing
 
