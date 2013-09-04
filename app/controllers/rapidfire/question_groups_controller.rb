@@ -1,6 +1,5 @@
 module Rapidfire
   class QuestionGroupsController < Rapidfire::ApplicationController
-    before_filter :authenticate_administrator!, except: :index
     respond_to :html, :js
     respond_to :json, only: :results
 
