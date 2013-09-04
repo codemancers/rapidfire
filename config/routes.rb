@@ -1,10 +1,10 @@
 Rapidfire::Engine.routes.draw do
-  resources :question_groups do
+  resources :question_groups, controller: Rapidfire.controllers[:question_groups] do
     get 'results', on: :member
 
-    resources :questions
-    resources :answer_groups, only: [:new, :create]
+    resources :questions, controller: Rapidfire.controllers[:questions]
+    resources :answer_groups, only: [:new, :create], controller: Rapidfire.controllers[:answer_groups]
   end
 
-  root :to => "question_groups#index"
+  root to: "#{Rapidfire.controllers[:question_groups]}#index"
 end
