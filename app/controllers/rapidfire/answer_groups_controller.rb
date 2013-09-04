@@ -1,7 +1,5 @@
 module Rapidfire
   class AnswerGroupsController < Rapidfire::ApplicationController
-    before_filter :find_question_group!
-
     def new
       @answer_group_builder = AnswerGroupBuilder.new(answer_group_params)
     end
@@ -23,7 +21,7 @@ module Rapidfire
 
     def answer_group_params
       answer_params = { params: params[:answer_group] }
-      answer_params.merge(user: current_user, question_group: @question_group)
+      answer_params.merge(user: current_user, question_group: find_question_group!)
     end
   end
 end
