@@ -31,7 +31,7 @@ module Rapidfire
     def initialize(params = {})
       from_question_to_attributes(params[:question]) if params[:question]
       super(params)
-      @question ||= question_group.questions.new
+      @question ||= Rapidfire::Question.new(question_group: question_group)
     end
 
     def save

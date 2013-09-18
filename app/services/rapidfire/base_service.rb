@@ -7,7 +7,7 @@ module Rapidfire
       include ActiveModel::Conversion
       include ActiveModel::Validations
 
-      def persisted; false end
+      def persisted?; false end
 
       def initialize(params={})
         params.each do |attr, value|
