@@ -18,6 +18,23 @@ describe Rapidfire::AnswerGroupBuilder do
       questions = builder.answers.collect { |a| a.question }
       questions.should =~ [question1, question2]
     end
+
+    context 'when update_existing_answers is set' do
+      let(:builder) do
+        described_class.new(question_group: question_group, update_existing_answers: true)
+      end
+
+      before(:each) do
+        answer_group = FactoryGirl.create(:answer_group, question_group: question_group)
+        FactoryGirl.create(:answer, answer_group: answer_group, question: question1, answer_text: 'small')
+        FactoryGirl.create(:answer, answer_group: answer_group, question: question2, answer_text: 'long')
+      end
+
+      it 'picks up existing answers from database' do
+        answer_texts = builder.answers.map(&:answer_text)
+        expect(answer_texts).to match_array(['small', 'long'])
+      end
+    end
   end
 
   describe "#save" do
