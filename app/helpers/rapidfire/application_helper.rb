@@ -6,7 +6,9 @@ module Rapidfire
     end
 
     def checkbox_checked?(answer, option)
-      answer.answer_text.to_s.split(",").include?(option)
+      answers_delimiter = Rapidfire.answers_delimiter
+      answers = answer.answer_text.to_s.split(answers_delimiter)
+      answers.include?(option)
     end
   end
 end

@@ -15,8 +15,17 @@ module Rapidfire
       params.each do |question_id, answer_attributes|
         if answer = @answer_group.answers.find { |a| a.question_id.to_s == question_id.to_s }
           text = answer_attributes[:answer_text]
+
+          # in case of checkboxes, values are submitted as an array of
+          # strings. we will store answers as one big string separated
+          # by delimiter.
           answer.answer_text =
-            text.is_a?(Array) ? strip_checkbox_answers(text).join(',') : text
+            if text.is_a?(Array)
+              stripped_answers = strip_checkbox_answers(text)
+              stripped_answers.join(Rapidfire.answers_delimiter)
+            else
+              text
+            end
         end
       end
 
@@ -25,7 +34,7 @@ module Rapidfire
 
     def save(options = {})
       save!(options)
-    rescue Exception => e
+    rescue ActiveRecord::ActiveRecordError => e
       # repopulate answers here in case of failure as they are not getting updated
       @answers = @question_group.questions.collect do |question|
         @answer_group.answers.find { |a| a.question_id == question.id }
