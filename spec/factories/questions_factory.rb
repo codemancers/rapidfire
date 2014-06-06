@@ -20,6 +20,10 @@ FactoryGirl.define do
       answer_options  "male\r\nfemale\r\n"
     end
 
+    factory ::q_range, class: "Rapidfire::Questions::Range" do
+      answer_options "1\r\n100\r\n"
+    end
+
     factory :q_select, :class => "Rapidfire::Questions::Select" do
       answer_options  "mac\r\nwindows\r\n"
     end

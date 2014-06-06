@@ -1,0 +1,4 @@
+<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+
+<%= f.label :answer_text, answer.question.question_text %>
+<%= range_field(:answer_text, answer.question.options, in: 1..100) %>
