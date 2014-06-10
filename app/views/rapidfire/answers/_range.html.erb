@@ -1,4 +1,4 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 
 <%= f.label :answer_text, answer.question.question_text %>
-<%= range_field(:answer_text, answer.question.options, in: 1..100) %>
+<%= f.range_field :answer_text, in: answer.question.rules[:greater_than_or_equal_to]..answer.question.rules[:less_than_or_equal_to], step: '1', value: '' %>
