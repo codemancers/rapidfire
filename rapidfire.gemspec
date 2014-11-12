@@ -30,7 +30,6 @@ PIM
   s.add_development_dependency 'shoulda'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency "factory_girl_rails"
-  s.add_development_dependency 'capybara', '2.0.3'
   s.add_development_dependency 'capybara-webkit'
   s.add_development_dependency 'launchy'
 end
