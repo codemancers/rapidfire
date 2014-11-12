@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency 'quiet_assets'
-  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'rspec-rails', '2.14.0'
   s.add_development_dependency 'shoulda'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency "factory_girl_rails"
