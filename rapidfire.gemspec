@@ -16,6 +16,11 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
+  s.post_install_message = <<-PIM
+There is breaking delimiter change when upgrading to version 2.0.0.
+Please see Readme for more information.
+PIM
+
   s.add_dependency "rails",    ">= 3.2.13"
   s.add_dependency "active_model_serializers", "~> 0.8.1"
 
