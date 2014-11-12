@@ -4,7 +4,7 @@ module Rapidfire
       validates :answer_options, :presence => true
 
       def options
-        answer_options.split(/\r?\n/)
+        answer_options.split(Rapidfire.answers_delimiter)
       end
 
       def validate_answer(answer)

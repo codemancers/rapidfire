@@ -2,8 +2,8 @@ module Rapidfire
   module AnswerSpecHelper
     def create_answers
       FactoryGirl.create(:answer, :question => @question_checkbox, :answer_text => 'hindi')
-      FactoryGirl.create(:answer, :question => @question_checkbox, :answer_text => 'hindi,telugu')
-      FactoryGirl.create(:answer, :question => @question_checkbox, :answer_text => 'hindi,kannada')
+      FactoryGirl.create(:answer, :question => @question_checkbox, :answer_text => "hindi\r\ntelugu")
+      FactoryGirl.create(:answer, :question => @question_checkbox, :answer_text => "hindi\r\nkannada")
 
       FactoryGirl.create(:answer, :question => @question_select, :answer_text => 'mac')
       FactoryGirl.create(:answer, :question => @question_select, :answer_text => 'mac')

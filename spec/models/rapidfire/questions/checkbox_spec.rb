@@ -28,7 +28,7 @@ describe Rapidfire::Questions::Checkbox do
 
       context "when there is an answer" do
         context "when answer is valid option" do
-          let(:answer_text)   { "hindi,telugu" }
+          let(:answer_text)   { "hindi\r\ntelugu" }
 
           it "passes validation" do
             answer.errors.should be_empty

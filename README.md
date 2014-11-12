@@ -185,6 +185,39 @@ The typical flow about how to use this gem is:
    creating questions fail.
 
 
+## Notes on upgrading
+##### Upgrading from 1.2.0 to 2.0.0
+
+The default delimiter which is used to store options for questions like select
+input, multiple answers for checkbox question is comma (,). This resulted in
+problems where gem is unable to parse options properly if answers also contain
+commas. For more information see [issue-19](https://github.com/code-mancers/rapidfire/issues/19).
+
+Starting from version `2.0.0` default delimiter is changed to `\r\n`, but a
+configuration is provided to change the delimiter. Please run this rake task
+to make existing questions or stored answers to use new delimiter.
+
+NOTE: Please take database backup before running this rake task.
+
+```ruby
+  bundle exec rake rapidfire:change_delimiter_from_comma_to_srsn
+```
+
+
+If you dont want to make this change rightaway, and would like to use comma
+as delimiter, then please use this initializer, but be warned that in future
+delimiter will be hardcoded to `\r\n`:
+
+
+```ruby
+# /<path-to-app>/config/initializers/rapidfire.rb
+
+Rapidfire.config do |config|
+  config.answers_delimiter = ','
+end
+```
+
+
 ## TODO
 1. Add ability to sort questions, so that order is preserved.
 2. Add multi tenant support.
