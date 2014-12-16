@@ -86,14 +86,13 @@ describe "Questions" do
     context "when type is modified" do
       before(:each) do
         page.within("#edit_question_#{question1.id}") do
-          select 'Checkbox', from: 'question_type'
+          select 'Numeric', from: 'question_type'
+          click_button "Update Question"
         end
       end
 
       it "updates question" do
-        expect do
-          click_button "Update Question"
-        end.to change { question1.reload.type }.to("Rapidfire::Questions::Checkbox")
+        expect(Rapidfire::Question.find(question1.id)).to be_a(Rapidfire::Questions::Numeric)
       end
     end
 
