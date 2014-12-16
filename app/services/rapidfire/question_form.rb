@@ -35,11 +35,6 @@ module Rapidfire
     end
 
     def save
-      @question.new_record? ? create_question : update_question
-    end
-
-    private
-    def create_question
       klass = nil
       if QUESTION_TYPES.values.include?(type)
         klass = type.constantize
@@ -48,12 +43,12 @@ module Rapidfire
         return false
       end
 
-      @question = klass.create(to_question_params)
+      @question = @question.becomes! klass
+      @question.assign_attributes to_question_params
+      @question.save
     end
 
-    def update_question
-      @question.update_attributes(to_question_params)
-    end
+    private
 
     def to_question_params
       {
