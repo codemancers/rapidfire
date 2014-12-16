@@ -10,6 +10,9 @@ module Rapidfire
   mattr_accessor :answers_delimiter
   self.answers_delimiter = "\r\n"
 
+  mattr_accessor :inline_main_app_named_routes
+  self.inline_main_app_named_routes = false
+
   def self.config
     yield(self)
   end
