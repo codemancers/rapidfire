@@ -83,6 +83,20 @@ describe "Questions" do
       end
     end
 
+    context "when type is modified" do
+      before(:each) do
+        page.within("#edit_question_#{question1.id}") do
+          select 'Checkbox', from: 'question_type'
+        end
+      end
+
+      it "updates question" do
+        expect do
+          click_button "Update Question"
+        end.to change { question1.reload.type }.to("Rapidfire::Questions::Checkbox")
+      end
+    end
+
     context "when name is not present" do
       before(:each) do
         page.within("#edit_question_#{question1.id}") do
