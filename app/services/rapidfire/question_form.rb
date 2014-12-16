@@ -55,7 +55,6 @@ module Rapidfire
         :question_group => question_group,
         :question_text  => question_text,
         :answer_options => answer_options,
-        :type => type,
         :validation_rules => {
           :presence => answer_presence,
           :minimum  => answer_minimum_length,
