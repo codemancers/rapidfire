@@ -4,6 +4,9 @@
 <%= form_for([@question_group, @answer_group_builder]) do |f| %>
   <%- @answer_group_builder.answers.each do |answer| %>
     <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+      <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+      <%= f.label :answer_text, answer.question.question_text %>
+
       <%= render_answer_form_helper(answer, answer_form) %>
     <% end %>
   <% end %>
