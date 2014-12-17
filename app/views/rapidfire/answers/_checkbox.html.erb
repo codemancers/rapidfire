@@ -2,9 +2,9 @@
 
 <%= f.label :answer_text, answer.question.question_text %>
 <%= f.fields_for :answer_text do |af| %>
-  <%- answer.question.options.each do |option| %>
-    <%= af.label option do %>
-      <%= af.check_box nil, { id: nil, checked: checkbox_checked?(answer, option) }, option %>
+  <%- answer.question.options.each_with_index do |option, index| %>
+    <%= af.label index do %>
+      <%= af.check_box index, { checked: checkbox_checked?(answer, option) }, option %>
       <%= option %>
     <% end %>
   <% end %>
