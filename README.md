@@ -218,7 +218,6 @@ end
 ```
 
 
-## Notes on upgrading
 ##### Upgrading from 2.0.0 to 2.0.1
 
 In 2.0.1 the positions of the questions are configurable. For the proper use,
