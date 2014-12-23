@@ -4,6 +4,8 @@
     <ul class="horizontal-list">
       <li><%= link_to "Edit", [:edit, question.question_group, question] %></li>
       <li><%= link_to "Delete", [question.question_group, question], method: :delete %></li>
+      <li><%= link_to "MoveUp", action: "move", question_group_id: question.question_group.id, question_id: question.id, position: (question.position-1) %></li>
+      <li><%= link_to "MoveDown", action: "move", question_group_id: question.question_group.id, question_id: question.id, position: (question.position+1) %></li>
     </ul>
   </td>
 </tr>

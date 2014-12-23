@@ -218,10 +218,21 @@ end
 ```
 
 
+## Notes on upgrading
+##### Upgrading from 2.0.0 to 2.0.1
+
+In 2.0.1 the positions of the questions are configurable. For the proper use,
+it's recommended to update the database to fill in the position values.
+
+NOTE: Please take database backup before running this rake task.
+
+```ruby
+  bundle exec rake rapidfire:position_initializer
+```
+
 ## TODO
-1. Add ability to sort questions, so that order is preserved.
-2. Add multi tenant support.
-3. Rename question-groups to surveys, and change routes accordingly.
+1. Add multi tenant support.
+2. Rename question-groups to surveys, and change routes accordingly.
 
 ## Contributing
 
