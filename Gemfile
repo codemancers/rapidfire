@@ -11,3 +11,4 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'pry-rails'
+gem 'responders'
