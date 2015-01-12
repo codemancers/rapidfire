@@ -2,7 +2,9 @@ Rapidfire::Engine.routes.draw do
   resources :question_groups do
     get 'results', on: :member
 
-    resources :questions
+    resources :questions do
+      get 'move/:position' => 'questions#move'
+    end
     resources :answer_groups, only: [:new, :create]
   end
 

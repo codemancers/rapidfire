@@ -1,9 +1,6 @@
-<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
-
-<%= f.label :answer_text, answer.question.question_text %>
-<%- answer.question.options.each do |option| %>
-  <%= f.label "answer_text_#{option}", option do %>
-    <%= f.radio_button :answer_text, option %>
+<%- answer.question.options.each_with_index do |option, index| %>
+  <%= f.label "answer_text_#{index}" do %>
+    <%= f.radio_button :answer_text, option, id: "#{f.object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")}_answer_text_#{index}" %>
     <%= option %>
   <% end %>
 <% end %>
