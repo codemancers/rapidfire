@@ -43,7 +43,8 @@ module Rapidfire
         return false
       end
 
-      @question = @question.becomes! klass
+      @question = @question.becomes(klass)
+      @question.public_send("#{klass.inheritance_column}=", klass.sti_name)
       @question.assign_attributes to_question_params
       @question.save
     end
