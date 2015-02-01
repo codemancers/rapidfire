@@ -10,7 +10,7 @@ describe "Questions" do
 
   describe "DELETE Question" do
     before(:each) do
-      ApplicationController.any_instance.stub(:can_administer?).and_return(true)
+      allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
       visit rapidfire.question_group_questions_path(question_group)
 
       page.within("#question_#{question1.id}") do
@@ -25,7 +25,7 @@ describe "Questions" do
 
   describe "CREATING Question" do
     before(:each) do
-      ApplicationController.any_instance.stub(:can_administer?).and_return(true)
+      allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
       visit rapidfire.question_group_questions_path(question_group)
       click_link "New Question"
     end
@@ -40,7 +40,7 @@ describe "Questions" do
       end
 
       it "creates question" do
-        page.should have_content "Which OS?"
+        expect(page).to have_content "Which OS?"
       end
     end
 
@@ -53,7 +53,7 @@ describe "Questions" do
 
       it "fails to create question group" do
         page.within("#new_question") do
-          page.should have_content "can't be blank"
+          expect(page).to have_content "can't be blank"
         end
       end
     end
@@ -61,7 +61,7 @@ describe "Questions" do
 
   describe "UPDATING Question" do
     before(:each) do
-      ApplicationController.any_instance.stub(:can_administer?).and_return(true)
+      allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
       visit rapidfire.question_group_questions_path(question_group)
       page.within("#question_#{question1.id}") do
         click_link "Edit"
@@ -70,31 +70,25 @@ describe "Questions" do
 
     context "when name is modified" do
       before(:each) do
-        page.within("#edit_question_#{question1.id}") do
-          fill_in "question_question_text",  with: "Updated Question"
-          click_button "Update Question"
-        end
+        fill_in "question_question_text",  with: "Updated Question"
+        click_button "Update Question"
       end
 
       it "updates question" do
         page.within("#question_#{question1.id}") do
-          page.should have_content "Updated Question"
+          expect(page).to have_content "Updated Question"
         end
       end
     end
 
     context "when name is not present" do
       before(:each) do
-        page.within("#edit_question_#{question1.id}") do
-          fill_in "question_question_text",  with: ""
-          click_button "Update Question"
-        end
+        fill_in "question_question_text",  with: ""
+        click_button "Update Question"
       end
 
       it "fails to update question" do
-        page.within("#edit_question_#{question1.id}") do
-          page.should have_content "can't be blank"
-        end
+        expect(page).to have_content "can't be blank"
       end
     end
   end

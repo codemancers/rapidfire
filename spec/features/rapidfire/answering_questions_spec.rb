@@ -18,16 +18,16 @@ describe "Question Groups" do
       end
 
       it "persists 2 answers" do
-        Rapidfire::Answer.count.should == 2
+        expect(Rapidfire::Answer.count).to eq(2)
       end
 
       it "persists 2 answers with answer values" do
         expected_answers = ["Long Answer", "Short Answer"]
-        Rapidfire::Answer.all.map(&:answer_text).should =~ expected_answers
+        expect(Rapidfire::Answer.all.map(&:answer_text)).to match(expected_answers)
       end
 
       it "redirects to question groups path" do
-        current_path.should == rapidfire.question_groups_path
+        expect(current_path).to eq(rapidfire.question_groups_path)
       end
     end
 
@@ -39,16 +39,16 @@ describe "Question Groups" do
       end
 
       it "fails to persits answers" do
-        Rapidfire::Answer.count.should == 0
+        expect(Rapidfire::Answer.count).to eq(0)
       end
 
       it "shows error for missing answers" do
-        page.should have_content "can't be blank"
+        expect(page).to have_content "can't be blank"
       end
 
       it "shows already populated answers" do
         short_answer = page.find("#answer_group_#{question2.id}_answer_text").value
-        short_answer.should have_content "Short Answer"
+        expect(short_answer).to have_content "Short Answer"
       end
     end
   end

@@ -11,12 +11,12 @@ describe Rapidfire::AnswerGroupBuilder do
     before(:each)  { [question1, question2] }
 
     it "builds answer group with answers" do
-      builder.answers.should_not be_empty
+      expect(builder.answers).not_to be_empty
     end
 
     it "builds answers based on number of questions available" do
       questions = builder.answers.collect { |a| a.question }
-      questions.should =~ [question1, question2]
+      expect(questions).to match_array([question1, question2])
     end
   end
 
@@ -42,13 +42,13 @@ describe Rapidfire::AnswerGroupBuilder do
       end
 
       it "returns true" do
-        save_answers.should be_true
+        expect(save_answers).to be_truthy
       end
 
       it "successfully saves answers" do
         builder.answers.each do |answer|
-          answer.should be_persisted
-          question_ids.should include(answer.question_id)
+          expect(answer).to be_persisted
+          expect(question_ids).to include(answer.question_id)
         end
       end
     end
@@ -62,24 +62,24 @@ describe Rapidfire::AnswerGroupBuilder do
       end
 
       it "returns false" do
-        save_answers.should be_false
+        expect(save_answers).to be_falsey
       end
 
       it "fails to save those answers" do
-        Rapidfire::Answer.count.should == 0
+        expect(Rapidfire::Answer.count).to eq(0)
       end
 
       context "when requested to save without validations" do
         let(:save_answers)  { builder.save(:validate => false) }
 
         it "returns true" do
-          save_answers.should be_true
+          expect(save_answers).to be_truthy
         end
 
         it "saves all the answers" do
           builder.answers.each do |answer|
-            answer.should be_persisted
-            question_ids.should include(answer.question_id)
+            expect(answer).to be_persisted
+            expect(question_ids).to include(answer.question_id)
           end
         end
       end

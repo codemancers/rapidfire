@@ -7,14 +7,14 @@ describe Rapidfire::QuestionForm do
     let(:proxy)  { described_class.new(question_group: question_group) }
 
     it "builds a dummy question" do
-      proxy.question.should_not be_nil
+      expect(proxy.question).not_to be_nil
     end
 
     context "when params are passed" do
       let(:proxy)  { described_class.new(question_group: question_group, question_text: "Your Bio") }
 
       it "persists those params" do
-        proxy.question_text.should == "Your Bio"
+        expect(proxy.question_text).to eq("Your Bio")
       end
     end
 
@@ -23,10 +23,10 @@ describe Rapidfire::QuestionForm do
       let(:proxy)     { described_class.new(question_group: question_group, question: question) }
 
       it "persists question params" do
-        proxy.type.should == question.type
-        proxy.question_group.should == question.question_group
-        proxy.question_text.should  == question.question_text
-        proxy.answer_options.should == question.answer_options
+        expect(proxy.type).to eq(question.type)
+        expect(proxy.question_group).to eq(question.question_group)
+        expect(proxy.question_text).to  eq(question.question_text)
+        expect(proxy.answer_options).to eq(question.answer_options)
       end
     end
   end
@@ -47,16 +47,16 @@ describe Rapidfire::QuestionForm do
         end
 
         it "persists the question" do
-          proxy.errors.should be_empty
+          expect(proxy.errors).to be_empty
         end
 
         it "creates a question given type" do
-          proxy.question.should be_a(Rapidfire::Questions::Checkbox)
+          expect(proxy.question).to be_a(Rapidfire::Questions::Checkbox)
         end
 
         it "persists params in created question" do
-          proxy.question.question_text.should == "Your mood today"
-          proxy.question.options.should =~ ["good", "bad"]
+          expect(proxy.question.question_text).to eq("Your mood today")
+          expect(proxy.question.options).to match_array(["good", "bad"])
         end
       end
 
@@ -66,9 +66,9 @@ describe Rapidfire::QuestionForm do
         end
 
         it "fails to presist the question" do
-          proxy.errors.should_not be_empty
-          proxy.errors[:question_text].should  include("can't be blank")
-          proxy.errors[:answer_options].should include("can't be blank")
+          expect(proxy.errors).not_to be_empty
+          expect(proxy.errors[:question_text]).to  include("can't be blank")
+          expect(proxy.errors[:answer_options]).to include("can't be blank")
         end
       end
     end
@@ -85,8 +85,8 @@ describe Rapidfire::QuestionForm do
       end
 
       it "updates the question" do
-        proxy.errors.should be_empty
-        proxy.question.question_text.should == "Changing question text"
+        expect(proxy.errors).to be_empty
+        expect(proxy.question.question_text).to eq("Changing question text")
       end
     end
   end

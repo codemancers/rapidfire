@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Rapidfire::QuestionGroup do
   describe "Validations" do
-    it { should validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:name) }
   end
 
   describe "Associations" do
-    it { should have_many(:questions) }
+    it { is_expected.to have_many(:questions) }
   end
 end
