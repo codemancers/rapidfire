@@ -1,9 +1,9 @@
 <h3>Question</h3>
 
-<%= form_for [@question_group, question] do |f| %>
-  <%- unless question.errors.empty? %>
+<%= form_for form, as: :question, url: url, method: method do |f| %>
+  <%- unless form.errors.empty? %>
     <ul>
-      <%- question.errors.full_messages.each do |message| %>
+      <%- form.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>
@@ -36,5 +36,5 @@
   <%= f.label :answer_less_than_or_equal_to %>
   <%= f.text_field :answer_less_than_or_equal_to %>
 
-  <%= f.submit %>
+  <%= f.submit submit_text %>
 <% end %>

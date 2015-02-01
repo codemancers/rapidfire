@@ -12,12 +12,27 @@ module Rapidfire
 
     def create
       @question_group = QuestionGroup.new(question_group_params)
-      @question_group.save
+      if @question_group.save
+        respond_to do |format|
+          format.html { redirect_to question_groups_path }
+          format.js
+        end
+      else
+        respond_to do |format|
+          format.html { render :new }
+          format.js
+        end
+      end
     end
 
     def destroy
       @question_group = QuestionGroup.find(params[:id])
       @question_group.destroy
+
+      respond_to do |format|
+        format.html { redirect_to question_groups_path }
+        format.js
+      end
     end
 
     def results
@@ -26,7 +41,9 @@ module Rapidfire
         QuestionGroupResults.new(question_group: @question_group).extract
 
       respond_to do |format|
-        format.json { @question_group_results.to_json }
+        format.json { render json: @question_group_results, root: false }
+        format.html
+        format.js
       end
     end
 

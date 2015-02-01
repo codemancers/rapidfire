@@ -22,11 +22,7 @@ module Rapidfire
       :answer_minimum_length, :answer_maximum_length,
       :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
 
-    delegate :valid?, :errors, :id, :to => :question
-
-    def to_model
-      question
-    end
+    delegate :valid?, :errors, :to => :question
 
     def initialize(params = {})
       from_question_to_attributes(params[:question]) if params[:question]
