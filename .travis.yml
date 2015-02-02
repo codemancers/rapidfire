@@ -12,6 +12,17 @@ gemfile:
   - gemfiles/Gemfile.rails-4.0.x
   - gemfiles/Gemfile.rails-4.1.x
 
+matrix:
+  exclude:
+    # has test/unit/testcase removed, and also 3.2.x is too old to support
+    # ruby 2.2.0. so ignoring this combination.
+    - rvm: 2.2.0
+      gemfile: gemfiles/Gemfile.rails-3.2.x
+    # https://github.com/rspec/rspec-rails/issues/1273
+    # waiting for this issue to be resolved
+    - rvm: 2.2.0
+      gemfile: gemfiles/Gemfile.rails-4.0.x
+
 before_script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
 
