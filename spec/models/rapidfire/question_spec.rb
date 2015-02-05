@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Rapidfire::Question do
   describe "Validations" do
-    it { should validate_presence_of(:question_group) }
-    it { should validate_presence_of(:question_text)  }
+    it { is_expected.to validate_presence_of(:question_group) }
+    it { is_expected.to validate_presence_of(:question_text)  }
   end
 
   describe "Associations" do
-    it { should belong_to(:question_group) }
+    it { is_expected.to belong_to(:question_group) }
   end
 
   describe "#rules" do
@@ -17,7 +17,7 @@ describe Rapidfire::Question do
       let(:validation_rules) { {} }
 
       it "returns empty hash" do
-        question.rules.should be_empty
+        expect(question.rules).to be_empty
       end
     end
 
@@ -27,7 +27,7 @@ describe Rapidfire::Question do
       end
 
       it "returns those rules" do
-        question.rules[:presence].should be_true
+        expect(question.rules[:presence]).to be_truthy
       end
     end
   end
@@ -42,7 +42,7 @@ describe Rapidfire::Question do
       let(:answer_text)      { "" }
 
       it "answer should pass validations" do
-        answer.errors.should be_empty
+        expect(answer.errors).to be_empty
       end
     end
 
@@ -53,11 +53,11 @@ describe Rapidfire::Question do
         let(:answer_text)  { "" }
 
         it "fails validations" do
-          answer.errors.should_not be_empty
+          expect(answer.errors).not_to be_empty
         end
 
         it "says answer should be present" do
-          answer.errors[:answer_text].should include("can't be blank")
+          expect(answer.errors[:answer_text]).to include("can't be blank")
         end
       end
 
@@ -65,7 +65,7 @@ describe Rapidfire::Question do
         let(:answer_text)  { "sample answer" }
 
         it "passes validations" do
-          answer.errors.should be_empty
+          expect(answer.errors).to be_empty
         end
       end
     end
@@ -77,11 +77,11 @@ describe Rapidfire::Question do
         let(:answer_text)  { "" }
 
         it "fails validations" do
-          answer.errors.should_not be_empty
+          expect(answer.errors).not_to be_empty
         end
 
         it "says answer is too short" do
-          answer.errors[:answer_text].first.should match("is too short")
+          expect(answer.errors[:answer_text].first).to match("is too short")
         end
       end
 
@@ -90,11 +90,11 @@ describe Rapidfire::Question do
           let(:answer_text)  { 'i' * 9 }
 
           it "fails validations" do
-            answer.errors.should_not be_empty
+            expect(answer.errors).not_to be_empty
           end
 
           it "says answer is too short" do
-            answer.errors[:answer_text].first.should match("is too short")
+            expect(answer.errors[:answer_text].first).to match("is too short")
           end
         end
 
@@ -102,7 +102,7 @@ describe Rapidfire::Question do
           let(:answer_text)  { 'i' * 15 }
 
           it "passes validations" do
-            answer.errors.should be_empty
+            expect(answer.errors).to be_empty
           end
         end
 
@@ -110,11 +110,11 @@ describe Rapidfire::Question do
           let(:answer_text)  { 'i' * 21 }
 
           it "fails validations" do
-            answer.errors.should_not be_empty
+            expect(answer.errors).not_to be_empty
           end
 
           it "says answer is too long" do
-            answer.errors[:answer_text].first.should match("is too long")
+            expect(answer.errors[:answer_text].first).to match("is too long")
           end
         end
       end

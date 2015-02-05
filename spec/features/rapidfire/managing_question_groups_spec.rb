@@ -24,7 +24,7 @@ describe "Question Groups" do
   describe "DELETE Question Groups" do
     context "when user can administer" do
       before(:each) do
-        ApplicationController.any_instance.stub(:can_administer?).and_return(true)
+        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
         click_link "Delete"
@@ -37,7 +37,7 @@ describe "Question Groups" do
 
     context "when user cannot administer" do
       before(:each) do
-        ApplicationController.any_instance.stub(:can_administer?).and_return(false)
+        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(false)
         visit rapidfire.root_path
       end
 
@@ -50,7 +50,7 @@ describe "Question Groups" do
   describe "CREATING Question Group" do
     context "when user can create groups" do
       before(:each) do
-        ApplicationController.any_instance.stub(:can_administer?).and_return(true)
+        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
         click_link "New Group"
@@ -86,7 +86,7 @@ describe "Question Groups" do
 
     context "when user cannot create groups" do
       before(:each) do
-        ApplicationController.any_instance.stub(:can_administer?).and_return(false)
+        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(false)
         visit rapidfire.root_path
       end
 
@@ -99,7 +99,7 @@ describe "Question Groups" do
   describe "EDITING Question Groups" do
     context "when user can manage questions" do
       before(:each) do
-        ApplicationController.any_instance.stub(:can_administer?).and_return(true)
+        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
         click_link question_group.name
@@ -113,7 +113,7 @@ describe "Question Groups" do
 
     context "when user cannot manage questions" do
       before(:each) do
-        ApplicationController.any_instance.stub(:can_administer?).and_return(false)
+        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(false)
       end
 
       it "fails to access the page" do

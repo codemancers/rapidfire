@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe Rapidfire::Questions::Checkbox do
   describe "Validations" do
-    it { should validate_presence_of(:answer_options) }
+    it { is_expected.to validate_presence_of(:answer_options) }
   end
 
   describe "#options" do
     let(:question)  { FactoryGirl.create(:q_select) }
 
     it "returns options" do
-      question.options.should =~ ["mac", "windows"]
+      expect(question.options).to match_array(["mac", "windows"])
     end
   end
 
@@ -23,7 +23,7 @@ describe Rapidfire::Questions::Checkbox do
       let(:answer_text)      { "" }
 
       it "answer should pass validations" do
-        answer.errors.should be_empty
+        expect(answer.errors).to be_empty
       end
 
       context "when there is an answer" do
@@ -31,7 +31,7 @@ describe Rapidfire::Questions::Checkbox do
           let(:answer_text)   { "hindi\r\ntelugu" }
 
           it "passes validation" do
-            answer.errors.should be_empty
+            expect(answer.errors).to be_empty
           end
         end
 
@@ -39,11 +39,11 @@ describe Rapidfire::Questions::Checkbox do
           let(:answer_text)   { "sample answer" }
 
           it "fails validation" do
-            answer.errors.should_not be_empty
+            expect(answer.errors).not_to be_empty
           end
 
           it "says answer is invalid" do
-            answer.errors[:answer_text].should include("is invalid")
+            expect(answer.errors[:answer_text]).to include("is invalid")
           end
         end
       end
@@ -56,11 +56,11 @@ describe Rapidfire::Questions::Checkbox do
         let(:answer_text)  { "" }
 
         it "fails validations" do
-          answer.errors.should_not be_empty
+          expect(answer.errors).not_to be_empty
         end
 
         it "says answer should be present" do
-          answer.errors[:answer_text].should include("can't be blank")
+          expect(answer.errors[:answer_text]).to include("can't be blank")
         end
       end
 
@@ -69,7 +69,7 @@ describe Rapidfire::Questions::Checkbox do
           let(:answer_text)   { "kannada" }
 
           it "passes validation" do
-            answer.errors.should be_empty
+            expect(answer.errors).to be_empty
           end
         end
 
@@ -77,11 +77,11 @@ describe Rapidfire::Questions::Checkbox do
           let(:answer_text)   { "sample answer" }
 
           it "fails validation" do
-            answer.errors.should_not be_empty
+            expect(answer.errors).not_to be_empty
           end
 
           it "says answer is invalid" do
-            answer.errors[:answer_text].should include("is invalid")
+            expect(answer.errors[:answer_text]).to include("is invalid")
           end
         end
       end
