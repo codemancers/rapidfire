@@ -2,19 +2,19 @@ module Rapidfire
   class QuestionsController < Rapidfire::ApplicationController
     before_filter :authenticate_administrator!
 
-    before_filter :find_question_group!
+    before_filter :find_survey!
     before_filter :find_question!, :only => [:edit, :update, :destroy]
 
     def index
-      @questions = @question_group.questions
+      @questions = @survey.questions
     end
 
     def new
-      @question_form = QuestionForm.new(:question_group => @question_group)
+      @question_form = QuestionForm.new(:survey => @survey)
     end
 
     def create
-      form_params = params[:question].merge(:question_group => @question_group)
+      form_params = params[:question].merge(:survey => @survey)
       @question_form = QuestionForm.new(form_params)
       @question_form.save
 
@@ -63,16 +63,16 @@ module Rapidfire
 
     private
 
-    def find_question_group!
-      @question_group = QuestionGroup.find(params[:question_group_id])
+    def find_survey!
+      @survey = Survey.find(params[:survey_id])
     end
 
     def find_question!
-      @question = @question_group.questions.find(params[:id])
+      @question = @survey.questions.find(params[:id])
     end
 
     def index_location
-      rapidfire.question_group_questions_url(@question_group)
+      rapidfire.survey_questions_url(@survey)
     end
   end
 end

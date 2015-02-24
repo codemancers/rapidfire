@@ -10,7 +10,7 @@ module Rapidfire
       def copy_views
         view_directory :answer_groups
         view_directory :answers
-        view_directory :question_groups
+        view_directory :surveys
         view_directory :questions
       end
 

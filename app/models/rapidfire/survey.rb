@@ -1,5 +1,5 @@
 module Rapidfire
-  class QuestionGroup < ActiveRecord::Base
+  class Survey < ActiveRecord::Base
     has_many  :questions
     validates :name, :presence => true
 

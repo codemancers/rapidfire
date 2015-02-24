@@ -9,18 +9,18 @@ describe 'rapidfire:change_delimiter_from_comma_to_srsn' do
   end
 
   it 'converts select,radio and checkbox answer options delimiter from , to \r\n' do
-    question_group = FactoryGirl.create(:question_group)
-    q_checkbox = FactoryGirl.create(:q_checkbox, question_group: question_group,
+    survey = FactoryGirl.create(:survey)
+    q_checkbox = FactoryGirl.create(:q_checkbox, survey: survey,
                                     answer_options: 'one,two,three')
-    q_radio = FactoryGirl.create(:q_radio, question_group: question_group,
+    q_radio = FactoryGirl.create(:q_radio, survey: survey,
                                  answer_options: 'hello,world')
-    q_select = FactoryGirl.create(:q_select, question_group: question_group,
+    q_select = FactoryGirl.create(:q_select, survey: survey,
                                   answer_options: 'new,old,historic,')
 
-    q_date = FactoryGirl.create(:q_date, question_group: question_group)
-    q_long = FactoryGirl.create(:q_long, question_group: question_group)
-    q_numeric = FactoryGirl.create(:q_numeric, question_group: question_group)
-    q_short = FactoryGirl.create(:q_short, question_group: question_group)
+    q_date = FactoryGirl.create(:q_date, survey: survey)
+    q_long = FactoryGirl.create(:q_long, survey: survey)
+    q_numeric = FactoryGirl.create(:q_numeric, survey: survey)
+    q_short = FactoryGirl.create(:q_short, survey: survey)
 
     Rake::Task['rapidfire:change_delimiter_from_comma_to_srsn'].invoke
 

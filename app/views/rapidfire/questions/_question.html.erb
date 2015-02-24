@@ -2,8 +2,8 @@
   <td><%= question.question_text %></td>
   <td>
     <ul class="horizontal-list">
-      <li><%= link_to "Edit", [:edit, question.question_group, question] %></li>
-      <li><%= link_to "Delete", [question.question_group, question], method: :delete %></li>
+      <li><%= link_to "Edit", [:edit, question.survey, question] %></li>
+      <li><%= link_to "Delete", [question.survey, question], method: :delete %></li>
     </ul>
   </td>
 </tr>
