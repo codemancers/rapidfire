@@ -8,7 +8,7 @@ module Rapidfire
       desc "Copies default Rapidfire views to your application."
 
       def copy_views
-        view_directory :answer_groups
+        view_directory :attempts
         view_directory :answers
         view_directory :surveys
         view_directory :questions

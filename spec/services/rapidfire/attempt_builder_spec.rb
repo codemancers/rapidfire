@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Rapidfire::AnswerGroupBuilder do
+describe Rapidfire::AttemptBuilder do
   let(:survey)  { FactoryGirl.create(:survey) }
   let(:question1)  { FactoryGirl.create(:q_short, survey: survey) }
   let(:question2)  { FactoryGirl.create(:q_long, survey: survey,

@@ -8,7 +8,7 @@
   </td>
   <td>
     <ul class="horizontal-list">
-      <li><%= link_to "Answer Questions", new_survey_answer_group_path(survey) %></li>
+      <li><%= link_to "Answer Questions", new_survey_attempt_path(survey) %></li>
       <% if can_administer? %>
         <li><%= link_to "Results", [:results, survey] %></li>
         <li><%= link_to "Delete", [survey], method: :delete %></li>
