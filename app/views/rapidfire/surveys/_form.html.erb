@@ -1,0 +1,15 @@
+<h3><%= survey.new_record? ? "New Survey" : "Edit Survey" %></h3>
+
+<%= form_for survey do |f| %>
+  <%- if survey.errors.any? %>
+    <ul>
+      <%- survey.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>

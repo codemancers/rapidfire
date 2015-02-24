@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Rapidfire::QuestionGroup do
+describe Rapidfire::Survey do
   describe "Validations" do
     it { is_expected.to validate_presence_of(:name) }
   end

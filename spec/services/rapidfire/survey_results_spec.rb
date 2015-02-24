@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe Rapidfire::QuestionGroupResults do
+describe Rapidfire::SurveyResults do
   include Rapidfire::QuestionSpecHelper
   include Rapidfire::AnswerSpecHelper
 
-  let(:question_group) { FactoryGirl.create(:question_group) }
+  let(:survey) { FactoryGirl.create(:survey) }
 
   describe '#extract' do
     before do
-      create_questions(question_group)
+      create_questions(survey)
       create_answers
-      @question_group_results =
-        Rapidfire::QuestionGroupResults.new(question_group: question_group)
-      @results = @question_group_results.extract
+      @survey_results =
+        Rapidfire::SurveyResults.new(survey: survey)
+      @results = @survey_results.extract
     end
 
     it 'returns checkbox answers as a hash containing options as keys and number of answers as values' do

@@ -1,0 +1,18 @@
+<tr id= "survey_<%= survey.id %>">
+  <td>
+    <% if can_administer? %>
+      <%= link_to survey.name, survey_questions_path(survey) %>
+    <% else %>
+      <%= survey.name %>
+    <% end %>
+  </td>
+  <td>
+    <ul class="horizontal-list">
+      <li><%= link_to "Answer Questions", new_survey_attempt_path(survey) %></li>
+      <% if can_administer? %>
+        <li><%= link_to "Results", [:results, survey] %></li>
+        <li><%= link_to "Delete", [survey], method: :delete %></li>
+      <% end %>
+    </ul>
+  </td>
+</tr>

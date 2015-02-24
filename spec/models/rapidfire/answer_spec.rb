@@ -4,7 +4,7 @@ describe Rapidfire::Answer do
   describe "Validations" do
     subject { FactoryGirl.build(:answer) }
     it { is_expected.to validate_presence_of(:question)      }
-    it { is_expected.to validate_presence_of(:answer_group)  }
+    it { is_expected.to validate_presence_of(:attempt)  }
 
     context "when validations are run" do
       let(:answer)  { FactoryGirl.build(:answer) }
@@ -18,6 +18,6 @@ describe Rapidfire::Answer do
 
   describe "Associations" do
     it { is_expected.to belong_to(:question)     }
-    it { is_expected.to belong_to(:answer_group) }
+    it { is_expected.to belong_to(:attempt) }
   end
 end

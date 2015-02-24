@@ -1,27 +1,27 @@
 require 'spec_helper'
 
-describe "Question Groups" do
+describe "Surveys" do
   include Rapidfire::QuestionSpecHelper
   include Rapidfire::AnswerSpecHelper
 
-  let(:question_group)  { FactoryGirl.create(:question_group, name: "Question Set") }
-  let(:question1)  { FactoryGirl.create(:q_long,  question_group: question_group, question_text: "Long Question")  }
-  let(:question2)  { FactoryGirl.create(:q_short, question_group: question_group, question_text: "Short Question") }
+  let(:survey)  { FactoryGirl.create(:survey, name: "Question Set") }
+  let(:question1)  { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question")  }
+  let(:question2)  { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
   before(:each) do
     [question1, question2]
   end
 
-  describe "INDEX Question Groups" do
+  describe "INDEX Surveys" do
     before(:each) do
       visit rapidfire.root_path
     end
 
-    it "lists all question groups" do
-      expect(page).to have_content question_group.name
+    it "lists all surveys" do
+      expect(page).to have_content survey.name
     end
   end
 
-  describe "DELETE Question Groups" do
+  describe "DELETE Surveys" do
     context "when user can administer" do
       before(:each) do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
@@ -30,8 +30,8 @@ describe "Question Groups" do
         click_link "Delete"
       end
 
-      it "deletes the question group" do
-        expect(page).not_to have_content question_group.name
+      it "deletes the survey" do
+        expect(page).not_to have_content survey.name
       end
     end
 
@@ -41,43 +41,43 @@ describe "Question Groups" do
         visit rapidfire.root_path
       end
 
-      it "doesn't show option to delete question group" do
+      it "doesn't show option to delete survey" do
         expect(page).not_to have_link "Delete"
       end
     end
   end
 
-  describe "CREATING Question Group" do
+  describe "CREATING Survey" do
     context "when user can create groups" do
       before(:each) do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
-        click_link "New Group"
+        click_link "New survey"
       end
 
       context "when name is present" do
         before(:each) do
-          page.within("#new_question_group") do
-            fill_in "question_group_name", with: "New Survey"
-            click_button "Create Question group"
+          page.within("#new_survey") do
+            fill_in "survey_name", with: "New Survey"
+            click_button "Create Survey"
           end
         end
 
-        it "creates question group" do
+        it "creates survey" do
           expect(page).to have_content "New Survey"
         end
       end
 
       context "when name is not present" do
         before(:each) do
-          page.within("#new_question_group") do
-            click_button "Create Question group"
+          page.within("#new_survey") do
+            click_button "Create Survey"
           end
         end
 
-        it "fails to create question group" do
-          page.within("#new_question_group") do
+        it "fails to create survey" do
+          page.within("#new_survey") do
             expect(page).to have_content "can't be blank"
           end
         end
@@ -96,13 +96,13 @@ describe "Question Groups" do
     end
   end
 
-  describe "EDITING Question Groups" do
+  describe "EDITING Surveys" do
     context "when user can manage questions" do
       before(:each) do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
-        click_link question_group.name
+        click_link survey.name
       end
 
       it "shows set of questions" do
@@ -117,23 +117,23 @@ describe "Question Groups" do
       end
 
       it "fails to access the page" do
-        expect(page).not_to have_link question_group.name
+        expect(page).not_to have_link survey.name
       end
     end
   end
 
-  describe "GET Question Group results" do
+  describe "GET Survey results" do
     before(:each) do
-      create_questions(question_group)
+      create_questions(survey)
       create_answers
 
       visit rapidfire.root_path
-      page.within("#question_group_#{question_group.id}") do
+      page.within("#survey_#{survey.id}") do
         click_link "Results"
       end
     end
 
-    it "shows results for particular question group" do
+    it "shows results for particular survey" do
       expect(page).to have_content "Results"
       expect(page).to have_content "hindi 3"
     end
