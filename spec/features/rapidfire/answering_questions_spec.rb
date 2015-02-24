@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe "Question Groups" do
-  let(:question_group)  { FactoryGirl.create(:question_group, name: "Question Set") }
-  let(:question1)  { FactoryGirl.create(:q_long,  question_group: question_group, question_text: "Long Question", validation_rules: { presence: "1" })  }
-  let(:question2)  { FactoryGirl.create(:q_short, question_group: question_group, question_text: "Short Question") }
+describe "Surveys" do
+  let(:survey)  { FactoryGirl.create(:survey, name: "Question Set") }
+  let(:question1)  { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question", validation_rules: { presence: "1" })  }
+  let(:question2)  { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
   before(:each) do
     [question1, question2]
-    visit rapidfire.new_question_group_answer_group_path(question_group)
+    visit rapidfire.new_survey_answer_group_path(survey)
   end
 
   describe "Answering Questions" do
@@ -26,8 +26,8 @@ describe "Question Groups" do
         expect(Rapidfire::Answer.all.map(&:answer_text)).to match(expected_answers)
       end
 
-      it "redirects to question groups path" do
-        expect(current_path).to eq(rapidfire.question_groups_path)
+      it "redirects to surveys path" do
+        expect(current_path).to eq(rapidfire.surveys_path)
       end
     end
 

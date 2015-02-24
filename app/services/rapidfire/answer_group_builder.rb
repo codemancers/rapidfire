@@ -1,6 +1,6 @@
 module Rapidfire
   class AnswerGroupBuilder < Rapidfire::BaseService
-    attr_accessor :user, :question_group, :questions, :answers, :params
+    attr_accessor :user, :survey, :questions, :answers, :params
 
     def initialize(params = {})
       super(params)
@@ -36,7 +36,7 @@ module Rapidfire
       save!(options)
     rescue ActiveRecord::ActiveRecordError => e
       # repopulate answers here in case of failure as they are not getting updated
-      @answers = @question_group.questions.collect do |question|
+      @answers = @survey.questions.collect do |question|
         @answer_group.answers.find { |a| a.question_id == question.id }
       end
       false
@@ -44,8 +44,8 @@ module Rapidfire
 
     private
     def build_answer_group
-      @answer_group = AnswerGroup.new(user: user, question_group: question_group)
-      @answers = @question_group.questions.collect do |question|
+      @answer_group = AnswerGroup.new(user: user, survey: survey)
+      @answers = @survey.questions.collect do |question|
         @answer_group.answers.build(question_id: question.id)
       end
     end

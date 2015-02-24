@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :question do
-    question_group  { FactoryGirl.create(:question_group) }
+    survey  { FactoryGirl.create(:survey) }
     question_text   "Sample Question"
 
     factory :q_checkbox, :class => "Rapidfire::Questions::Checkbox" do
