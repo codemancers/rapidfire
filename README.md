@@ -217,6 +217,20 @@ Rapidfire.config do |config|
 end
 ```
 
+##### Upgrading from 2.1.0 to 3.0.0
+In v3.0.0 we have renamed lots of code based on 2 assumptions:
+- renamed `question_groups` to `surveys`, and all associations, and
+- renamed `answer_groups` to `attempts` and all associations
+
+- Run a migration which creates a migration to do this renaming.
+
+```sh
+  bundle exec rails g rapidfire:upgrade210to300
+
+  # make edits to migration if required as per your needs
+  bundle exec rake db:migrate
+```
+
 
 ## TODO
 1. Add ability to sort questions, so that order is preserved.

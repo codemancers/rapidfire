@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150224155913) do
+ActiveRecord::Schema.define(:version => 20150225190019) do
 
   create_table "rapidfire_answers", :force => true do |t|
     t.integer  "attempt_id"
