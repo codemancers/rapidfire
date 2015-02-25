@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150225190019) do
+ActiveRecord::Schema.define(:version => 20150225192235) do
 
   create_table "rapidfire_answers", :force => true do |t|
     t.integer  "attempt_id"
@@ -21,9 +21,6 @@ ActiveRecord::Schema.define(:version => 20150225190019) do
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "rapidfire_answers", ["attempt_id"], :name => "index_rapidfire_answers_on_answer_group_id"
-  add_index "rapidfire_answers", ["question_id"], :name => "index_rapidfire_answers_on_question_id"
-
   create_table "rapidfire_attempts", :force => true do |t|
     t.integer  "survey_id"
     t.integer  "user_id"
@@ -31,9 +28,6 @@ ActiveRecord::Schema.define(:version => 20150225190019) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "rapidfire_attempts", ["survey_id"], :name => "index_rapidfire_answer_groups_on_question_group_id"
-  add_index "rapidfire_attempts", ["user_id", "user_type"], :name => "index_rapidfire_answer_groups_on_user_id_and_user_type"
 
   create_table "rapidfire_questions", :force => true do |t|
     t.integer  "survey_id"
@@ -46,16 +40,10 @@ ActiveRecord::Schema.define(:version => 20150225190019) do
     t.datetime "updated_at",       :null => false
   end
 
-  add_index "rapidfire_questions", ["survey_id"], :name => "index_rapidfire_questions_on_survey_id"
-
   create_table "rapidfire_surveys", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "tenant_id"
-    t.string   "tenant_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
-
-  add_index "rapidfire_surveys", ["tenant_id", "tenant_type"], :name => "index_rapidfire_question_groups_on_tenant_id_and_tenant_type"
 
 end

@@ -17,7 +17,7 @@ Add this line to your application's Gemfile:
 And then execute:
 
     $ bundle install
-    $ bundle exec rake rapidfire:install:migrations
+    $ bundle exec rake rapidfire:create_tables
     $ bundle exec rake db:migrate
 
 And if you want to customize rapidfire views, you can do
