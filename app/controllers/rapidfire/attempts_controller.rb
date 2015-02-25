@@ -1,15 +1,15 @@
 module Rapidfire
-  class AnswerGroupsController < Rapidfire::ApplicationController
+  class AttemptsController < Rapidfire::ApplicationController
     before_filter :find_survey!
 
     def new
-      @answer_group_builder = AnswerGroupBuilder.new(answer_group_params)
+      @attempt_builder = AttemptBuilder.new(attempt_params)
     end
 
     def create
-      @answer_group_builder = AnswerGroupBuilder.new(answer_group_params)
+      @attempt_builder = AttemptBuilder.new(attempt_params)
 
-      if @answer_group_builder.save
+      if @attempt_builder.save
         redirect_to surveys_path
       else
         render :new
@@ -21,8 +21,8 @@ module Rapidfire
       @survey = Survey.find(params[:survey_id])
     end
 
-    def answer_group_params
-      answer_params = { params: params[:answer_group] }
+    def attempt_params
+      answer_params = { params: params[:attempt] }
       answer_params.merge(user: current_user, survey: @survey)
     end
   end

@@ -11,9 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150224142246) do
+ActiveRecord::Schema.define(:version => 20150224155913) do
 
-  create_table "rapidfire_answer_groups", :force => true do |t|
+  create_table "rapidfire_answers", :force => true do |t|
+    t.integer  "attempt_id"
+    t.integer  "question_id"
+    t.text     "answer_text"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "rapidfire_answers", ["attempt_id"], :name => "index_rapidfire_answers_on_answer_group_id"
+  add_index "rapidfire_answers", ["question_id"], :name => "index_rapidfire_answers_on_question_id"
+
+  create_table "rapidfire_attempts", :force => true do |t|
     t.integer  "survey_id"
     t.integer  "user_id"
     t.string   "user_type"
@@ -21,19 +32,8 @@ ActiveRecord::Schema.define(:version => 20150224142246) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "rapidfire_answer_groups", ["survey_id"], :name => "index_rapidfire_answer_groups_on_question_group_id"
-  add_index "rapidfire_answer_groups", ["user_id", "user_type"], :name => "index_rapidfire_answer_groups_on_user_id_and_user_type"
-
-  create_table "rapidfire_answers", :force => true do |t|
-    t.integer  "answer_group_id"
-    t.integer  "question_id"
-    t.text     "answer_text"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "rapidfire_answers", ["answer_group_id"], :name => "index_rapidfire_answers_on_answer_group_id"
-  add_index "rapidfire_answers", ["question_id"], :name => "index_rapidfire_answers_on_question_id"
+  add_index "rapidfire_attempts", ["survey_id"], :name => "index_rapidfire_answer_groups_on_question_group_id"
+  add_index "rapidfire_attempts", ["user_id", "user_type"], :name => "index_rapidfire_answer_groups_on_user_id_and_user_type"
 
   create_table "rapidfire_questions", :force => true do |t|
     t.integer  "survey_id"

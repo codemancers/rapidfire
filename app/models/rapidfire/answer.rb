@@ -1,13 +1,13 @@
 module Rapidfire
   class Answer < ActiveRecord::Base
     belongs_to :question
-    belongs_to :answer_group, inverse_of: :answers
+    belongs_to :attempt, inverse_of: :answers
 
-    validates :question, :answer_group, presence: true
+    validates :question, :attempt, presence: true
     validate  :verify_answer_text, :if => "question.present?"
 
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :question_id, :answer_group, :answer_text
+      attr_accessible :question_id, :attempt, :answer_text
     end
 
     private
