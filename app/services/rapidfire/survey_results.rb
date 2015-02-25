@@ -1,6 +1,6 @@
 module Rapidfire
-  class QuestionGroupResults < Rapidfire::BaseService
-    attr_accessor :question_group
+  class SurveyResults < Rapidfire::BaseService
+    attr_accessor :survey
 
     # extracts question along with results
     # each entry will have the following:
@@ -9,7 +9,7 @@ module Rapidfire
     # 3. if aggregatable, return each option with value
     # 4. else return an array of all the answers given
     def extract
-      @question_group.questions.collect do |question|
+      @survey.questions.collect do |question|
         results =
           case question
           when Rapidfire::Questions::Select, Rapidfire::Questions::Radio,

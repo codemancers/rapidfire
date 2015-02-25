@@ -11,17 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502195504) do
+ActiveRecord::Schema.define(:version => 20150224142246) do
 
   create_table "rapidfire_answer_groups", :force => true do |t|
-    t.integer  "question_group_id"
+    t.integer  "survey_id"
     t.integer  "user_id"
     t.string   "user_type"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "rapidfire_answer_groups", ["question_group_id"], :name => "index_rapidfire_answer_groups_on_question_group_id"
+  add_index "rapidfire_answer_groups", ["survey_id"], :name => "index_rapidfire_answer_groups_on_question_group_id"
   add_index "rapidfire_answer_groups", ["user_id", "user_type"], :name => "index_rapidfire_answer_groups_on_user_id_and_user_type"
 
   create_table "rapidfire_answers", :force => true do |t|
@@ -35,23 +35,27 @@ ActiveRecord::Schema.define(:version => 20130502195504) do
   add_index "rapidfire_answers", ["answer_group_id"], :name => "index_rapidfire_answers_on_answer_group_id"
   add_index "rapidfire_answers", ["question_id"], :name => "index_rapidfire_answers_on_question_id"
 
-  create_table "rapidfire_question_groups", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "rapidfire_questions", :force => true do |t|
-    t.integer  "question_group_id"
+    t.integer  "survey_id"
     t.string   "type"
     t.string   "question_text"
     t.integer  "position"
     t.text     "answer_options"
     t.text     "validation_rules"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
-  add_index "rapidfire_questions", ["question_group_id"], :name => "index_rapidfire_questions_on_question_group_id"
+  add_index "rapidfire_questions", ["survey_id"], :name => "index_rapidfire_questions_on_survey_id"
+
+  create_table "rapidfire_surveys", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "tenant_id"
+    t.string   "tenant_type"
+  end
+
+  add_index "rapidfire_surveys", ["tenant_id", "tenant_type"], :name => "index_rapidfire_question_groups_on_tenant_id_and_tenant_type"
 
 end

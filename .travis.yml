@@ -28,3 +28,12 @@ before_script:
 
 script:
   - bundle exec rspec spec
+
+# copy hipchat notification settings from rbkit repository
+notifications:
+  hipchat:
+    rooms:
+      secure: BXr8nsaTdnOhY9w9pQ4j8CkAxHSIwJr1ANfLsftOs2T9vofJP488qMNb0DLoWI0c3cFpzbzG2enjIqqCuIrHux3s05N9y0fb3s00BNPg+i6iK8+C/VoQd01tuuxYnhjUI3eXnsa65zdJFvO7k04kvPNg/foAnRytArjA1lK8Kss=
+    template:
+      - '%{result}: %{repository_slug}#%{branch} - <a href="%{compare_url}">%{commit}</a>(%{commit_message}) by %{author} (<a href="%{build_url}">Details</a>)'
+    format: html
