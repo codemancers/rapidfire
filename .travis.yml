@@ -24,7 +24,7 @@ matrix:
       gemfile: gemfiles/Gemfile.rails-4.0.x
 
 before_script:
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - cd spec/dummy && RAILS_ENV=test bundle exec rake db:migrate --trace && cd ../..
 
 script:
   - bundle exec rspec spec

@@ -17,7 +17,7 @@ Add this line to your application's Gemfile:
 And then execute:
 
     $ bundle install
-    $ bundle exec rake rapidfire:install:migrations
+    $ bundle exec rails g rapidfire:create_tables
     $ bundle exec rake db:migrate
 
 And if you want to customize rapidfire views, you can do
@@ -215,6 +215,20 @@ delimiter will be hardcoded to `\r\n`:
 Rapidfire.config do |config|
   config.answers_delimiter = ','
 end
+```
+
+##### Upgrading from 2.1.0 to 3.0.0
+In v3.0.0 we have renamed lots of code based on 2 assumptions:
+- renamed `question_groups` to `surveys`, and all associations, and
+- renamed `answer_groups` to `attempts` and all associations
+
+- Run a generator which creates a migration to do this renaming.
+
+```sh
+  bundle exec rails g rapidfire:upgrade210to300
+
+  # make edits to migration if required as per your needs
+  bundle exec rake db:migrate
 ```
 
 
