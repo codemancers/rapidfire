@@ -17,7 +17,7 @@ Add this line to your application's Gemfile:
 And then execute:
 
     $ bundle install
-    $ bundle exec rake rapidfire:create_tables
+    $ bundle exec rails g rapidfire:create_tables
     $ bundle exec rake db:migrate
 
 And if you want to customize rapidfire views, you can do
@@ -222,7 +222,7 @@ In v3.0.0 we have renamed lots of code based on 2 assumptions:
 - renamed `question_groups` to `surveys`, and all associations, and
 - renamed `answer_groups` to `attempts` and all associations
 
-- Run a migration which creates a migration to do this renaming.
+- Run a generator which creates a migration to do this renaming.
 
 ```sh
   bundle exec rails g rapidfire:upgrade210to300
