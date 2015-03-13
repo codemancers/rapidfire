@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Rapidfire::Questions::Select do
-  describe "Validations" do
-    it { is_expected.to validate_presence_of(:answer_options) }
-  end
-
   describe "#options" do
     let(:question)  { FactoryGirl.create(:q_select) }
 

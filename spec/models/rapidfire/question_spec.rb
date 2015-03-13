@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Rapidfire::Question do
   describe "Validations" do
     it { is_expected.to validate_presence_of(:survey) }
-    it { is_expected.to validate_presence_of(:question_text)  }
   end
 
   describe "Associations" do

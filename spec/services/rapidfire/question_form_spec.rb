@@ -3,7 +3,23 @@ require 'spec_helper'
 describe Rapidfire::QuestionForm do
   let(:survey)  { FactoryGirl.create(:survey) }
 
-  describe "Creation" do
+  describe 'Validations' do
+    subject { described_class.new(survey: survey) }
+
+    it { should validate_presence_of(:type) }
+    it { should validate_inclusion_of(:type)
+        .in_array(["Rapidfire::Questions::Checkbox",
+                    "Rapidfire::Questions::Date",
+                    "Rapidfire::Questions::Long",
+                    "Rapidfire::Questions::Numeric",
+                    "Rapidfire::Questions::Radio",
+                    "Rapidfire::Questions::Select",
+                    "Rapidfire::Questions::Short"]) }
+
+    context 'answer_options validations'
+  end
+
+  describe 'Initialization' do
     let(:proxy)  { described_class.new(survey: survey) }
 
     it "builds a dummy question" do
@@ -32,8 +48,6 @@ describe Rapidfire::QuestionForm do
   end
 
   describe "#save" do
-    before(:each)  { proxy.save }
-
     context "creating a new question" do
       let(:proxy) { described_class.new(params.merge(survey: survey)) }
 
@@ -47,14 +61,17 @@ describe Rapidfire::QuestionForm do
         end
 
         it "persists the question" do
+          expect(proxy.save).to be_truthy
           expect(proxy.errors).to be_empty
         end
 
         it "creates a question given type" do
+          expect(proxy.save).to be_truthy
           expect(proxy.question).to be_a(Rapidfire::Questions::Checkbox)
         end
 
         it "persists params in created question" do
+          expect(proxy.save).to be_truthy
           expect(proxy.question.question_text).to eq("Your mood today")
           expect(proxy.question.options).to match_array(["good", "bad"])
         end
@@ -66,6 +83,7 @@ describe Rapidfire::QuestionForm do
         end
 
         it "fails to presist the question" do
+          expect(proxy.save).to be_falsey
           expect(proxy.errors).not_to be_empty
           expect(proxy.errors[:question_text]).to  include("can't be blank")
           expect(proxy.errors[:answer_options]).to include("can't be blank")
@@ -85,6 +103,7 @@ describe Rapidfire::QuestionForm do
       end
 
       it "updates the question" do
+        expect(proxy.save).to be_truthy
         expect(proxy.errors).to be_empty
         expect(proxy.question.question_text).to eq("Changing question text")
       end

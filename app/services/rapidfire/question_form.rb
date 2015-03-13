@@ -20,9 +20,12 @@ module Rapidfire
     attr_accessor :survey, :question,
       :type, :question_text, :answer_options, :answer_presence,
       :answer_minimum_length, :answer_maximum_length,
-      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
+      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to,
+      :dependent_on_id, :dependency_answer_options
 
-    delegate :valid?, :errors, :to => :question
+    validates :type, presence: true, inclusion: { in: QUESTION_TYPES.values }
+    validates :question_text, presence: true
+    validates :answer_options, presence: true, if: :collection_question?
 
     def initialize(params = {})
       from_question_to_attributes(params[:question]) if params[:question]
@@ -31,10 +34,18 @@ module Rapidfire
     end
 
     def save
-      @question.new_record? ? create_question : update_question
+      return false unless valid?
+
+      question = if @question.new_record?
+                   create_question
+                 else
+                   update_question
+                 end
+      !!question
     end
 
     private
+
     def create_question
       klass = nil
       if QUESTION_TYPES.values.include?(type)
@@ -49,6 +60,12 @@ module Rapidfire
 
     def update_question
       @question.update_attributes(to_question_params)
+    end
+
+    def collection_question?
+      QUESTION_TYPES.slice("Checkbox", "Radio", "Select")
+        .values
+        .include?(type)
     end
 
     def to_question_params
