@@ -3,6 +3,11 @@ module Rapidfire
     belongs_to :survey, :inverse_of => :questions
     has_many   :answers
 
+    has_one :question_dependency, class_name: "QuestionDependency",
+      foreign_key: :question_id
+    has_one :dependent_on, through: :question_dependency,
+      source: :dependent_on
+
     default_scope { order(:position) }
 
     validates :survey, presence: true
