@@ -3,7 +3,7 @@ module Rapidfire
     before_filter :authenticate_administrator!
 
     before_filter :find_survey!
-    before_filter :find_question!, :only => [:edit, :update, :destroy]
+    before_filter :find_question!, :only => [:show, :edit, :update, :destroy]
 
     def index
       @questions = @survey.questions
@@ -25,6 +25,14 @@ module Rapidfire
         respond_to do |format|
           format.html { render :new }
           format.js
+        end
+      end
+    end
+
+    def show
+      respond_to do |format|
+        format.json do
+          render json: @question, serializer: Rapidfire::QuestionSerializer
         end
       end
     end
