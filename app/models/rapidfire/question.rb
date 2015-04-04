@@ -9,7 +9,7 @@ module Rapidfire
     serialize :validation_rules
 
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :question_group, :question_text, :validation_rules, :answer_options
+      attr_accessible :question_group, :question_text, :default_text, :placeholder, :validation_rules, :answer_options
     end
 
     def self.inherited(child)
