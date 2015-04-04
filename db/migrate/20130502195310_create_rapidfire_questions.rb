@@ -4,6 +4,8 @@ class CreateRapidfireQuestions < ActiveRecord::Migration
       t.references :survey
       t.string  :type
       t.string  :question_text
+      t.string  :default_text
+      t.string  :placeholder
       t.integer :position
       t.text :answer_options
       t.text :validation_rules
