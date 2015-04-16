@@ -10,15 +10,13 @@ module Rapidfire
     end
 
     def new
-      @question_form = QuestionForm.new(:survey => @survey)
+      @question_form = QuestionForm.new(@survey)
     end
 
     def create
-      form_params = params[:question].merge(:survey => @survey)
-      @question_form = QuestionForm.new(form_params)
-      @question_form.save
+      @question_form = QuestionForm.new(@survey)
 
-      if @question_form.errors.empty?
+      if @question_form.with_params(params[:question]).create()
         respond_to do |format|
           format.html { redirect_to index_location }
           format.js
@@ -32,15 +30,13 @@ module Rapidfire
     end
 
     def edit
-      @question_form = QuestionForm.new(:question => @question)
+      @question_form = QuestionForm.new(@survey).edit(@question)
     end
 
     def update
-      form_params = params[:question].merge(:question => @question)
-      @question_form = QuestionForm.new(form_params)
-      @question_form.save
+      @question_form = QuestionForm.new(@survey).edit(@question)
 
-      if @question_form.errors.empty?
+      if @question_form.with_params(params[:question]).update()
         respond_to do |format|
           format.html { redirect_to index_location }
           format.js

@@ -1,93 +1,93 @@
 require 'spec_helper'
 
 describe Rapidfire::QuestionForm do
-  let(:survey)  { FactoryGirl.create(:survey) }
+  let(:survey)  { FactoryGirl.build_stubbed(:survey) }
 
-  describe "Creation" do
-    let(:proxy)  { described_class.new(survey: survey) }
+  describe 'Validations' do
+    subject { described_class.new(survey) }
 
-    it "builds a dummy question" do
-      expect(proxy.question).not_to be_nil
+    it { should validate_presence_of(:type) }
+    it { should validate_inclusion_of(:type)
+        .in_array(["Rapidfire::Questions::Checkbox",
+                    "Rapidfire::Questions::Date",
+                    "Rapidfire::Questions::Long",
+                    "Rapidfire::Questions::Numeric",
+                    "Rapidfire::Questions::Radio",
+                    "Rapidfire::Questions::Select",
+                    "Rapidfire::Questions::Short"]) }
+  end
+
+  describe "#create" do
+    let(:form)  { described_class.new(survey) }
+
+    it 'returns false if form is invalid' do
+      expect(form.with_params().create()).to be_falsey
     end
 
-    context "when params are passed" do
-      let(:proxy)  { described_class.new(survey: survey, question_text: "Your Bio") }
-
-      it "persists those params" do
-        expect(proxy.question_text).to eq("Your Bio")
-      end
+    it 'doesnot create any question if form is invalid' do
+      form.with_params().create()
+      expect(Rapidfire::Question.count).to be_zero
     end
 
-    context "when a question is passed" do
-      let(:question)  { FactoryGirl.create(:q_checkbox, survey: survey) }
-      let(:proxy)     { described_class.new(survey: survey, question: question) }
+    let(:params) do
+      {
+        type:           "Rapidfire::Questions::Checkbox",
+        question_text:  "Your mood today",
+        answer_options: "good\r\nbad"
+      }
+    end
 
-      it "persists question params" do
-        expect(proxy.type).to eq(question.type)
-        expect(proxy.survey).to eq(question.survey)
-        expect(proxy.question_text).to  eq(question.question_text)
-        expect(proxy.answer_options).to eq(question.answer_options)
-      end
+    it "creates a question given type" do
+      expect(form.with_params(params).create()).to be_truthy
+      expect(form.question).to be_a(Rapidfire::Questions::Checkbox)
+    end
+
+    it "persists params in created question" do
+      expect(form.with_params(params).create()).to be_truthy
+      expect(form.question.question_text).to eq("Your mood today")
+      expect(form.question.options).to match_array(["good", "bad"])
     end
   end
 
-  describe "#save" do
-    before(:each)  { proxy.save }
+  describe '#edit' do
+    let(:question)  { FactoryGirl.create(:q_checkbox, survey: survey) }
+    let(:form)  { described_class.new(survey) }
 
-    context "creating a new question" do
-      let(:proxy) { described_class.new(params.merge(survey: survey)) }
+    it "updates form with question params" do
+      form.edit(question)
 
-      context "when question params are valid" do
-        let(:params) do
-          {
-            type:           "Rapidfire::Questions::Checkbox",
-            question_text:  "Your mood today",
-            answer_options: "good\r\nbad"
-          }
-        end
+      expect(form.type).to eq(question.type)
+      expect(form.question_text).to  eq(question.question_text)
+      expect(form.answer_options).to eq(question.answer_options)
+    end
+  end
 
-        it "persists the question" do
-          expect(proxy.errors).to be_empty
-        end
+  describe "#update" do
+    let(:question)  { FactoryGirl.create(:q_checkbox, survey: survey) }
+    let(:form)  { described_class.new(survey) }
 
-        it "creates a question given type" do
-          expect(proxy.question).to be_a(Rapidfire::Questions::Checkbox)
-        end
-
-        it "persists params in created question" do
-          expect(proxy.question.question_text).to eq("Your mood today")
-          expect(proxy.question.options).to match_array(["good", "bad"])
-        end
-      end
-
-      context "when question params are invalid" do
-        let(:params) do
-          { type: "Rapidfire::Questions::Checkbox" }
-        end
-
-        it "fails to presist the question" do
-          expect(proxy.errors).not_to be_empty
-          expect(proxy.errors[:question_text]).to  include("can't be blank")
-          expect(proxy.errors[:answer_options]).to include("can't be blank")
-        end
-      end
+    before(:each) do
+      form.edit(question)
     end
 
-    context "updating a question" do
-      let(:question)  { FactoryGirl.create(:q_checkbox, survey: survey) }
-      let(:proxy) do
-        proxy_params = params.merge(survey: survey, question: question)
-        described_class.new(proxy_params)
-      end
+    it 'returns false if form is invalid' do
+      params = { question_text: "" }
+      expect(form.with_params(params).update()).to be_falsey
+    end
 
-      let(:params) do
-        { question_text: "Changing question text" }
-      end
+    it 'doesnot create any question if form is invalid' do
+      original_text = question.question_text
+      params = { question_text: "" }
+      form.with_params(params).update()
 
-      it "updates the question" do
-        expect(proxy.errors).to be_empty
-        expect(proxy.question.question_text).to eq("Changing question text")
-      end
+      expect(question.reload.question_text).to eq original_text
+    end
+
+    it "updates the question" do
+      params = { question_text: "Changing question text" }
+
+      expect(form.with_params(params).update()).to be_truthy
+      expect(question.reload.question_text).to eq("Changing question text")
     end
   end
 end

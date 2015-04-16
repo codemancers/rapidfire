@@ -22,33 +22,53 @@ module Rapidfire
       :answer_minimum_length, :answer_maximum_length,
       :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
 
-    delegate :valid?, :errors, :to => :question
+    validates :type, presence: true, inclusion: { in: QUESTION_TYPES.values }
+    validates :question_text, presence: true
+    validates :answer_options, presence: true, if: :collection_question?
 
-    def initialize(params = {})
-      from_question_to_attributes(params[:question]) if params[:question]
-      super(params)
-      @question ||= survey.questions.new
+    def initialize(survey)
+      self.survey = survey
     end
 
-    def save
-      @question.new_record? ? create_question : update_question
+    def create
+      return false unless valid?
+
+      capture_errors do
+        self.question =
+          type.constantize.create!(to_question_params)
+        true
+      end
+    end
+
+    def edit(question)
+      self.question = question
+      self.type = question.type
+      self.question_text   = question.question_text
+      self.answer_options  = question.answer_options
+      self.answer_presence = question.rules[:presence]
+      self.answer_minimum_length = question.rules[:minimum]
+      self.answer_maximum_length = question.rules[:maximum]
+      self.answer_greater_than_or_equal_to = question.rules[:greater_than_or_equal_to]
+      self.answer_less_than_or_equal_to    = question.rules[:less_than_or_equal_to]
+
+      self
+    end
+
+    def update
+      return false unless valid?
+
+      capture_errors do
+        question.update_attributes!(to_question_params)
+        true
+      end
     end
 
     private
-    def create_question
-      klass = nil
-      if QUESTION_TYPES.values.include?(type)
-        klass = type.constantize
-      else
-        errors.add(:type, :invalid)
-        return false
-      end
 
-      @question = klass.create(to_question_params)
-    end
-
-    def update_question
-      @question.update_attributes(to_question_params)
+    def collection_question?
+      QUESTION_TYPES.slice("Checkbox", "Radio", "Select")
+        .values
+        .include?(type)
     end
 
     def to_question_params
@@ -64,18 +84,6 @@ module Rapidfire
           :less_than_or_equal_to    => answer_less_than_or_equal_to
         }
       }
-    end
-
-    def from_question_to_attributes(question)
-      self.type = question.type
-      self.survey  = question.survey
-      self.question_text   = question.question_text
-      self.answer_options  = question.answer_options
-      self.answer_presence = question.rules[:presence]
-      self.answer_minimum_length = question.rules[:minimum]
-      self.answer_maximum_length = question.rules[:maximum]
-      self.answer_greater_than_or_equal_to = question.rules[:greater_than_or_equal_to]
-      self.answer_less_than_or_equal_to    = question.rules[:less_than_or_equal_to]
     end
   end
 end

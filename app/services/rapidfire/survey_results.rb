@@ -2,6 +2,17 @@ module Rapidfire
   class SurveyResults < Rapidfire::BaseService
     attr_accessor :survey
 
+    # Helps in serializing results for each question
+    class QuestionResult < Rapidfire::BaseService
+      include ActiveModel::Serialization
+
+      attr_accessor :question, :results
+
+      def active_model_serializer
+        Rapidfire::QuestionResultSerializer
+      end
+    end
+
     # extracts question along with results
     # each entry will have the following:
     # 1. question type and question id

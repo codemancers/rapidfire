@@ -5,7 +5,7 @@ module Rapidfire
 
     default_scope { order(:position) }
 
-    validates :survey, :question_text, :presence => true
+    validates :survey, presence: true
     serialize :validation_rules
 
     if Rails::VERSION::MAJOR == 3
