@@ -31,6 +31,10 @@ module Rapidfire
       validation_rules || {}
     end
 
+    def collection_select?
+      false
+    end
+
     # answer will delegate its validation to question, and question
     # will inturn add validations on answer on the fly!
     def validate_answer(answer)

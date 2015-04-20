@@ -5,6 +5,10 @@ module Rapidfire
         answer_options.split(Rapidfire.answers_delimiter)
       end
 
+      def collection_select?
+        true
+      end
+
       def validate_answer(answer)
         super(answer)
 
