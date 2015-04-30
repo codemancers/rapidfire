@@ -1,5 +1,5 @@
 # Rapidfire
-[![Code Climate](https://codeclimate.com/repos/51a70089f3ea000534070811/badges/aedc90c3b5481e7569bb/gpa.png)](https://codeclimate.com/repos/51a70089f3ea000534070811/feed)
+[![Code Climate](https://codeclimate.com/github/code-mancers/rapidfire/badges/gpa.svg)](https://codeclimate.com/github/code-mancers/rapidfire)
 [![Build Status](https://travis-ci.org/code-mancers/rapidfire.png?branch=master)](https://travis-ci.org/code-mancers/rapidfire)
 
 One stop solution for all survey related requirements! Its tad easy!
