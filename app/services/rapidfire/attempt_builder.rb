@@ -43,10 +43,12 @@ module Rapidfire
     end
 
     private
+
     def build_attempt
       @attempt = Attempt.new(user: user, survey: survey)
-      @answers = @survey.questions.collect do |question|
-        @attempt.answers.build(question_id: question.id)
+      questions = survey.questions.includes(question_dependency: :dependent_on)
+      @answers = questions.collect do |question|
+        @attempt.answers.build(question: question)
       end
     end
 
