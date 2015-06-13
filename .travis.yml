@@ -19,10 +19,6 @@ matrix:
     # ruby 2.2.2. so ignoring this combination.
     - rvm: 2.2.2
       gemfile: gemfiles/Gemfile.rails-3.2.x
-    # https://github.com/rspec/rspec-rails/issues/1273
-    # waiting for this issue to be resolved
-    - rvm: 2.2.2
-      gemfile: gemfiles/Gemfile.rails-4.0.x
 
 before_script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
