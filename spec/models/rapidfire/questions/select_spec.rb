@@ -16,7 +16,7 @@ describe Rapidfire::Questions::Select do
   describe "validate_answer" do
     let(:question)  { FactoryGirl.create(:q_select, validation_rules: validation_rules) }
     let(:answer)    { FactoryGirl.build(:answer, question: question, answer_text: answer_text) }
-    before(:each)   { answer.valid? }
+    before  { answer.valid? }
 
     context "when there are no validation rules" do
       let(:validation_rules) { {} }

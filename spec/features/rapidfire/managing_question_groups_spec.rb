@@ -7,12 +7,12 @@ describe "Question Groups" do
   let(:question_group)  { FactoryGirl.create(:question_group, name: "Question Set") }
   let(:question1)  { FactoryGirl.create(:q_long,  question_group: question_group, question_text: "Long Question")  }
   let(:question2)  { FactoryGirl.create(:q_short, question_group: question_group, question_text: "Short Question") }
-  before(:each) do
+  before do
     [question1, question2]
   end
 
   describe "INDEX Question Groups" do
-    before(:each) do
+    before do
       visit rapidfire.root_path
     end
 
@@ -23,7 +23,7 @@ describe "Question Groups" do
 
   describe "DELETE Question Groups" do
     context "when user can administer" do
-      before(:each) do
+      before do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
@@ -36,7 +36,7 @@ describe "Question Groups" do
     end
 
     context "when user cannot administer" do
-      before(:each) do
+      before do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(false)
         visit rapidfire.root_path
       end
@@ -49,7 +49,7 @@ describe "Question Groups" do
 
   describe "CREATING Question Group" do
     context "when user can create groups" do
-      before(:each) do
+      before do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
@@ -57,7 +57,7 @@ describe "Question Groups" do
       end
 
       context "when name is present" do
-        before(:each) do
+        before do
           page.within("#new_question_group") do
             fill_in "question_group_name", with: "New Survey"
             click_button "Create Question group"
@@ -70,7 +70,7 @@ describe "Question Groups" do
       end
 
       context "when name is not present" do
-        before(:each) do
+        before do
           page.within("#new_question_group") do
             click_button "Create Question group"
           end
@@ -85,7 +85,7 @@ describe "Question Groups" do
     end
 
     context "when user cannot create groups" do
-      before(:each) do
+      before do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(false)
         visit rapidfire.root_path
       end
@@ -98,7 +98,7 @@ describe "Question Groups" do
 
   describe "EDITING Question Groups" do
     context "when user can manage questions" do
-      before(:each) do
+      before do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
@@ -112,7 +112,7 @@ describe "Question Groups" do
     end
 
     context "when user cannot manage questions" do
-      before(:each) do
+      before do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(false)
       end
 
@@ -123,7 +123,7 @@ describe "Question Groups" do
   end
 
   describe "GET Question Group results" do
-    before(:each) do
+    before do
       create_questions(question_group)
       create_answers
 

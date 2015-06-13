@@ -4,7 +4,7 @@ load File.expand_path('../../../lib/tasks/change_delimiter_to_srsn.rake', __FILE
 
 
 describe 'rapidfire:change_delimiter_from_comma_to_srsn' do
-  before(:each) do
+  before do
     Rake::Task.define_task(:environment)
   end
 

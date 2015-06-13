@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Rapidfire::AnswerGroupsController do
-  before(:each) do
+  before do
     @routes = Rapidfire::Engine.routes
   end
 

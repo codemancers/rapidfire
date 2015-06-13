@@ -47,13 +47,13 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.before(:each) do
+  config.before do
     DatabaseCleaner.strategy =
       Capybara.current_driver == :rack_test ? :transaction : :truncation
     DatabaseCleaner.start
   end
 
-  config.after(:each) do
+  config.after do
     DatabaseCleaner.clean
   end
 
