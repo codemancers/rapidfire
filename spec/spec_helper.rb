@@ -9,8 +9,6 @@ require 'factory_girl_rails'
 require 'database_cleaner'
 require 'shoulda'
 
-require 'pry-rails'
-
 Capybara.javascript_driver = :webkit
 
 RAPIDFIRE_ROOT = File.join(File.dirname(__FILE__), '..')
