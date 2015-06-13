@@ -32,7 +32,7 @@ describe Rapidfire::QuestionForm do
   end
 
   describe "#save" do
-    before(:each)  { proxy.save }
+    before  { proxy.save }
 
     context "creating a new question" do
       let(:proxy) { described_class.new(params.merge(question_group: question_group)) }

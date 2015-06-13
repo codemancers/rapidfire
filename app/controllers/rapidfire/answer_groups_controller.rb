@@ -22,7 +22,7 @@ module Rapidfire
     end
 
     def answer_group_params
-      answer_params = { params: params[:answer_group] }
+      answer_params = { params: (params[:answer_group] || {}) }
       answer_params.merge(user: current_user, question_group: @question_group)
     end
   end

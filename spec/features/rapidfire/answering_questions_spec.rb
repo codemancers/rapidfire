@@ -4,14 +4,14 @@ describe "Question Groups" do
   let(:question_group)  { FactoryGirl.create(:question_group, name: "Question Set") }
   let(:question1)  { FactoryGirl.create(:q_long,  question_group: question_group, question_text: "Long Question", validation_rules: { presence: "1" })  }
   let(:question2)  { FactoryGirl.create(:q_short, question_group: question_group, question_text: "Short Question") }
-  before(:each) do
+  before do
     [question1, question2]
     visit rapidfire.new_question_group_answer_group_path(question_group)
   end
 
   describe "Answering Questions" do
     context "when all questions are answered" do
-      before(:each) do
+      before do
         fill_in "answer_group_#{question1.id}_answer_text", with: "Long Answer"
         fill_in "answer_group_#{question2.id}_answer_text", with: "Short Answer"
         click_button "Save"
@@ -32,7 +32,7 @@ describe "Question Groups" do
     end
 
     context "when all questions are not answered" do
-      before(:each) do
+      before do
         fill_in "answer_group_#{question1.id}_answer_text", with: ""
         fill_in "answer_group_#{question2.id}_answer_text", with: "Short Answer"
         click_button "Save"

@@ -8,7 +8,7 @@ describe Rapidfire::AnswerGroupBuilder do
 
   describe "Creation" do
     let(:builder)  { described_class.new(question_group: question_group) }
-    before(:each)  { [question1, question2] }
+    before  { [question1, question2] }
 
     it "builds answer group with answers" do
       expect(builder.answers).not_to be_empty
@@ -28,7 +28,7 @@ describe Rapidfire::AnswerGroupBuilder do
     end
     let(:save_answers)  { builder.save }
 
-    before(:each) do
+    before do
       [question1, question2]
       save_answers
     end
