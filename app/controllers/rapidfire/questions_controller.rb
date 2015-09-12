@@ -3,20 +3,20 @@ module Rapidfire
     before_filter :authenticate_administrator!
 
     before_filter :find_question_group!
-    before_filter :find_question!, only: [:edit, :update, :destroy]
+    before_filter :find_question!, :only => [:edit, :update, :destroy]
 
     def index
       @questions = @question_group.questions
     end
 
     def new
-      @question_form = QuestionForm.new(question_group: @question_group)
+      @question_form = QuestionForm.new(:question_group => @question_group)
     end
 
     def create
-      form_params = params[:question].merge(question_group: @question_group)
+      form_params = params[:question].merge(:question_group => @question_group)
 
-      save_and_redirect(params: form_params, error: :new)
+      save_and_redirect(form_params, :new)
     end
 
     def edit
@@ -24,9 +24,9 @@ module Rapidfire
     end
 
     def update
-      form_params = params[:question].merge(question: @question)
+      form_params = params[:question].merge(:question => @question)
 
-      save_and_redirect(params: form_params, error: :edit)
+      save_and_redirect(form_params, :edit)
     end
 
     def destroy
@@ -39,7 +39,7 @@ module Rapidfire
 
     private
 
-    def save_and_redirect(params: required, error: required)
+    def save_and_redirect(params, on_error_key)
       @question_form = QuestionForm.new(params)
       @question_form.save
 
@@ -50,7 +50,7 @@ module Rapidfire
         end
       else
         respond_to do |format|
-          format.html { render error }
+          format.html { render on_error_key.to_sym }
           format.js
         end
       end
