@@ -12,13 +12,17 @@ And the source code of demo [here](https://github.com/code-mancers/rapidfire-dem
 ## Installation
 Add this line to your application's Gemfile:
 
+```rb
     gem 'rapidfire'
+```
 
 And then execute:
 
+```shell
     $ bundle install
     $ bundle exec rake rapidfire:install:migrations
     $ bundle exec rake db:migrate
+```
 
 And if you want to customize rapidfire views, you can do
 
@@ -28,7 +32,9 @@ And if you want to customize rapidfire views, you can do
 
 Add this line to your routes will and you will be good to go!
 
+```rb
     mount Rapidfire::Engine => "/rapidfire"
+```
 
 And point your browser to [http://localhost:3000/rapidfire](http://localhost:3000/rapidfire)
 
@@ -41,7 +47,7 @@ methods `current_user` and `can_administer?` on your `ApplicationController`
 
 Typical implementation would be:
 
-```ruby
+```rb
   class ApplicationController < ActionController::Base
     def current_user
       @current_user ||= User.find(session[:user_id])
@@ -199,7 +205,7 @@ to make existing questions or stored answers to use new delimiter.
 
 NOTE: Please take database backup before running this rake task.
 
-```ruby
+```rb
   bundle exec rake rapidfire:change_delimiter_from_comma_to_srsn
 ```
 
@@ -209,12 +215,12 @@ as delimiter, then please use this initializer, but be warned that in future
 delimiter will be hardcoded to `\r\n`:
 
 
-```ruby
-# /<path-to-app>/config/initializers/rapidfire.rb
-
-Rapidfire.config do |config|
-  config.answers_delimiter = ','
-end
+```rb
+  # /<path-to-app>/config/initializers/rapidfire.rb
+  
+  Rapidfire.config do |config|
+    config.answers_delimiter = ','
+  end
 ```
 
 
