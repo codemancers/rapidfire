@@ -10,6 +10,15 @@ module Rapidfire
   mattr_accessor :answers_delimiter
   self.answers_delimiter = "\r\n"
 
+  # If app is multi tenant, then tenancy can be enabled by setting this
+  # accessor to true, and specifying tenant class.
+  mattr_accessor :enable_tenancy
+  self.enable_tenancy = false
+
+  mattr_accessor :tenant_class
+  self.tenant_class = nil
+
+
   def self.config
     yield(self)
   end

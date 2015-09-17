@@ -7,6 +7,7 @@ class RapidfireCreateTables < ActiveRecord::Migration
     # - answers
 
     create_table :rapidfire_surveys do |t|
+      t.references :tenant, index: true
       t.string  :name
       t.timestamps
     end

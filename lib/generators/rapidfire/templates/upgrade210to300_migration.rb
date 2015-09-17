@@ -18,19 +18,21 @@ class RapidfireUpgrade210to300 < ActiveRecord::Migration
 
     rename_column :rapidfire_answers, :answer_group_id, :attempt_id
     rename_table :rapidfire_answer_groups, :rapidfire_attempts
+
+    # make rapidfire multi tenant.
+    add_column :rapidfire_surveys, :tenant_id, :integer
+    add_index  :rapidfire_surveys, :tenant_id
   end
 
   def down
+    remove_index  :rapidfire_surveys, :tenant_id
+    remove_column :rapidfire_surveys, :tenant_id
+
     rename_table :rapidfire_attempts, :rapidfire_answer_groups
     rename_column :rapidfire_answers, :attempt_id, :answer_group_id
 
     rename_table :rapidfire_surveys, :rapidfire_question_groups
 
-    # dropping and adding index here, otherwise im getting index name length
-    # too long error
-    #
-    # Index name 'temp_index_altered_rapidfire_answer_groups_on_user_id_and_user_type'
-    #  on table 'altered_rapidfire_answer_groups' is too long;
     remove_index :rapidfire_answer_groups, [:user_id, :user_type]
     rename_column :rapidfire_answer_groups, :survey_id, :question_group_id
     add_index :rapidfire_answer_groups, [:user_id, :user_type]
