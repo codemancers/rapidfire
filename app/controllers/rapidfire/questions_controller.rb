@@ -15,20 +15,8 @@ module Rapidfire
 
     def create
       form_params = params[:question].merge(:question_group => @question_group)
-      @question_form = QuestionForm.new(form_params)
-      @question_form.save
 
-      if @question_form.errors.empty?
-        respond_to do |format|
-          format.html { redirect_to index_location }
-          format.js
-        end
-      else
-        respond_to do |format|
-          format.html { render :new }
-          format.js
-        end
-      end
+      save_and_redirect(form_params, :new)
     end
 
     def edit
@@ -37,20 +25,8 @@ module Rapidfire
 
     def update
       form_params = params[:question].merge(:question => @question)
-      @question_form = QuestionForm.new(form_params)
-      @question_form.save
 
-      if @question_form.errors.empty?
-        respond_to do |format|
-          format.html { redirect_to index_location }
-          format.js
-        end
-      else
-        respond_to do |format|
-          format.html { render :edit }
-          format.js
-        end
-      end
+      save_and_redirect(form_params, :edit)
     end
 
     def destroy
@@ -62,6 +38,23 @@ module Rapidfire
     end
 
     private
+
+    def save_and_redirect(params, on_error_key)
+      @question_form = QuestionForm.new(params)
+      @question_form.save
+
+      if @question_form.errors.empty?
+        respond_to do |format|
+          format.html { redirect_to index_location }
+          format.js
+        end
+      else
+        respond_to do |format|
+          format.html { render on_error_key.to_sym }
+          format.js
+        end
+      end
+    end
 
     def find_question_group!
       @question_group = QuestionGroup.find(params[:question_group_id])

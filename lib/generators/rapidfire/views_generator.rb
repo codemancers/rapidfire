@@ -4,8 +4,8 @@ require 'rails/generators'
 module Rapidfire
   module Generators
     class ViewsGenerator < Rails::Generators::Base
-      source_root File.expand_path("../../../../app/views/rapidfire", __FILE__)
-      desc "Copies default Rapidfire views to your application."
+      source_root File.expand_path('../../../../app/views/rapidfire', __FILE__)
+      desc 'Copies default Rapidfire views to your application.'
 
       def copy_views
         view_directory :answer_groups
