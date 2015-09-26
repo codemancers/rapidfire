@@ -1,6 +1,6 @@
 module Rapidfire
   class Question < ActiveRecord::Base
-    belongs_to :survey, :inverse_of => :questions
+    belongs_to :survey, :inverse_of => :questions, :class_name => 'Rapidfire::Survey'
     has_many   :answers
 
     default_scope { order(:position) }
