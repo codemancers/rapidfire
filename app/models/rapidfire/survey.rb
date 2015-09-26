@@ -4,7 +4,8 @@ module Rapidfire
     validates :name, :presence => true
 
     if Rapidfire.enable_tenancy
-      belongs_to :tenant, class_name: Plutus.tenant_class
+      belongs_to :tenant, class_name: Rapidfire.tenant_class
+      validates :tenant, :presence => true
     end
 
     if Rails::VERSION::MAJOR == 3
