@@ -1,5 +1,9 @@
 module Rapidfire
   class ApplicationController < ::ApplicationController
+    if Rapidfire.layout
+      layout Rapidfire.layout
+    end
+
     helper_method :can_administer?
 
     def authenticate_administrator!
