@@ -23,7 +23,6 @@ PIM
   s.add_dependency 'active_model_serializers', '~> 0.8.1'
 
   s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'quiet_assets'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'shoulda'
   s.add_development_dependency 'database_cleaner'
