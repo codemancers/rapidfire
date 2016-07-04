@@ -1,6 +1,6 @@
 module Rapidfire
   class BaseService
-    if Rails::VERSION::MAJOR == 4
+    if Rails::VERSION::MAJOR == 4 || Rails::VERSION::MAJOR == 5
       include ActiveModel::Model
     else
       extend  ActiveModel::Naming

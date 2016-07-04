@@ -11,7 +11,7 @@ Dummy::Application.configure do
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
 
-  if Rails::VERSION::MAJOR == 4
+  if Rails::VERSION::MAJOR == 4 || Rails::VERSION::MAJOR == 5
     config.eager_load = true
   else
     # Log error messages when you accidentally call methods on nil

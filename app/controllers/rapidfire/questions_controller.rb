@@ -14,7 +14,7 @@ module Rapidfire
     end
 
     def create
-      form_params = params[:question].merge(:question_group => @question_group)
+      form_params = question_params.merge(:question_group => @question_group)
 
       save_and_redirect(form_params, :new)
     end
@@ -24,7 +24,7 @@ module Rapidfire
     end
 
     def update
-      form_params = params[:question].merge(:question => @question)
+      form_params = question_params.merge(:question => @question)
 
       save_and_redirect(form_params, :edit)
     end
@@ -66,6 +66,14 @@ module Rapidfire
 
     def index_location
       rapidfire.question_group_questions_url(@question_group)
+    end
+
+    def question_params
+      if Rails::VERSION::MAJOR == 4 || Rails::VERSION::MAJOR == 5
+        params.require(:question).permit!
+      else
+        params[:question]
+      end
     end
   end
 end
