@@ -7,6 +7,7 @@ module Rapidfire
        Rapidfire::Questions::Long,
        Rapidfire::Questions::Numeric,
        Rapidfire::Questions::Radio,
+       Rapidfire::Questions::Range,
        Rapidfire::Questions::Select,
        Rapidfire::Questions::Short,
       ]
