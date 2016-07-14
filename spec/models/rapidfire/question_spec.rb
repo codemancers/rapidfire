@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Rapidfire::Question do
   describe "Validations" do
-    it { is_expected.to validate_presence_of(:question_group) }
+    it { is_expected.to validate_presence_of(:survey) }
     it { is_expected.to validate_presence_of(:question_text)  }
   end
 
   describe "Associations" do
-    it { is_expected.to belong_to(:question_group) }
+    it { is_expected.to belong_to(:survey) }
   end
 
   describe "#rules" do

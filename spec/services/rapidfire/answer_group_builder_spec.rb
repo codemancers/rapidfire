@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Rapidfire::AnswerGroupBuilder do
-  let(:question_group)  { FactoryGirl.create(:question_group) }
-  let(:question1)  { FactoryGirl.create(:q_short, question_group: question_group) }
-  let(:question2)  { FactoryGirl.create(:q_long, question_group: question_group,
+  let(:survey)  { FactoryGirl.create(:survey) }
+  let(:question1)  { FactoryGirl.create(:q_short, survey: survey) }
+  let(:question2)  { FactoryGirl.create(:q_long, survey: survey,
                                         validation_rules: { presence: "1" }) }
 
   describe "Creation" do
-    let(:builder)  { described_class.new(question_group: question_group) }
+    let(:builder)  { described_class.new(survey: survey) }
     before  { [question1, question2] }
 
     it "builds answer group with answers" do
@@ -21,9 +21,9 @@ describe Rapidfire::AnswerGroupBuilder do
   end
 
   describe "#save" do
-    let(:question_ids)  { question_group.questions.map(&:id) }
+    let(:question_ids)  { survey.questions.map(&:id) }
     let(:builder) do
-      params = { params: answer_params }.merge(question_group: question_group)
+      params = { params: answer_params }.merge(survey: survey)
       described_class.new(params)
     end
     let(:save_answers)  { builder.save }

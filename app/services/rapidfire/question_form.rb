@@ -17,7 +17,7 @@ module Rapidfire
       result
     end
 
-    attr_accessor :question_group, :question,
+    attr_accessor :survey, :question,
       :type, :question_text, :answer_options, :answer_presence,
       :answer_minimum_length, :answer_maximum_length,
       :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
@@ -27,7 +27,7 @@ module Rapidfire
     def initialize(params = {})
       from_question_to_attributes(params[:question]) if params[:question]
       super(params)
-      @question ||= question_group.questions.new
+      @question ||= survey.questions.new
     end
 
     def save
@@ -53,7 +53,7 @@ module Rapidfire
 
     def to_question_params
       {
-        :question_group => question_group,
+        :survey => survey,
         :question_text  => question_text,
         :answer_options => answer_options,
         :validation_rules => {
@@ -68,7 +68,7 @@ module Rapidfire
 
     def from_question_to_attributes(question)
       self.type = question.type
-      self.question_group  = question.question_group
+      self.survey  = question.survey
       self.question_text   = question.question_text
       self.answer_options  = question.answer_options
       self.answer_presence = question.rules[:presence]

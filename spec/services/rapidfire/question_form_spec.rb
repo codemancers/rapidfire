@@ -1,17 +1,17 @@
 require 'spec_helper'
 
 describe Rapidfire::QuestionForm do
-  let(:question_group)  { FactoryGirl.create(:question_group) }
+  let(:survey)  { FactoryGirl.create(:survey) }
 
   describe "Creation" do
-    let(:proxy)  { described_class.new(question_group: question_group) }
+    let(:proxy)  { described_class.new(survey: survey) }
 
     it "builds a dummy question" do
       expect(proxy.question).not_to be_nil
     end
 
     context "when params are passed" do
-      let(:proxy)  { described_class.new(question_group: question_group, question_text: "Your Bio") }
+      let(:proxy)  { described_class.new(survey: survey, question_text: "Your Bio") }
 
       it "persists those params" do
         expect(proxy.question_text).to eq("Your Bio")
@@ -19,12 +19,12 @@ describe Rapidfire::QuestionForm do
     end
 
     context "when a question is passed" do
-      let(:question)  { FactoryGirl.create(:q_checkbox, question_group: question_group) }
-      let(:proxy)     { described_class.new(question_group: question_group, question: question) }
+      let(:question)  { FactoryGirl.create(:q_checkbox, survey: survey) }
+      let(:proxy)     { described_class.new(survey: survey, question: question) }
 
       it "persists question params" do
         expect(proxy.type).to eq(question.type)
-        expect(proxy.question_group).to eq(question.question_group)
+        expect(proxy.survey).to eq(question.survey)
         expect(proxy.question_text).to  eq(question.question_text)
         expect(proxy.answer_options).to eq(question.answer_options)
       end
@@ -35,7 +35,7 @@ describe Rapidfire::QuestionForm do
     before  { proxy.save }
 
     context "creating a new question" do
-      let(:proxy) { described_class.new(params.merge(question_group: question_group)) }
+      let(:proxy) { described_class.new(params.merge(survey: survey)) }
 
       context "when question params are valid" do
         let(:params) do
@@ -74,9 +74,9 @@ describe Rapidfire::QuestionForm do
     end
 
     context "updating a question" do
-      let(:question)  { FactoryGirl.create(:q_checkbox, question_group: question_group) }
+      let(:question)  { FactoryGirl.create(:q_checkbox, survey: survey) }
       let(:proxy) do
-        proxy_params = params.merge(question_group: question_group, question: question)
+        proxy_params = params.merge(survey: survey, question: question)
         described_class.new(proxy_params)
       end
 

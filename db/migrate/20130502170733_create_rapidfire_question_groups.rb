@@ -1,6 +1,6 @@
 class CreateRapidfireQuestionGroups < ActiveRecord::Migration
   def change
-    create_table :rapidfire_question_groups do |t|
+    create_table :rapidfire_surveys do |t|
       t.string  :name
       t.timestamps
     end
