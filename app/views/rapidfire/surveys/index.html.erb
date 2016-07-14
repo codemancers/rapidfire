@@ -1,7 +1,7 @@
 <h2>
-  Question Groups
+  Surveys
   <% if can_administer? %>
-    <%= link_to "New Group", new_question_group_path %>
+    <%= link_to "New Survey", new_survey_path %>
   <% end %>
 </h2>
 <hr/>
@@ -13,11 +13,11 @@
   </colgroup>
   <thead>
     <tr>
-      <th>Question Group</th>
+      <th>Survey</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <%= render partial: "question_group", collection: @question_groups %>
+    <%= render partial: "survey", collection: @surveys %>
   </tbody>
 </table>

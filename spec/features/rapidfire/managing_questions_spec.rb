@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe "Questions" do
-  let(:question_group)  { FactoryGirl.create(:question_group, name: "Question Set") }
-  let(:question1)  { FactoryGirl.create(:q_long,  question_group: question_group, question_text: "Long Question")  }
-  let(:question2)  { FactoryGirl.create(:q_short, question_group: question_group, question_text: "Short Question") }
+  let(:survey)  { FactoryGirl.create(:survey, name: "Question Set") }
+  let(:question1)  { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question")  }
+  let(:question2)  { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
   before do
     [question1, question2]
   end
@@ -11,7 +11,7 @@ describe "Questions" do
   describe "DELETE Question" do
     before do
       allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
-      visit rapidfire.question_group_questions_path(question_group)
+      visit rapidfire.survey_questions_path(survey)
 
       page.within("#question_#{question1.id}") do
         click_link "Delete"
@@ -26,7 +26,7 @@ describe "Questions" do
   describe "CREATING Question" do
     before do
       allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
-      visit rapidfire.question_group_questions_path(question_group)
+      visit rapidfire.survey_questions_path(survey)
       click_link "New Question"
     end
 
@@ -51,7 +51,7 @@ describe "Questions" do
         end
       end
 
-      it "fails to create question group" do
+      it "fails to create survey" do
         page.within("#new_question") do
           expect(page).to have_content "can't be blank"
         end
@@ -62,7 +62,7 @@ describe "Questions" do
   describe "UPDATING Question" do
     before do
       allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
-      visit rapidfire.question_group_questions_path(question_group)
+      visit rapidfire.survey_questions_path(survey)
       page.within("#question_#{question1.id}") do
         click_link "Edit"
       end

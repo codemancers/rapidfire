@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -14,15 +13,14 @@
 ActiveRecord::Schema.define(version: 20130502195504) do
 
   create_table "rapidfire_answer_groups", force: :cascade do |t|
-    t.integer  "question_group_id"
-    t.integer  "user_id"
+    t.integer  "survey_id"
     t.string   "user_type"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["survey_id"], name: "index_rapidfire_answer_groups_on_survey_id"
+    t.index ["user_id", "user_type"], name: "index_rapidfire_answer_groups_on_user_id_and_user_type"
   end
-
-  add_index "rapidfire_answer_groups", ["question_group_id"], name: "index_rapidfire_answer_groups_on_question_group_id"
-  add_index "rapidfire_answer_groups", ["user_id", "user_type"], name: "index_rapidfire_answer_groups_on_user_id_and_user_type"
 
   create_table "rapidfire_answers", force: :cascade do |t|
     t.integer  "answer_group_id"
@@ -30,19 +28,12 @@ ActiveRecord::Schema.define(version: 20130502195504) do
     t.text     "answer_text"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  add_index "rapidfire_answers", ["answer_group_id"], name: "index_rapidfire_answers_on_answer_group_id"
-  add_index "rapidfire_answers", ["question_id"], name: "index_rapidfire_answers_on_question_id"
-
-  create_table "rapidfire_question_groups", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.index ["answer_group_id"], name: "index_rapidfire_answers_on_answer_group_id"
+    t.index ["question_id"], name: "index_rapidfire_answers_on_question_id"
   end
 
   create_table "rapidfire_questions", force: :cascade do |t|
-    t.integer  "question_group_id"
+    t.integer  "survey_id"
     t.string   "type"
     t.string   "question_text"
     t.integer  "position"
@@ -50,8 +41,13 @@ ActiveRecord::Schema.define(version: 20130502195504) do
     t.text     "validation_rules"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["survey_id"], name: "index_rapidfire_questions_on_survey_id"
   end
 
-  add_index "rapidfire_questions", ["question_group_id"], name: "index_rapidfire_questions_on_question_group_id"
+  create_table "rapidfire_surveys", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

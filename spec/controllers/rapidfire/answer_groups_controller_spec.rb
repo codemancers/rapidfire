@@ -10,10 +10,10 @@ describe Rapidfire::AnswerGroupsController do
   # any default value.
   context 'when no parameters are passed' do
     it 'initializes answer builder with empty args' do
-      question_group = FactoryGirl.create(:question_group)
+      survey = FactoryGirl.create(:survey)
 
       expect {
-        post :create, question_group_id: question_group.id
+        post :create, survey_id: survey.id
       }.not_to raise_error
     end
   end

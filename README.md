@@ -72,7 +72,7 @@ You can see them by running `bundle exec rake routes`.
 2. Optionally, each survey can by answered by visiting this path:
 
    ```
-     localhost:3000/rapidfire/question_groups/<survey-id>/answer_groups/new
+     localhost:3000/rapidfire/surveys/<survey-id>/answer_groups/new
    ```
 
    You can distribute this url so that survey takers can answer a particular survey
@@ -82,7 +82,7 @@ You can see them by running `bundle exec rake routes`.
 A new api is released which helps in seeing results for each survey. The api is:
 
 ```
-  GET /rapidfire/question_groups/<survey-id>/results
+  GET /rapidfire/surveys/<survey-id>/results
 ```
 This new api supports two formats: `html` and `json`. The `json` format is supported
 so that end user can use any javascript based chart solutions and render results
@@ -185,7 +185,7 @@ The typical flow about how to use this gem is:
      is validated with these values.
 
 5. Once the questions are populated, you can return to root_path ie by clicking
-   `Question Groups` and share distribute answer url so that others can answer
+   `Surveys` and share distribute answer url so that others can answer
    the questions populated.
 6. Note that answers fail to persist of the criteria that you have provided while
    creating questions fail.
@@ -227,7 +227,6 @@ delimiter will be hardcoded to `\r\n`:
 ## TODO
 1. Add ability to sort questions, so that order is preserved.
 2. Add multi tenant support.
-3. Rename question-groups to surveys, and change routes accordingly.
 
 ## Contributing
 
