@@ -10,13 +10,14 @@ module Rapidfire
       @attempt_builder = AttemptBuilder.new(attempt_params)
 
       if @attempt_builder.save
-        redirect_to surveys_path
+        redirect_to after_answer_path_for
       else
         render :new
       end
     end
 
     private
+
     def find_survey!
       @survey = Survey.find(params[:survey_id])
     end
@@ -24,6 +25,22 @@ module Rapidfire
     def attempt_params
       answer_params = { params: (params[:attempt] || {}) }
       answer_params.merge(user: current_user, survey: @survey)
+    end
+
+    # Override path to redirect after answer the survey
+    # Write:
+    #   # my_app/app/decorators/controllers/rapidfire/answer_groups_controller_decorator.rb
+    #   Rapidfire::AnswerGroupsController.class_eval do
+    #     def after_answer_path_for
+    #       main_app.root_path
+    #     end
+    #   end
+    def after_answer_path_for
+      question_groups_path
+    end
+
+    def rapidfire_current_scoped
+      send 'current_'+scoped.to_s
     end
   end
 end
