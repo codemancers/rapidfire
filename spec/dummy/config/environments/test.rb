@@ -12,7 +12,7 @@ Dummy::Application.configure do
   config.static_cache_control = "public, max-age=3600"
 
   if Rails::VERSION::MAJOR == 4 || Rails::VERSION::MAJOR == 5
-    config.eager_load = true
+    config.eager_load = false
   else
     # Log error messages when you accidentally call methods on nil
     config.whiny_nils = true

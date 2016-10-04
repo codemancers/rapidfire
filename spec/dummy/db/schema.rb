@@ -12,24 +12,24 @@
 
 ActiveRecord::Schema.define(version: 20130502195504) do
 
-  create_table "rapidfire_answer_groups", force: :cascade do |t|
+  create_table "rapidfire_answers", force: :cascade do |t|
+    t.integer  "attempt_id"
+    t.integer  "question_id"
+    t.text     "answer_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["attempt_id"], name: "index_rapidfire_answers_on_attempt_id"
+    t.index ["question_id"], name: "index_rapidfire_answers_on_question_id"
+  end
+
+  create_table "rapidfire_attempts", force: :cascade do |t|
     t.integer  "survey_id"
     t.string   "user_type"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["survey_id"], name: "index_rapidfire_answer_groups_on_survey_id"
-    t.index ["user_id", "user_type"], name: "index_rapidfire_answer_groups_on_user_id_and_user_type"
-  end
-
-  create_table "rapidfire_answers", force: :cascade do |t|
-    t.integer  "answer_group_id"
-    t.integer  "question_id"
-    t.text     "answer_text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["answer_group_id"], name: "index_rapidfire_answers_on_answer_group_id"
-    t.index ["question_id"], name: "index_rapidfire_answers_on_question_id"
+    t.index ["survey_id"], name: "index_rapidfire_attempts_on_survey_id"
+    t.index ["user_id", "user_type"], name: "index_rapidfire_attempts_on_user_id_and_user_type"
   end
 
   create_table "rapidfire_questions", force: :cascade do |t|
