@@ -20,7 +20,7 @@ Dummy::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  if Rails::VERSION::MAJOR == 4
+  if Rails::VERSION::MAJOR >= 4
     config.eager_load = true
     config.assets.js_compressor = :uglifier
   end

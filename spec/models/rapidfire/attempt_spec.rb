@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Rapidfire::AnswerGroup do
+describe Rapidfire::Attempt do
   describe "Associations" do
     it { is_expected.to belong_to(:survey) }
     it { is_expected.to belong_to(:user)    }
