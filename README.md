@@ -28,6 +28,13 @@ And if you want to customize rapidfire views, you can do
 
     $ bundle exec rails generate rapidfire:views
 
+### Upgrading?
+Only if you are upgrading from an older version of **rapidfire** gem then you need to run
+
+```shell
+    $ rake rename:tables_answer_groups_and_question_groups
+```
+
 ## Usage
 
 Add this line to your routes will and you will be good to go!
@@ -217,7 +224,7 @@ delimiter will be hardcoded to `\r\n`:
 
 ```rb
   # /<path-to-app>/config/initializers/rapidfire.rb
-  
+
   Rapidfire.config do |config|
     config.answers_delimiter = ','
   end
