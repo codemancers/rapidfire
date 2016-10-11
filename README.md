@@ -193,12 +193,12 @@ The typical flow about how to use this gem is:
 
 ## Notes on upgrading
 
-##### Upgrading from 2.2.0 to 3.2.0
+##### Upgrading from 2.1.0 to 3.0.0
 
 If you are upgrading you need to rename your `rapidfire_question_groups` to `rapidfire_surveys` and `rapidfire_answer_groups` to `rapidfire_attempts`. Run the given task to do that for you.
 
 ```shell
-    $ rake rapidfire:upgrade:migrations:from210to330
+    $ rake rapidfire:upgrade:migrations:from210to300
 ```
 
 ##### Upgrading from 1.2.0 to 2.0.0
