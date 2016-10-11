@@ -28,13 +28,6 @@ And if you want to customize rapidfire views, you can do
 
     $ bundle exec rails generate rapidfire:views
 
-### Upgrading?
-Only if you are upgrading from an older version of **rapidfire** gem then you need to run
-
-```shell
-    $ rake rename:tables_answer_groups_and_question_groups
-```
-
 ## Usage
 
 Add this line to your routes will and you will be good to go!
@@ -199,6 +192,15 @@ The typical flow about how to use this gem is:
 
 
 ## Notes on upgrading
+
+##### Upgrading from 2.2.0 to 3.2.0
+
+If you are upgrading you need to rename your `rapidfire_question_groups` to `rapidfire_surveys` and `rapidfire_answer_groups` to `rapidfire_attempts`. Run the given task to do that for you.
+
+```shell
+    $ rake rapidfire:upgrade:migrations:from210to330
+```
+
 ##### Upgrading from 1.2.0 to 2.0.0
 
 The default delimiter which is used to store options for questions like select
@@ -213,6 +215,7 @@ to make existing questions or stored answers to use new delimiter.
 NOTE: Please take database backup before running this rake task.
 
 ```rb
+  bundle exec rake rapidfire:change_delimiter_from_comma_to_srsn
   bundle exec rake rapidfire:change_delimiter_from_comma_to_srsn
 ```
 
