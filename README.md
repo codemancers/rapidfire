@@ -192,6 +192,15 @@ The typical flow about how to use this gem is:
 
 
 ## Notes on upgrading
+
+##### Upgrading from 2.1.0 to 3.0.0
+
+If you are upgrading you need to rename your `rapidfire_question_groups` to `rapidfire_surveys` and `rapidfire_answer_groups` to `rapidfire_attempts`. Run the given task to do that for you.
+
+```shell
+    $ rake rapidfire:upgrade:migrations:from210to300
+```
+
 ##### Upgrading from 1.2.0 to 2.0.0
 
 The default delimiter which is used to store options for questions like select
@@ -207,6 +216,7 @@ NOTE: Please take database backup before running this rake task.
 
 ```rb
   bundle exec rake rapidfire:change_delimiter_from_comma_to_srsn
+  bundle exec rake rapidfire:change_delimiter_from_comma_to_srsn
 ```
 
 
@@ -217,7 +227,7 @@ delimiter will be hardcoded to `\r\n`:
 
 ```rb
   # /<path-to-app>/config/initializers/rapidfire.rb
-  
+
   Rapidfire.config do |config|
     config.answers_delimiter = ','
   end
