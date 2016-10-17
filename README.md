@@ -4,7 +4,7 @@
 
 One stop solution for all survey related requirements! Its tad easy!
 
-This gem supports both **rails 3.2.13+** and **rails4** versions.
+This gem supports **rails 3.2.13+**, **rails4** and **rails5** versions.
 
 You can see a demo of this gem [here](https://rapidfire.herokuapp.com).
 And the source code of demo [here](https://github.com/code-mancers/rapidfire-demo).
