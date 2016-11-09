@@ -1,6 +1,6 @@
 # -*- ruby -*-
 
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gemspec path: '..'
 gem 'rails', "~> 3.2.13"
