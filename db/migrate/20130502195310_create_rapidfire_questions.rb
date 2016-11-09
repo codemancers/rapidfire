@@ -8,7 +8,7 @@ class CreateRapidfireQuestions < ActiveRecord::Migration
       t.string  :placeholder
       t.integer :position
       t.text :answer_options
-      t.text :validation_rules
+      t.column :validation_rules, :json
 
       t.timestamps
     end
