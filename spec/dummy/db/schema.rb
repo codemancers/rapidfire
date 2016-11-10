@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20130502195504) do
 
   create_table "rapidfire_surveys", force: :cascade do |t|
     t.string   "name"
+    t.text     "introduction"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
