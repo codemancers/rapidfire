@@ -4,7 +4,7 @@ module Rapidfire
     validates :name, :presence => true
 
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :name
+      attr_accessible :name, :introduction
     end
   end
 end
