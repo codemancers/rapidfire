@@ -23,7 +23,7 @@ module Rapidfire
     end
 
     def rules
-      validation_rules || {}
+      validation_rules.to_h.with_indifferent_access
     end
 
     # answer will delegate its validation to question, and question
