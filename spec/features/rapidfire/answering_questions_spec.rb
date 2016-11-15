@@ -27,7 +27,7 @@ describe "Surveys" do
 
       it "persists 2 answers with answer values" do
         expected_answers = ["Long Answer", "Short Answer"]
-        expect(Rapidfire::Answer.all.map(&:answer_text)).to match(expected_answers)
+        expect(Rapidfire::Answer.all.map(&:answer_text)).to match_array(expected_answers)
       end
 
       it "redirects to question groups path" do
