@@ -6,7 +6,7 @@ describe "Surveys" do
   let!(:question2)  { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
   let!(:attempt) { FactoryGirl.create(:attempt, survey: survey) }
   before do
-    visit rapidfire.edit_survey_attempt_path(attempt)
+    visit rapidfire.edit_survey_attempt_path(survey, attempt)
   end
 
   describe "Editing Answers" do
