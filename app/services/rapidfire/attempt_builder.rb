@@ -1,10 +1,10 @@
 module Rapidfire
   class AttemptBuilder < Rapidfire::BaseService
-    attr_accessor :user, :survey, :questions, :answers, :params
+    attr_accessor :user, :survey, :questions, :answers, :params, :attempt_id
 
     def initialize(params = {})
-      super(params.except(:id))
-      build_attempt(params[:id])
+      super(params)
+      build_attempt(params[:attempt_id])
     end
 
     def to_model
@@ -46,7 +46,6 @@ module Rapidfire
     def build_attempt(attempt_id)
       if attempt_id.present?
         @attempt = Attempt.find(attempt_id)
-        self.params = {}
         self.answers = @attempt.answers
         self.user = @attempt.user
         self.survey = @attempt.survey
