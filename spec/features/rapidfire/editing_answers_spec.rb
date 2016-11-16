@@ -21,7 +21,7 @@ describe "Surveys" do
       before do
         fill_in "attempt_#{question1.id}_answer_text", with: "Updated Long Answer"
         fill_in "attempt_#{question2.id}_answer_text", with: "Updated Short Answer"
-        click_button "Save"
+        click_button "Update"
       end
 
       it "persists 2 answers" do
@@ -42,7 +42,7 @@ describe "Surveys" do
       before do
         fill_in "attempt_#{question1.id}_answer_text", with: ""
         fill_in "attempt_#{question2.id}_answer_text", with: "Updated Short Answer"
-        click_button "Save"
+        click_button "Update"
       end
 
       it "shows error for missing answers" do
