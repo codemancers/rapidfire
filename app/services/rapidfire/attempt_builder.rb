@@ -3,8 +3,8 @@ module Rapidfire
     attr_accessor :user, :survey, :questions, :answers, :params
 
     def initialize(params = {})
-      super(params)
-      build_attempt
+      super(params.except(:id))
+      build_attempt(params[:id])
     end
 
     def to_model
@@ -43,10 +43,19 @@ module Rapidfire
     end
 
     private
-    def build_attempt
-      @attempt = Attempt.new(user: user, survey: survey)
-      @answers = @survey.questions.collect do |question|
-        @attempt.answers.build(question_id: question.id)
+    def build_attempt(attempt_id)
+      if attempt_id.present?
+        @attempt = Attempt.find(attempt_id)
+        self.params = {}
+        self.answers = @attempt.answers
+        self.user = @attempt.user
+        self.survey = @attempt.survey
+        self.questions = @survey.questions
+      else
+        @attempt = Attempt.new(user: user, survey: survey)
+        @answers = @survey.questions.collect do |question|
+          @attempt.answers.build(question_id: question.id)
+        end
       end
     end
 
