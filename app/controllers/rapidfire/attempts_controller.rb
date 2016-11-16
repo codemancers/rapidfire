@@ -17,7 +17,7 @@ module Rapidfire
     end
 
     def edit
-
+      @attempt_builder = AttemptBuilder.new({id: params[:id]})
     end
 
     def update
