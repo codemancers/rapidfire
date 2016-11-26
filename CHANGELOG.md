@@ -1,5 +1,10 @@
 # Change Log
 
+- Add `position` attribute to `Question` model.  
+  Fixes #79  
+  
+  Leon Hooijer
+
 ## [v3.0.0](https://github.com/code-mancers/rapidfire/tree/HEAD)
 
 [Changelog](https://github.com/code-mancers/rapidfire/compare/v2.1.0...HEAD)
