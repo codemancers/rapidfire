@@ -18,7 +18,7 @@ module Rapidfire
     end
 
     attr_accessor :survey, :question,
-      :type, :question_text, :answer_options, :answer_presence,
+      :type, :question_text, :position, :answer_options, :answer_presence,
       :answer_minimum_length, :answer_maximum_length,
       :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
 
@@ -55,6 +55,7 @@ module Rapidfire
       {
         :survey => survey,
         :question_text  => question_text,
+        :position => position,
         :answer_options => answer_options,
         :validation_rules => {
           :presence => answer_presence,
@@ -70,6 +71,7 @@ module Rapidfire
       self.type = question.type
       self.survey  = question.survey
       self.question_text   = question.question_text
+      self.position = question.position
       self.answer_options  = question.answer_options
       self.answer_presence = question.rules[:presence]
       self.answer_minimum_length = question.rules[:minimum]

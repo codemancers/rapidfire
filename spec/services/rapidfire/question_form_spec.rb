@@ -26,6 +26,7 @@ describe Rapidfire::QuestionForm do
         expect(proxy.type).to eq(question.type)
         expect(proxy.survey).to eq(question.survey)
         expect(proxy.question_text).to  eq(question.question_text)
+        expect(proxy.position).to  eq(question.position)
         expect(proxy.answer_options).to eq(question.answer_options)
       end
     end
