@@ -30,7 +30,7 @@ describe "Surveys" do
         click_link "Delete"
       end
 
-      it "deletes the question group" do
+      it "deletes the survey" do
         expect(page).not_to have_content survey.name
       end
     end

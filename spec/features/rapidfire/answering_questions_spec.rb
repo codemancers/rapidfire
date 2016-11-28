@@ -1,12 +1,16 @@
 require 'spec_helper'
 
 describe "Surveys" do
-  let(:survey)  { FactoryGirl.create(:survey, name: "Question Set") }
+  let(:survey)  { FactoryGirl.create(:survey, name: "Question Set", introduction: "Some introduction") }
   let(:question1)  { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question", validation_rules: { presence: "1" })  }
   let(:question2)  { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
   before do
     [question1, question2]
     visit rapidfire.new_survey_attempt_path(survey)
+  end
+
+  it "displays survey introduction" do
+    expect(page).to have_content "Some introduction"
   end
 
   describe "Answering Questions" do
