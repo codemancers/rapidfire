@@ -12,9 +12,11 @@ module Rapidfire
         view_directory :answers
         view_directory :surveys
         view_directory :questions
+        view_directory :api
       end
 
       protected
+
       def view_directory(name)
         directory name.to_s, "app/views/rapidfire/#{name}"
       end
