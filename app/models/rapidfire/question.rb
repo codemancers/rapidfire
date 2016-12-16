@@ -8,10 +8,6 @@ module Rapidfire
     validates :survey, :question_text, :presence => true
     serialize :validation_rules
 
-    attr_accessor :type, :answer_presence,
-      :answer_minimum_length, :answer_maximum_length,
-      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
-
     if Rails::VERSION::MAJOR == 3
       attr_accessible :survey, :question_text, :position, :validation_rules, :answer_options
     end
