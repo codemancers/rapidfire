@@ -1,3 +1,3 @@
 json.surveys do
-  json.array! @surveys, partial: 'surveys/survey.json', as: :survey
+  json.array! @surveys, partial: 'survey', as: :survey
 end
