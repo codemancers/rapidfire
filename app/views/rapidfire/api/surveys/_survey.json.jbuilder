@@ -1,1 +1,1 @@
-json.extract! survey, :id, :name, :create_at
+json.extract! survey, :id, :name, :created_at
