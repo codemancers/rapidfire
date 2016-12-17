@@ -13,7 +13,7 @@ Rapidfire::Engine.routes.draw do
       # get 'results', on: :member
 
       # resources :questions
-      # resources :attempts, only: [:new, :create]
+      resources :attempts, only: [:create]
     end
 
     root :to => "surveys#index"
