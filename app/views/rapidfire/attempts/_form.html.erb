@@ -1,5 +1,7 @@
-<h2>Please answer these Questions</h2>
+<h2><%= t('rapidfire.attempt.header') -%></h2>
 <hr/>
+
+<p><%= @survey.introduction %></p>
 
 <%= form_for([@survey, @attempt_builder]) do |f| %>
   <%- @attempt_builder.answers.each do |answer| %>
