@@ -1,4 +1,4 @@
-<h2><%= t('rapidfire.attempt.header') -%></h2>
+<h2><%= t('rapidfire.attempts.header') -%></h2>
 <hr/>
 
 <p><%= @survey.introduction %></p>
@@ -9,5 +9,5 @@
       <%= render_answer_form_helper(answer, answer_form) %>
     <% end %>
   <% end %>
-  <%= f.submit t('rapidfire.attempt.save') %>
+  <%= f.submit t('rapidfire.attempts.save') %>
 <% end %>

@@ -1,6 +1,6 @@
 <h2>
-  Questions
-  <%= link_to "New Question", new_survey_question_path(@survey) %>
+  <%= t('rapidfire.questions.header') -%>
+  <%= link_to t('rapidfire.questions.new'), new_survey_question_path(@survey) %>
 </h2>
 <hr/>
 
@@ -11,7 +11,7 @@
   </colgroup>
   <thead>
     <tr>
-      <th>Question</th>
+      <th><%= t('rapidfire.questions.question') -%></th>
       <th></th>
     </tr>
   </thead>

@@ -1,5 +1,10 @@
 en:
   rapidfire:
-    attempt:
+    attempts:
       header: "Please answer these Questions"
       save: "Save"
+    questions:
+      header: "Questions"
+      new: "New Question"
+      question: "Question"
+
