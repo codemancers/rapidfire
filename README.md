@@ -28,6 +28,10 @@ And if you want to customize rapidfire views, you can do
 
     $ bundle exec rails generate rapidfire:views
 
+If you want to customize rapidfire locales (i18n) files, you can do
+
+    $ bundle exec rails generate rapidfire:locales
+
 ## Usage
 
 Add this line to your routes will and you will be good to go!
