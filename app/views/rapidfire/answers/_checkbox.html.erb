@@ -1,6 +1,6 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 
-<%= f.label :answer_text, answer.question.question_text %>
+<%= f.span(:question_text) %>
 <%= f.fields_for :answer_text do |af| %>
   <%- answer.question.options.each do |option| %>
     <%= af.label option do %>

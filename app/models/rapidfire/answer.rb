@@ -6,6 +6,8 @@ module Rapidfire
     validates :question, :attempt, presence: true
     validate  :verify_answer_text, :if => "question.present?"
 
+    delegate :question_text, to: :question
+
     if Rails::VERSION::MAJOR == 3
       attr_accessible :question_id, :attempt, :answer_text
     end
