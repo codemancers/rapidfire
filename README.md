@@ -62,6 +62,19 @@ Typical implementation would be:
 If you are using authentication gems like devise, you get `current_user` for free
 and you don't have to define it.
 
+### Override
+
+Override path to redirect after answer the survey
+
+```ruby
+# my_app/app/decorators/controllers/rapidfire/answer_groups_controller_decorator.rb
+Rapidfire::AnswerGroupsController.class_eval do
+  def after_answer_path_for
+    main_app.root_path
+  end
+end
+```
+
 ### Routes Information
 Once this gem is mounted on, say at 'rapidfire', it generates several routes
 You can see them by running `bundle exec rake routes`.
