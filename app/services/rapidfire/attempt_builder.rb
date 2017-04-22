@@ -36,7 +36,6 @@ module Rapidfire
       save!(options)
     rescue ActiveRecord::ActiveRecordError => e
       # repopulate answers here in case of failure as they are not getting updated
-      p params
       @answers = @survey.questions.collect do |question|
         @attempt.answers.find { |a| a.question_id == question.id }
       end

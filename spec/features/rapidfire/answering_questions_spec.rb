@@ -52,7 +52,6 @@ describe "Surveys" do
 
       it "shows already populated answers" do
         short_answer = page.find("#attempt_#{question2.id}_answer_text").value
-        save_page
         expect(short_answer).to have_content "Short Answer"
       end
     end
