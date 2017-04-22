@@ -1,0 +1,10 @@
+he:
+  rapidfire:
+    attempts:
+      header: "נא לענות על השאלות הבאות"
+      save: "שמור"
+    questions:
+      header: "רשימת השאלות"
+      new: "שאלה חדשה"
+      question: "השאלה"
+
