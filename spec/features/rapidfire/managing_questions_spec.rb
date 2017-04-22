@@ -81,6 +81,19 @@ describe "Questions" do
       end
     end
 
+    context "when type is modified" do
+      before(:each) do
+        page.within("#edit_question_#{question1.id}") do
+          select 'Numeric', from: 'question_type'
+          click_button "Update Question"
+        end
+      end
+
+      it "updates question" do
+        expect(Rapidfire::Question.find(question1.id)).to be_a(Rapidfire::Questions::Numeric)
+      end
+    end
+
     context "when name is not present" do
       before do
         fill_in "question_question_text",  with: ""
