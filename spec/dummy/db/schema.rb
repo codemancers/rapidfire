@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20130502195504) do
     t.integer  "survey_id"
     t.string   "type"
     t.string   "question_text"
+    t.string   "default_text"
+    t.string   "placeholder"
     t.integer  "position"
     t.text     "answer_options"
     t.text     "validation_rules"

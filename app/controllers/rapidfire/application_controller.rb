@@ -17,9 +17,5 @@ module Rapidfire
     def scoped
       :user
     end
-
-    def current_user
-      send 'current_'+scoped.to_s
-    end
   end
 end

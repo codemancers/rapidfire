@@ -2,8 +2,9 @@ language: ruby
 
 rvm:
   - 2.1.9
-  - 2.2.6
-  - 2.3.3
+  - 2.2.7
+  - 2.3.4
+  - 2.4.1
 
 gemfile:
   - gemfiles/Gemfile.rails-3.2.x
@@ -21,6 +22,15 @@ matrix:
     # rack with rails 5 cannot be installed in ruby versions prior to 2.2.2
     - rvm: 2.1.9
       gemfile: gemfiles/Gemfile.rails-5.0.x
+    # Numeric incompatabilty with Rails 3.2.x
+    - rvm: 2.4.1
+      gemfile: gemfiles/Gemfile.rails-3.2.x
+    # Numeric incompatabilty with Rails 4.0.x
+    - rvm: 2.4.1
+      gemfile: gemfiles/Gemfile.rails-4.0.x
+    # Numeric incompatabilty with Rails 4.1.x
+    - rvm: 2.4.1
+      gemfile: gemfiles/Gemfile.rails-4.1.x
 
 before_script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace

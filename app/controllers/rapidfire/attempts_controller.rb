@@ -50,7 +50,7 @@ module Rapidfire
     #     end
     #   end
     def after_answer_path_for
-      question_groups_path
+      surveys_path
     end
 
     def rapidfire_current_scoped
