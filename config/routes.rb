@@ -7,4 +7,15 @@ Rapidfire::Engine.routes.draw do
   end
 
   root :to => "surveys#index"
+
+  namespace :api, defaults: { format: :json } do
+    resources :surveys, only:[:index] do
+      # get 'results', on: :member
+
+      # resources :questions
+      resources :attempts, only: [:create]
+    end
+
+    root :to => "surveys#index"
+  end
 end
