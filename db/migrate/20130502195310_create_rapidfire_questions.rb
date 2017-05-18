@@ -12,6 +12,5 @@ class CreateRapidfireQuestions < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :rapidfire_questions, :survey_id
   end
 end
