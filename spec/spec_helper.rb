@@ -17,6 +17,12 @@ RAPIDFIRE_ROOT = File.join(File.dirname(__FILE__), '..')
 # in spec/support/ and its subdirectories.
 Dir[File.join(RAPIDFIRE_ROOT, "spec/support/**/*.rb")].each { |f| require f }
 
+class TrueClass
+  def validate(arg)
+    arg
+  end
+end
+
 RSpec.configure do |config|
   # ## Mock Framework
   #
