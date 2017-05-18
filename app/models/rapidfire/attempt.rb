@@ -6,6 +6,8 @@ module Rapidfire
 
     if Rails::VERSION::MAJOR == 3
       attr_accessible :survey, :user
+    else
+      attr_accessor :survey, :user
     end
   end
 end

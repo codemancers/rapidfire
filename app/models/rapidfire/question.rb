@@ -10,6 +10,9 @@ module Rapidfire
 
     if Rails::VERSION::MAJOR == 3
       attr_accessible :survey, :question_text, :position, :default_text, :placeholder, :validation_rules, :answer_options
+    else
+      attr_accessor :survey, :question_text, :position, :default_text, :placeholder, :validation_rules, :answer_options
+
     end
 
     def self.inherited(child)

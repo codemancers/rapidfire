@@ -1,4 +1,4 @@
-class CreateRapidfireAnswers < ActiveRecord::Migration
+class CreateRapidfireAnswers < ActiveRecord::Migration[5.1]
   def change
     create_table :rapidfire_answers do |t|
       t.references :attempt
@@ -7,7 +7,6 @@ class CreateRapidfireAnswers < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :rapidfire_answers, :attempt_id
     add_index :rapidfire_answers, :question_id
   end
 end
