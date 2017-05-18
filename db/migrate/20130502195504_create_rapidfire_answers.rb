@@ -1,4 +1,4 @@
-class CreateRapidfireAnswers < ActiveRecord::Migration
+class CreateRapidfireAnswers < ActiveRecord::Migration[5.1]
   def change
     create_table :rapidfire_answers do |t|
       t.references :attempt
