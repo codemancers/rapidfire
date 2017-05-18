@@ -1,4 +1,4 @@
-class CreateRapidfireQuestions < ActiveRecord::Migration
+class CreateRapidfireQuestions < ActiveRecord::Migration[5.1]
   def change
     create_table :rapidfire_questions do |t|
       t.references :survey
@@ -12,6 +12,5 @@ class CreateRapidfireQuestions < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :rapidfire_questions, :survey_id
   end
 end

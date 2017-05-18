@@ -4,10 +4,12 @@ module Rapidfire
     belongs_to :attempt, inverse_of: :answers
 
     validates :question, :attempt, presence: true
-    validate  :verify_answer_text, :if => "question.present?"
+    validate  :verify_answer_text, if: :question.present?
 
     if Rails::VERSION::MAJOR == 3
       attr_accessible :question_id, :attempt, :answer_text
+    else
+      attr_accessor :question_id, :attempt, :answer_text
     end
 
     private
