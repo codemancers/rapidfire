@@ -22,8 +22,15 @@ describe Rapidfire::Survey do
     it "creates questions" do
       last_question = create_questions(survey)
       expect(last_question.survey).to eql(survey)
+      expect(last_question.question_text).not_to be_nil
+      expect(last_question.question_text).to eql("Sample Question")
+
       qs = survey.questions.to_a
       expect(qs).not_to be_empty
+      final_question = qs[-1]
+      expect(final_question).not_to be_nil
+      expect(final_question).to eql(last_question)
+      expect(final_question.question_text).not_to be_nil
     end
   end
 
