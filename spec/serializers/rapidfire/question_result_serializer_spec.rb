@@ -28,8 +28,9 @@ describe Rapidfire::QuestionResultSerializer do
     end
 
     it "has valid questions to work with" do
-      expect(survey.questions).to_not be_empty
       expect(@question_radio.question_text).to_not be_empty
+      expect(@question_radio.survey).to eql(survey)
+      expect(survey.questions.to_a).to_not be_empty
     end
 
     it "has valid results to work with" do
