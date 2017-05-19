@@ -7,6 +7,5 @@ class CreateRapidfireAnswers < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :rapidfire_answers, :question_id
   end
 end
