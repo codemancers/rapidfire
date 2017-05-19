@@ -3,7 +3,9 @@
 <%= f.label :answer_text, answer.question.question_text %>
 <%- answer.question.options.each_with_index do |option, index| %>
   <%= f.label "answer_text_#{index}" do %>
+  <div class="form-group">
     <%= f.radio_button :answer_text, option, id: "#{f.object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")}_answer_text_#{index}" %>
     <%= option %>
+  </div>
   <% end %>
 <% end %>
