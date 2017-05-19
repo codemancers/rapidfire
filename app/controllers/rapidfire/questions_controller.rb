@@ -26,7 +26,7 @@ module Rapidfire
     def update
       form_params = question_params.merge(:question => @question)
 
-      save_and_redirect(form_params, :edit)
+      save_and_redirect(form_params, :index)
     end
 
     def destroy
