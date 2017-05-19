@@ -8,8 +8,6 @@ module Rapidfire
 
     if Rails::VERSION::MAJOR == 3
       attr_accessible :question_id, :attempt, :answer_text
-    else
-      attr_accessor :answer_text
     end
 
     private
