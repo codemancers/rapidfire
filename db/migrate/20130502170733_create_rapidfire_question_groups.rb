@@ -1,4 +1,4 @@
-class CreateRapidfireQuestionGroups < ActiveRecord::Migration
+class CreateRapidfireQuestionGroups < ActiveRecord::Migration[5.1]
   def change
     create_table :rapidfire_surveys do |t|
       t.string  :name

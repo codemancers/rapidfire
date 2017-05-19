@@ -2,7 +2,10 @@ module Rapidfire
   module Questions
     class Checkbox < Rapidfire::Question
       validates :answer_options, :presence => true
-
+      attr_accessor :default_text
+      def placeholder
+        ""
+      end
       def options
         answer_options.split(Rapidfire.answers_delimiter)
       end
