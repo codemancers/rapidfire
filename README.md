@@ -94,6 +94,16 @@ You can see them by running `bundle exec rake routes`.
 
    You can distribute this url so that survey takers can answer a particular survey
    of your interest.
+3. If you have an established application that uses route helpers and/or the
+   `url_for([@model1, @model2])` style, you can include your route helpers in 
+   RapidFire by adding `config/initializers/rapidfire.rb` with the 
+   following content:
+   
+   ```
+   Rapidfire::ApplicationController.class_eval do
+     helper Rails.application.routes.url_helpers
+   end
+   ```
 
 ### Survey Results
 A new api is released which helps in seeing results for each survey. The api is:
