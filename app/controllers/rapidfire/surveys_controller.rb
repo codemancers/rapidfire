@@ -26,11 +26,11 @@ module Rapidfire
     end
 
     def edit
-      @survey = Survey.find(params[:id])
+      @survey = owner_surveys_scope.find(params[:id])
     end
 
     def update
-      @survey = Survey.find(params[:id])
+      @survey = owner_surveys_scope.find(params[:id])
       if @survey.update(survey_params)
         respond_to do |format|
           format.html { redirect_to surveys_path }
