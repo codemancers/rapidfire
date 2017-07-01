@@ -9,6 +9,10 @@ namespace :rapidfire do
       desc "Adding multitenancy support to Rapidfire"
       task multitenancy: :environment do
         `rails generate rapidfire:multitenant_migration`
+
+      desc "Adds a field to show the user after they take a survey"
+      task after_survey_page: :environment do
+        `rails generate rapidfire:after_survey_content_migration`
       end
     end
   end
