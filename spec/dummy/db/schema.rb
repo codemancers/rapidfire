@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130502195504) do
+ActiveRecord::Schema.define(version: 20170701163638) do
 
   create_table "rapidfire_answers", force: :cascade do |t|
     t.integer  "attempt_id"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20130502195504) do
     t.text     "introduction"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
+    t.string   "owner_type"
   end
 
 end

@@ -12,6 +12,14 @@ module Rapidfire
       end
     end
 
+    def owner_surveys_scope
+      if defined?(super)
+        super
+      else
+        Survey
+      end
+    end
+
     # Override prefixes to consider the scoped.
     # for method current_user
     def scoped

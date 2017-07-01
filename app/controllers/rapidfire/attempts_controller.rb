@@ -33,7 +33,7 @@ module Rapidfire
     private
 
     def find_survey!
-      @survey = Survey.find(params[:survey_id])
+      @survey = owner_surveys_scope.find(params[:survey_id])
     end
 
     def attempt_params

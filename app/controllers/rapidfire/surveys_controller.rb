@@ -3,15 +3,15 @@ module Rapidfire
     before_filter :authenticate_administrator!, except: :index
 
     def index
-      @surveys = Survey.all
+      @surveys = owner_surveys_scope.all
     end
 
     def new
-      @survey = Survey.new
+      @survey = owner_surveys_scope.new
     end
 
     def create
-      @survey = Survey.new(survey_params)
+      @survey = owner_surveys_scope.new(survey_params)
       if @survey.save
         respond_to do |format|
           format.html { redirect_to surveys_path }
@@ -26,7 +26,7 @@ module Rapidfire
     end
 
     def destroy
-      @survey = Survey.find(params[:id])
+      @survey = owner_surveys_scope.find(params[:id])
       @survey.destroy
 
       respond_to do |format|
@@ -36,7 +36,7 @@ module Rapidfire
     end
 
     def results
-      @survey = Survey.find(params[:id])
+      @survey = owner_surveys_scope.find(params[:id])
       @survey_results =
         SurveyResults.new(survey: @survey).extract
 

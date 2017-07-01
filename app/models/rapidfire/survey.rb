@@ -1,5 +1,6 @@
 module Rapidfire
   class Survey < ActiveRecord::Base
+    belongs_to :owner, :polymorphic => true
     has_many  :questions
     validates :name, :presence => true
 

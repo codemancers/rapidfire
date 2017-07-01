@@ -5,6 +5,11 @@ namespace :rapidfire do
       task from210to300: :environment do
         `rails generate rapidfire:upgrade_migration`
       end
+
+      desc "Adding multitenancy support to Rapidfire"
+      task multitenancy: :environment do
+        `rails generate rapidfire:multitenant_migration`
+      end
     end
   end
 end
