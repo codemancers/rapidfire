@@ -57,7 +57,7 @@ module Rapidfire
     end
 
     def find_survey!
-      @survey = Survey.find(params[:survey_id])
+      @survey = owner_surveys_scope.find(params[:survey_id])
     end
 
     def find_question!

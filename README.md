@@ -48,6 +48,7 @@ methods `current_user` and `can_administer?` on your `ApplicationController`
 1. `current_user` : the user who is answering the survey. can be `nil`
 2. `can_administer?` : a method which determines whether current user can
    create/update survey questions.
+3. `owner_surveys_scope` : the scope of surveys for this entity, if you want to have multi-tenancy. Defaults to `Survey`
 
 Typical implementation would be:
 
@@ -59,6 +60,10 @@ Typical implementation would be:
 
     def can_administer?
       current_user.try(:admin?)
+    end
+
+    def owner_surveys_scope
+      current_user.surveys
     end
   end
 ```
@@ -209,6 +214,10 @@ The typical flow about how to use this gem is:
 
 
 ## Notes on upgrading
+##### Adding multitenancy support
+```shell
+    $ rake rapidfire:upgrade:migrations:multitenancy
+```
 
 ##### Upgrading from 2.1.0 to 3.0.0
 
@@ -253,7 +262,6 @@ delimiter will be hardcoded to `\r\n`:
 
 ## TODO
 1. Add ability to sort questions, so that order is preserved.
-2. Add multi tenant support.
 
 ## Contributing
 
