@@ -24,7 +24,7 @@ module Rapidfire
       @attempt_builder = AttemptBuilder.new(attempt_params)
 
       if @attempt_builder.save
-        redirect_to surveys_path
+        redirect_to after_answer_path_for
       else
         render :edit
       end
