@@ -2,6 +2,10 @@ module Rapidfire
   class AttemptsController < Rapidfire::ApplicationController
     before_filter :find_survey!
 
+    def show
+      @attempt = @survey.attempts.find_by(attempt_params_for_find)
+    end
+
     def new
       @attempt_builder = AttemptBuilder.new(attempt_params)
     end
@@ -41,6 +45,12 @@ module Rapidfire
       answer_params.merge(user: current_user, survey: @survey, attempt_id: params[:id])
     end
 
+    def attempt_params_for_find
+      these_params = attempt_params
+      these_params[:id] = these_params.delete(:attempt_id)
+      these_params
+    end
+
     # Override path to redirect after answer the survey
     # Write:
     #   # my_app/app/decorators/controllers/rapidfire/answer_groups_controller_decorator.rb
@@ -50,7 +60,11 @@ module Rapidfire
     #     end
     #   end
     def after_answer_path_for
-      surveys_path
+      if @survey.after_survey_content.present?
+        survey_attempt_path(@survey, @attempt_builder.to_model)
+      else
+        surveys_path
+      end
     end
 
     def rapidfire_current_scoped

@@ -5,6 +5,11 @@ namespace :rapidfire do
       task from210to300: :environment do
         `rails generate rapidfire:upgrade_migration`
       end
+
+      desc "Adds a field to show the user after they take a survey"
+      task after_survey_page: :environment do
+        `rails generate rapidfire:after_survey_content_migration`
+      end
     end
   end
 end
