@@ -42,7 +42,7 @@ module Rapidfire
 
     def attempt_params
       answer_params = { params: (params[:attempt] || {}) }
-      answer_params.merge(user: current_user, survey: @survey, attempt_id: params[:id])
+      answer_params.merge(user: rapidfire_current_scoped, survey: @survey, attempt_id: params[:id])
     end
 
     def attempt_params_for_find
@@ -68,7 +68,7 @@ module Rapidfire
     end
 
     def rapidfire_current_scoped
-      send 'current_'+scoped.to_s
+      send 'current_' + rapidfire_scoped.to_s
     end
   end
 end
