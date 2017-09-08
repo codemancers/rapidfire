@@ -17,7 +17,7 @@ matrix:
   exclude:
     # has test/unit/testcase removed, and also 3.2.x is too old to support
     # ruby 2.2.x. so ignoring this combination.
-    - rvm: 2.2.6
+    - rvm: 2.2.7
       gemfile: gemfiles/Gemfile.rails-3.2.x
     # rack with rails 5 cannot be installed in ruby versions prior to 2.2.2
     - rvm: 2.1.9
