@@ -1,9 +1,14 @@
 <h2>
   Surveys
+</h2>
+<h3>
   <% if can_administer? %>
     <%= link_to "New Survey", new_survey_path %>
   <% end %>
-</h2>
+</h3>
+<h4>
+  <%= link_to t('Back to home'), '/' %>
+</h4>
 <hr/>
 
 <table>
@@ -14,7 +19,7 @@
   <thead>
     <tr>
       <th>Survey</th>
-      <th></th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
