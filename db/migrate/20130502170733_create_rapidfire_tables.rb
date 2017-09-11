@@ -1,4 +1,11 @@
-class CreateRapidfireTables < ActiveRecord::Migration
+if Rails::VERSION::MAJOR == 5
+  version = [Rails::VERSION::MAJOR, Rails::VERSION::MINOR].join('.').to_f
+  base = ActiveRecord::Migration[version]
+else
+  base = ActiveRecord::Migration
+end
+
+class CreateRapidfireTables < base
   def change
     create_table :rapidfire_surveys do |t|
       t.string  :name
