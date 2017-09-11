@@ -1,4 +1,5 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
-
+<div class="form-group">
 <%= f.label :answer_text, answer.question.question_text %>
 <%= f.text_area :answer_text, value: answer.answer_text || answer.question.default_text, :rows => 5, placeholder: answer.question.placeholder %>
+</div>

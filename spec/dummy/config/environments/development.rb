@@ -34,6 +34,8 @@ Dummy::Application.configure do
 
     # Do not compress assets
     config.assets.compress = false
+  else
+    config.whiny_nils = false
   end
 
   # Expands the lines which load the assets

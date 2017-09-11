@@ -1,4 +1,4 @@
-class CreateRapidfireAnswerGroups < ActiveRecord::Migration
+class CreateRapidfireAnswerGroups < ActiveRecord::Migration[5.1]
   def change
     create_table :rapidfire_attempts do |t|
       t.references :survey
@@ -6,7 +6,5 @@ class CreateRapidfireAnswerGroups < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :rapidfire_attempts, :survey_id
-    add_index :rapidfire_attempts, [:user_id, :user_type]
   end
 end
