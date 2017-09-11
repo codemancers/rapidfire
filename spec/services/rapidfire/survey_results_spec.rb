@@ -10,8 +10,7 @@ describe Rapidfire::SurveyResults do
     before do
       create_questions(survey)
       create_answers
-      @survey_results =
-        Rapidfire::SurveyResults.new(survey: survey)
+      @survey_results = Rapidfire::SurveyResults.new(survey: survey)
       @results = @survey_results.extract
     end
 
