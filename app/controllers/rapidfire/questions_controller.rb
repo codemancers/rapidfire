@@ -1,9 +1,14 @@
 module Rapidfire
   class QuestionsController < Rapidfire::ApplicationController
-    before_action :authenticate_administrator!
-
-    before_action :find_survey!
-    before_action :find_question!, :only => [:edit, :update, :destroy]
+    if Rails::VERSION::MAJOR ==  5
+      before_action :authenticate_administrator!
+      before_action :find_survey!
+      before_action :find_question!, :only => [:edit, :update, :destroy]
+    else
+      before_filter :authenticate_administrator!
+      before_filter :find_survey!
+      before_filter :find_question!, :only => [:edit, :update, :destroy]
+    end
 
     def index
       @questions = @survey.questions
