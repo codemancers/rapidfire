@@ -1,4 +1,11 @@
-class CreateRapidfireTables < ActiveRecord::Migration
+if Rails::VERSION::MAJOR == 5
+  version = [Rails::VERSION::MAJOR, Rails::VERSION::MINOR].join('.').to_f
+  base = ActiveRecord::Migration[version]
+else
+  base = ActiveRecord::Migration
+end
+
+class CreateRapidfireTables < base
   def change
     create_table :rapidfire_surveys do |t|
       t.string  :name
@@ -18,7 +25,7 @@ class CreateRapidfireTables < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :rapidfire_questions, :survey_id
+    add_index :rapidfire_questions, :survey_id if Rails::VERSION::MAJOR != 5
 
     create_table :rapidfire_attempts do |t|
       t.references :survey
@@ -26,7 +33,7 @@ class CreateRapidfireTables < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :rapidfire_attempts, :survey_id
+    add_index :rapidfire_attempts, :survey_id if Rails::VERSION::MAJOR != 5
     add_index :rapidfire_attempts, [:user_id, :user_type]
 
     create_table :rapidfire_answers do |t|
@@ -36,7 +43,9 @@ class CreateRapidfireTables < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :rapidfire_answers, :attempt_id
-    add_index :rapidfire_answers, :question_id
+    if Rails::VERSION::MAJOR != 5
+      add_index :rapidfire_answers, :attempt_id
+      add_index :rapidfire_answers, :question_id
+    end
   end
 end
