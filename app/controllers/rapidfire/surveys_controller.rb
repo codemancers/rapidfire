@@ -1,20 +1,17 @@
 module Rapidfire
   class SurveysController < Rapidfire::ApplicationController
-    if Rails::VERSION::MAJOR == 5
-      before_action :authenticate_administrator!, except: :index
-    else
-      before_filter :authenticate_administrator!, except: :index
-    end
 
     def index
       @surveys = Survey.all
     end
 
     def new
+      authenticate_administrator!
       @survey = Survey.new
     end
 
     def create
+      authenticate_administrator!
       @survey = Survey.new(survey_params)
       if @survey.save
         respond_to do |format|
@@ -30,6 +27,7 @@ module Rapidfire
     end
 
     def destroy
+      authenticate_administrator!
       @survey = Survey.find(params[:id])
       @survey.destroy
 
@@ -40,6 +38,7 @@ module Rapidfire
     end
 
     def results
+      authenticate_administrator!
       @survey = Survey.find(params[:id])
       @survey_results =
         SurveyResults.new(survey: @survey).extract

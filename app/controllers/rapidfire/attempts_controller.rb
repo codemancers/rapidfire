@@ -1,16 +1,12 @@
 module Rapidfire
   class AttemptsController < Rapidfire::ApplicationController
-    if Rails::VERSION::MAJOR ==  5
-      before_action :find_survey!
-    else
-      before_filter :find_survey!
-    end
-
     def new
+      find_survey!
       @attempt_builder = AttemptBuilder.new(attempt_params)
     end
 
     def create
+      find_survey!
       @attempt_builder = AttemptBuilder.new(attempt_params)
 
       if @attempt_builder.save
@@ -21,10 +17,12 @@ module Rapidfire
     end
 
     def edit
+      find_survey!
       @attempt_builder = AttemptBuilder.new(attempt_params)
     end
 
     def update
+      find_survey!
       @attempt_builder = AttemptBuilder.new(attempt_params)
 
       if @attempt_builder.save
