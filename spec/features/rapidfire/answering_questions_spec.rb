@@ -7,6 +7,7 @@ describe "Surveys" do
   before do
     [question1, question2]
     visit rapidfire.new_survey_attempt_path(survey)
+    allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
   end
 
   it "displays survey introduction" do

@@ -1,18 +1,17 @@
 module Rapidfire
   class SurveysController < Rapidfire::ApplicationController
-
     def index
       @surveys = Survey.all
     end
 
     def new
-      authenticate_administrator!
       @survey = Survey.new
+      authorize @survey
     end
 
     def create
-      authenticate_administrator!
       @survey = Survey.new(survey_params)
+      authorize @survey
       if @survey.save
         respond_to do |format|
           format.html { redirect_to surveys_path }
@@ -27,8 +26,8 @@ module Rapidfire
     end
 
     def destroy
-      authenticate_administrator!
       @survey = Survey.find(params[:id])
+      authorize @survey
       @survey.destroy
 
       respond_to do |format|
@@ -38,8 +37,8 @@ module Rapidfire
     end
 
     def results
-      authenticate_administrator!
       @survey = Survey.find(params[:id])
+      authorize @survey
       @survey_results =
         SurveyResults.new(survey: @survey).extract
 

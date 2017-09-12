@@ -8,6 +8,7 @@ describe "Surveys" do
   let!(:answer1) { FactoryGirl.create(:answer, attempt: attempt, question: question1, answer_text: "Long Answer") }
   let!(:answer2) { FactoryGirl.create(:answer, attempt: attempt, question: question2, answer_text: "Short Answer") }
   before do
+    allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
     visit rapidfire.edit_survey_attempt_path(survey, attempt)
   end
 

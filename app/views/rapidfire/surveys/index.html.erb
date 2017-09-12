@@ -2,7 +2,7 @@
   Surveys
 </h2>
 <h3>
-  <% if can_administer? %>
+  <% if current_user.can_administer? %>
     <%= link_to "New Survey", new_survey_path %>
   <% end %>
 </h3>

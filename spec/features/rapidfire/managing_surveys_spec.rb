@@ -8,6 +8,7 @@ describe "Surveys" do
   let(:question1)  { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question")  }
   let(:question2)  { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
   before do
+    allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
     [question1, question2]
   end
 
@@ -24,7 +25,7 @@ describe "Surveys" do
   describe "DELETE surveys" do
     context "when user can administer" do
       before do
-        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
+        allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
         click_link "Delete"
@@ -37,7 +38,7 @@ describe "Surveys" do
 
     context "when user cannot administer" do
       before do
-        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(false)
+        allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(false)
         visit rapidfire.root_path
       end
 
@@ -50,7 +51,7 @@ describe "Surveys" do
   describe "CREATING Survey" do
     context "when user can create groups" do
       before do
-        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
+        allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
         click_link "New Survey"
@@ -86,7 +87,7 @@ describe "Surveys" do
 
     context "when user cannot create groups" do
       before do
-        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(false)
+        allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(false)
         visit rapidfire.root_path
       end
 
@@ -99,7 +100,7 @@ describe "Surveys" do
   describe "EDITING Surveys" do
     context "when user can manage questions" do
       before do
-        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
+        allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
         click_link survey.name
@@ -113,7 +114,7 @@ describe "Surveys" do
 
     context "when user cannot manage questions" do
       before do
-        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(false)
+        allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(false)
       end
 
       it "fails to access the page" do
@@ -124,6 +125,7 @@ describe "Surveys" do
 
   describe "GET survey results" do
     before do
+      allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
       create_questions(survey)
       create_answers
 

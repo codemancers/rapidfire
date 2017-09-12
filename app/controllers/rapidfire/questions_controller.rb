@@ -1,44 +1,43 @@
 module Rapidfire
   class QuestionsController < Rapidfire::ApplicationController
+    if Rails::VERSION::MAJOR ==  5
+      before_action :find_survey!
+      before_action :find_question!, :only => [:edit, :update, :destroy]
+    else
+      before_filter :find_survey!
+      before_filter :find_question!, :only => [:edit, :update, :destroy]
+    end
+
     def index
-      authenticate_administrator!
-      find_survey!
       @questions = @survey.questions
+      authorize @questions
     end
 
     def new
-      authenticate_administrator!
-      find_survey!
+      authorize @survey
       @question_form = QuestionForm.new(:survey => @survey)
     end
 
     def create
-      authenticate_administrator!
-      find_survey!
+      authorize @survey
       form_params = question_params.merge(:survey => @survey)
 
       save_and_redirect(form_params, :new)
     end
 
     def edit
-      authenticate_administrator!
-      find_survey!
-      find_question!
+      authorize @question
       @question_form = QuestionForm.new(:question => @question)
     end
 
     def update
-      authenticate_administrator!
-      find_survey!
-      find_question!
+      authorize @question
       form_params = question_params.merge(:question => @question)
       save_and_redirect(form_params, :edit)
     end
 
     def destroy
-      authenticate_administrator!
-      find_survey!
-      find_question!
+      authorize @question
       @question.destroy
       respond_to do |format|
         format.html { redirect_to index_location }

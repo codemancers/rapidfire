@@ -10,7 +10,7 @@ describe "Questions" do
 
   describe "DELETE Question" do
     before do
-      allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
+      allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
       visit rapidfire.survey_questions_path(survey)
 
       page.within("#question_#{question1.id}") do
@@ -25,7 +25,7 @@ describe "Questions" do
 
   describe "CREATING Question" do
     before do
-      allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
+      allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
       visit rapidfire.survey_questions_path(survey)
       click_link "New Question"
     end
@@ -61,7 +61,7 @@ describe "Questions" do
 
   describe "UPDATING Question" do
     before do
-      allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
+      allow_any_instance_of(NilClass).to receive(:can_administer?).and_return(true)
       visit rapidfire.survey_questions_path(survey)
       page.within("#question_#{question1.id}") do
         click_link "Edit"

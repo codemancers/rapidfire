@@ -22,6 +22,7 @@ PIM
 
   s.add_dependency 'rails', '>= 3.2.13'
   s.add_dependency 'active_model_serializers', '~> 0.8.1'
+  s.add_dependency 'pundit', '~> 1.1.0'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'
