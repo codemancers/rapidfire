@@ -27,4 +27,6 @@
   </tbody>
 </table>
 
-<%= paginate @surveys %>
+<% if defined?(Kaminari) %>
+  <%= paginate @surveys %>
+<% end %>
