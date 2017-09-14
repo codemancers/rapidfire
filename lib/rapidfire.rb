@@ -1,4 +1,5 @@
 require "rapidfire/engine"
+require "kaminari"
 
 module Rapidfire
   class AccessDenied < StandardError

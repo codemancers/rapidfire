@@ -7,7 +7,7 @@ module Rapidfire
     end
 
     def index
-      @surveys = Survey.all
+      @surveys = Survey.all.page(params[:page])
     end
 
     def new

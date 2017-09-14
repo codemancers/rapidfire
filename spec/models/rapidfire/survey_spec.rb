@@ -15,7 +15,7 @@ describe Rapidfire::Survey do
     let(:survey) { FactoryGirl.create(:survey) }
 
     it "has a name" do
-      expect(survey.name).to eql("Survey")
+      expect(survey.name).to eql("Survey 1")
     end
 
     it "creates questions" do
