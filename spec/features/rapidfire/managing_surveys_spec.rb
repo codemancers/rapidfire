@@ -19,19 +19,6 @@ describe "Surveys" do
     it "lists all surveys" do
       expect(page).to have_content survey.name
     end
-
-    describe "Surveys with pagination" do
-      let!(:surveys) { FactoryGirl.create_list(:survey, 50) }
-      before do
-        visit rapidfire.root_path
-      end
-
-      it "lists all surveys within page scope" do
-        expect(page).to have_text(surveys.first.name, count: 24)
-        click_link "2"
-        expect(page).to have_text(surveys.first.name, count: 25)
-      end
-    end
   end
 
   describe "DELETE surveys" do

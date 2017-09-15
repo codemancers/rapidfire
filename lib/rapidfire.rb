@@ -1,5 +1,4 @@
 require "rapidfire/engine"
-require "kaminari"
 
 module Rapidfire
   class AccessDenied < StandardError
@@ -13,7 +12,7 @@ module Rapidfire
 
   # configuration for setting the layout
   mattr_accessor :layout
-  
+
   def self.config
     yield(self)
   end
