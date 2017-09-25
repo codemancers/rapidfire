@@ -7,7 +7,11 @@ module Rapidfire
     end
 
     def index
-      @surveys = Survey.all
+      @surveys = if defined?(Kaminari)
+        Survey.page(params[:page])
+      else
+        Survey.all
+      end
     end
 
     def new

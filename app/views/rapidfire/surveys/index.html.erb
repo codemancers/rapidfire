@@ -26,3 +26,7 @@
     <%= render partial: "survey", collection: @surveys %>
   </tbody>
 </table>
+
+<% if defined?(Kaminari) %>
+  <%= paginate @surveys %>
+<% end %>
