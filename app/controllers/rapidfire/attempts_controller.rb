@@ -1,6 +1,6 @@
 module Rapidfire
   class AttemptsController < Rapidfire::ApplicationController
-    before_filter :find_survey!
+    before_action :find_survey!
 
     def show
       @attempt = @survey.attempts.find_by(attempt_params_for_find)

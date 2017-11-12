@@ -1,6 +1,6 @@
 module Rapidfire
   class SurveysController < Rapidfire::ApplicationController
-    before_filter :authenticate_administrator!, except: :index
+    before_action :authenticate_administrator!, except: :index
 
     def index
       @surveys = owner_surveys_scope.all
