@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :survey, :class => "Rapidfire::Survey" do
-    name  "Survey"
+    name  "Test Survey"
     introduction "Please answer all the questions in this survey."
   end
 end

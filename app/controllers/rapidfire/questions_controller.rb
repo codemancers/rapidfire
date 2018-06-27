@@ -1,9 +1,15 @@
 module Rapidfire
   class QuestionsController < Rapidfire::ApplicationController
-    before_action :authenticate_administrator!
+    if Rails::VERSION::MAJOR >=  5
+      before_action :authenticate_administrator!
+      before_action :find_survey!
+      before_action :find_question!, :only => [:edit, :update, :destroy]
+    else
+      before_filter :authenticate_administrator!
+      before_filter :find_survey!
+      before_filter :find_question!, :only => [:edit, :update, :destroy]
+    end
 
-    before_action :find_survey!
-    before_action :find_question!, :only => [:edit, :update, :destroy]
 
     def index
       @questions = @survey.questions
@@ -25,7 +31,6 @@ module Rapidfire
 
     def update
       form_params = question_params.merge(:question => @question)
-
       save_and_redirect(form_params, :edit)
     end
 
