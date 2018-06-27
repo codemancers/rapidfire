@@ -18,7 +18,10 @@ module Rapidfire
               text.to_s.split(Rapidfire.answers_delimiter)
             end.flatten
 
-            answers.inject(Hash.new(0)) { |total, e| total[e] += 1; total }
+            count_hash = Hash.new(0)
+            question.options.map{|o| count_hash[o] = 0 }
+
+            answers.inject(count_hash) { |total, e| total[e] += 1; total }
           when Rapidfire::Questions::Short, Rapidfire::Questions::Date,
             Rapidfire::Questions::Long, Rapidfire::Questions::Numeric
             question.answers.pluck(:answer_text)
