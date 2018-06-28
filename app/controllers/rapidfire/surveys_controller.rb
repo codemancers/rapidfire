@@ -61,9 +61,10 @@ module Rapidfire
     end
 
     def results
+      params[:filter] ||= {}
       @survey = owner_surveys_scope.find(params[:id])
       @survey_results =
-        SurveyResults.new(survey: @survey).extract
+        SurveyResults.new(survey: @survey).extract(params[:filter].permit({ question_ids: [], options: []}))
 
       respond_to do |format|
         format.json { render json: @survey_results, root: false }

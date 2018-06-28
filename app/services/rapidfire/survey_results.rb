@@ -8,13 +8,13 @@ module Rapidfire
     # 2. question text
     # 3. if aggregatable, return each option with value
     # 4. else return an array of all the answers given
-    def extract
+    def extract(filter_params = {})
       @survey.questions.collect do |question|
         results =
           case question
           when Rapidfire::Questions::Select, Rapidfire::Questions::Radio,
             Rapidfire::Questions::Checkbox
-            answers = question.answers.map(&:answer_text).map do |text|
+            answers = question.answers.where(*filter(filter_params)).map(&:answer_text).map do |text|
               text.to_s.split(Rapidfire.answers_delimiter)
             end.flatten
 
@@ -24,10 +24,35 @@ module Rapidfire
             answers.inject(count_hash) { |total, e| total[e] += 1; total }
           when Rapidfire::Questions::Short, Rapidfire::Questions::Date,
             Rapidfire::Questions::Long, Rapidfire::Questions::Numeric
-            question.answers.pluck(:answer_text)
+            question.answers.where(*filter(filter_params)).pluck(:answer_text)
           end
 
         QuestionResult.new(question: question, results: results)
+      end
+    end
+
+    def filter(filter_params)
+      @filter_result ||= begin
+        return ["0=0"] unless Array(filter_params[:question_ids]).compact.count == Array(filter_params[:options]).compact.count
+
+        collected_filters = {}
+        Array(filter_params[:question_ids]).each_with_index do |question_id, i|
+          collected_filters[question_id] ||= []
+          collected_filters[question_id] << filter_params[:options][i]
+        end
+
+        attempt_ids = nil
+
+        collected_filters.each do |question_id, options|
+          these_matches = Answer.where("question_id = ? and answer_text in (?)", question_id, options).pluck(:attempt_id)
+          if attempt_ids.nil?
+            attempt_ids = these_matches
+          else
+            attempt_ids = attempt_ids & these_matches
+          end
+        end
+
+        ["attempt_id in (?)", attempt_ids]
       end
     end
   end

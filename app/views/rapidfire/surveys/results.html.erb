@@ -16,6 +16,7 @@
             <tr>
               <th>Option</th>
               <th>Count</th>
+              <th>Filter</th>
             </tr>
           </thead>
           <tbody>
@@ -23,6 +24,7 @@
               <tr>
                 <td><%= option %></td>
                 <td><%= count %></td>
+                <td><%= filter_link(result.question.id, option) %></th>
               </tr>
             <% end %>
           </tbody>
