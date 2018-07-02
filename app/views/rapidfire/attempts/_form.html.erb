@@ -1,13 +1,13 @@
-<h2><%= t('rapidfire.attempts.header') -%></h2>
-<hr/>
+<div class="survey-attempt-form">
+  <h2><%= t('rapidfire.attempts.header') -%></h2>
+  <p class="survey-title"><%= @survey.introduction %></p>
 
-<p><%= @survey.introduction %></p>
-
-<%= form_for([@survey, @attempt_builder]) do |f| %>
-  <%- @attempt_builder.answers.each do |answer| %>
-    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
-      <%= render_answer_form_helper(answer, answer_form) %>
+  <%= form_for([@survey, @attempt_builder], url: rapidfire.survey_attempts_path(@survey, @attempt_builder)) do |f| %>
+    <%- @attempt_builder.answers.each do |answer| %>
+      <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+        <%= render_answer_form_helper(answer, answer_form) %>
+      <% end %>
     <% end %>
+    <%= f.submit submit_text,  :class => 'btn btn-default' %>
   <% end %>
-  <%= f.submit submit_text %>
-<% end %>
+</div>
