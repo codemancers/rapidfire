@@ -2,7 +2,7 @@
   <h2><%= t('rapidfire.attempts.header') -%></h2>
   <p class="survey-title"><%= @survey.introduction %></p>
 
-  <%= form_for([@survey, @attempt_builder], url: rapidfire.survey_attempts_path(@survey, @attempt_builder)) do |f| %>
+  <%= form_for([@survey, @attempt_builder], data: {remote: remote}, url: rapidfire.survey_attempts_path(@survey, @attempt_builder)) do |f| %>
     <%- @attempt_builder.answers.each do |answer| %>
       <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
         <%= render_answer_form_helper(answer, answer_form) %>

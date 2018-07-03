@@ -1,0 +1,5 @@
+$("div.survey-attempt-form").remove();
+<%
+  success_message = 'survey_success_message'.cms {'Thanks for your inputs.'}
+%>
+toastr.success('<%= success_message %>');
