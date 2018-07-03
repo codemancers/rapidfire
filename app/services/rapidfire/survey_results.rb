@@ -34,6 +34,7 @@ module Rapidfire
     def filter(filter_params)
       @filter_result ||= begin
         return ["0=0"] unless Array(filter_params[:question_ids]).compact.count == Array(filter_params[:options]).compact.count
+        return ["0=0"] if Array(filter_params[:question_ids]).compact.count == 0
 
         collected_filters = {}
         Array(filter_params[:question_ids]).each_with_index do |question_id, i|
