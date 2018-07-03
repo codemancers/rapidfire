@@ -14,12 +14,14 @@ module Rapidfire
     def results_to_csv(filter)
       CSV.generate do |csv|
         header = []
+        header << "User"
         questions.each do |question|
           header << question.question_text
         end
         csv << header
         attempts.where(SurveyResults.filter(filter, 'id')).each do |attempt|
           this_attempt = []
+          this_attempt << attempt.user.try(:survey_name)
           questions.each do |question|
             answer = attempt.answers.detect{|a| a.question_id == question.id }.try(:answer_text)
             this_attempt << answer
