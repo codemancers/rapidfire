@@ -68,6 +68,18 @@ Typical implementation would be:
   end
 ```
 
+It also will assume that whatever `current_user` returns above will respond to a method called `survey_name`.
+
+That method should return the name you want associated with the results. For example:
+
+```rb
+  class User
+    def survey_name
+      "#{last_name}, #{first_name}"
+    end
+  end
+```
+
 If you are using authentication gems like devise, you get `current_user` for free
 and you don't have to define it.
 
