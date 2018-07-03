@@ -31,9 +31,10 @@ module Rapidfire
       end
     end
 
-    def filter(filter_params)
+    def filter(filter_params, column = 'attempt_id')
       @filter_result ||= begin
         return ["0=0"] unless Array(filter_params[:question_ids]).compact.count == Array(filter_params[:options]).compact.count
+        return ["0=0"] unless %w(id attempt_id).include?(column)
         return ["0=0"] if Array(filter_params[:question_ids]).compact.count == 0
 
         collected_filters = {}
@@ -53,8 +54,12 @@ module Rapidfire
           end
         end
 
-        ["attempt_id in (?)", attempt_ids]
+        ["#{column} in (?)", attempt_ids]
       end
+    end
+
+    def self.filter(filter_params, column)
+      self.new.filter(filter_params, column)
     end
   end
 end

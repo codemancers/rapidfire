@@ -64,12 +64,13 @@ module Rapidfire
       params[:filter] ||= {}
       @survey = owner_surveys_scope.find(params[:id])
       @survey_results =
-        SurveyResults.new(survey: @survey).extract(params[:filter].permit({ question_ids: [], options: []}))
+        SurveyResults.new(survey: @survey).extract(filter_params)
 
       respond_to do |format|
         format.json { render json: @survey_results, root: false }
         format.html
         format.js
+        format.csv { send_data(@survey.results_to_csv(filter_params)) }
       end
     end
 
@@ -81,6 +82,10 @@ module Rapidfire
       else
         params[:survey]
       end
+    end
+
+    def filter_params
+      params[:filter].permit({ question_ids: [], options: []})
     end
   end
 end
