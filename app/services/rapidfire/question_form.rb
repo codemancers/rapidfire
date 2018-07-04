@@ -31,7 +31,18 @@ module Rapidfire
     end
 
     def save
-      @question.new_record? ? create_question : update_question
+      if @question.new_record?
+        create_question
+      elsif @question.type == type
+        update_question
+      else
+        # Question type was changed, so delete existing and create new one; 
+        # because both are different Activerecord models
+        
+        @question.destroy
+
+        create_question
+      end
     end
 
     private
