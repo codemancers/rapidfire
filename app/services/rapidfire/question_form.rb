@@ -31,7 +31,6 @@ module Rapidfire
     end
 
     def save
-      @question.new_record? ? create_question : update_question
       if @question.new_record?
         create_question
       elsif @question.type == type
