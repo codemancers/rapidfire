@@ -12,6 +12,7 @@
       <% if can_administer? %>
         <li><%= link_to "Results", [:results, survey] %></li>
         <li><%= link_to "Edit", edit_survey_path(survey) %></li>
+        <li><%= link_to "Copy", surveys_path(copy_survey_id: survey), method: :post %></li>
         <li><%= link_to "Delete", survey, method: :delete %></li>
       <% end %>
     </ul>

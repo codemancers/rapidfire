@@ -17,7 +17,20 @@ module Rapidfire
     end
 
     def create
+      source_survey = nil
+      if params[:copy_survey_id]
+        source_survey = owner_surveys_scope.find(params[:copy_survey_id])
+        params[:survey] = source_survey.attributes.except(*%w(created_at updated_at id owner_id owner_type))
+        params[:survey][:name] = "Copy of #{params[:survey][:name]}"
+      end
       @survey = owner_surveys_scope.new(survey_params)
+
+      if source_survey
+        source_survey.questions.each do |q|
+          @survey.questions << q.dup
+        end
+      end
+
       if @survey.save
         respond_to do |format|
           format.html { redirect_to surveys_path }
