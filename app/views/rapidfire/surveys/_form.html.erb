@@ -1,23 +1,24 @@
-<h3><%= survey.new_record? ? "New Survey" : "Edit Survey" %></h3>
+<div class="survey-attempt-form">
+<h2><%= survey.new_record? ? "New Survey" : "Edit Survey" %></h2>
+  <%= form_for survey do |f| %>
+    <%- if survey.errors.any? %>
+      <ul>
+        <%- survey.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
 
-<%= form_for survey do |f| %>
-  <%- if survey.errors.any? %>
-    <ul>
-      <%- survey.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :introduction %>
+      <%= f.text_area :introduction %>
+    </div>
+
+    <%= f.submit :class => "btn btn-default" %>
   <% end %>
-
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :introduction %>
-    <%= f.text_area :introduction %>
-  </div>
-
-  <%= f.submit %>
-<% end %>
+</div>

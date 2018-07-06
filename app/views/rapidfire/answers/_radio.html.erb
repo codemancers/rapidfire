@@ -1,12 +1,16 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 
-<div class="form-group">
+<div class="form-group check-box">
   <%= f.label :answer_text, answer.question.question_text %>
   <%- answer.question.options.each_with_index do |option, index| %>
     <span class="form-group sub">
       <%= f.label "answer_text_#{index}" do %>
         <%= f.radio_button :answer_text, option, id: "#{f.object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")}_answer_text_#{index}" %>
-        <%= option %>
+        <span class="checkmark check-radio"></span>
+        <div class="tooltip-div">
+         	<p class="label-tooltip-raido"><span><%= option %></span> </p>
+          <span class="label-tooltip-radio-text"><%= option %></span>
+         </div>
       <% end %>
     </span>
   <% end %>
