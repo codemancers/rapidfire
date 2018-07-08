@@ -1,26 +1,28 @@
-<h2>
-  <%= t('rapidfire.questions.header') -%>
-</h2>
-<h3>
-  <%= link_to t('rapidfire.questions.new'), new_survey_question_path(@survey) %>
-</h3>
-<h4>
-  <%= link_to t('rapidfire.questions.back'), surveys_path(@survey) %>
-</h4>
-<hr/>
+<div class="survey-attempt-form">
+  <h2>
+    <%= t('rapidfire.questions.header') -%>
+  </h2>
+  <h3>
+    <%= link_to t('rapidfire.questions.new'), new_survey_question_path(@survey) %>
+  </h3>
+  <h4>
+    <%= link_to t('rapidfire.questions.back'), surveys_path(@survey) %>
+  </h4>
+  <hr/>
 
-<table>
-  <colgroup>
-    <col>
-    <col width="250">
-  </colgroup>
-  <thead>
-    <tr>
-      <th><%= t('rapidfire.questions.question') -%></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render partial: "question", collection: @questions %>
-  </tbody>
-</table>
+  <table>
+    <colgroup>
+      <col>
+      <col width="250">
+    </colgroup>
+    <thead>
+      <tr>
+        <th><%= t('rapidfire.questions.question') -%></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "question", collection: @questions %>
+    </tbody>
+  </table>
+</div>
