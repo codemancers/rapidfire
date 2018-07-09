@@ -1,9 +1,11 @@
-<tr id="question_<%= question.id %>">
-  <td><%= question.question_text %></td>
-  <td>
-    <ul class="horizontal-list">
-      <li><%= link_to "Edit", [:edit, question.survey, question] %></li>
-      <li><%= link_to "Delete", [question.survey, question], method: :delete %></li>
-    </ul>
-  </td>
-</tr>
+<div class="survey-attempt-form">
+	<tr id="question_<%= question.id %>">
+	  <td><%= question.question_text %></td>
+	  <td>
+	    <ul class="horizontal-list">
+	      <li><%= link_to "Edit", [:edit, question.survey, question], :class => "btn btn-default" %></li>
+	      <li><%= link_to "Delete", [question.survey, question], method: :delete, :class => "btn btn-default" %></li>
+	    </ul>
+	  </td>
+	</tr>
+</div>
