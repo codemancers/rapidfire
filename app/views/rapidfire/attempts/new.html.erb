@@ -1,4 +1,4 @@
 <%
-  defined?(remote) or remote = false
+  defined?(remote) or remote = true
 %>
 <%= render partial: 'rapidfire/attempts/form', locals: { submit_text: t('rapidfire.attempts.save'), remote: remote } %>
