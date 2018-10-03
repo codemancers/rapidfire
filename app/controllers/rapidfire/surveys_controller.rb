@@ -7,10 +7,18 @@ module Rapidfire
     end
 
     def index
-      @surveys = if defined?(Kaminari)
-        Survey.page(params[:page])
+      if can_administer?
+        @surveys = if defined?(Kaminari)
+          Rapidfire::Survey.page(params[:page])
+        else
+          Rapidfire::Survey.all
+        end
       else
-        Survey.all
+        @surveys = if defined?(Kaminari)
+          Rapidfire::Survey.joins(:attempts).where("rapidfire_attempts.user_id = ?", current_user.id).page(params[:page])
+        else
+          Rapidfire::Survey.joins(:attempts).where("rapidfire_attempts.user_id = ?", current_user.id).all
+        end
       end
     end
 

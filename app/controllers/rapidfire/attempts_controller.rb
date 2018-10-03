@@ -4,6 +4,8 @@ module Rapidfire
       before_action :find_survey!
     else
       before_filter :find_survey!
+      before_filter :check_resubmit_availability, only: [:create]
+      after_filter :update_created_data, only: [:create]
     end
 
     def new
@@ -29,6 +31,11 @@ module Rapidfire
       end
     end
 
+    def show
+      @attempt_answers = Rapidfire::Answer.where(attempt_id: params[:id])
+      @survey_questions = Rapidfire::Question.where(survey_id: params[:survey_id])
+    end
+
     def edit
       @attempt_builder = AttemptBuilder.new(attempt_params)
     end
@@ -44,6 +51,26 @@ module Rapidfire
     end
 
     private
+
+    def check_resubmit_availability
+      attempted_survey = Rapidfire::Attempt.where(user_id: current_user.id, survey_id: params[:survey_id]).last
+      if attempted_survey.present?
+        if PyrCore::AppSetting.enable_survey_resubmission == "true"
+          attempted_survey.active = 0
+          attempted_survey.save
+        else
+          respond_to do |format|
+            format.js { render "rapidfire/attempts/submitted" }
+          end
+        end
+      end
+    end
+
+    def update_created_data
+      recent_survey_attempt = Rapidfire::Attempt.where(user_id: current_user.id, survey_id: params[:survey_id]).last
+      recent_survey_attempt.active = 1
+      recent_survey_attempt.save
+    end
 
     def find_survey!
       @survey = Survey.find(params[:survey_id])

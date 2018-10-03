@@ -1,10 +1,12 @@
+<% recent_attempt = Rapidfire::Attempt.find_by(user_id: current_user.id, survey_id: survey.id, active: 1) %>
+
 <div class="survey-attempt-form">
   <tr id= "survey_<%= survey.id %>">
     <td>
       <% if can_administer? %>
-        <%= link_to survey.name, survey_questions_path(survey) %>
+        <%= link_to survey.cms_name, survey_questions_path(survey) %>
       <% else %>
-        <%= survey.name %>
+        <%= survey.cms_name %>
       <% end %>
     </td>
     <td>
@@ -13,6 +15,8 @@
         <% if can_administer? %>
           <li><%= link_to "Results", [:results, survey] %></li>
           <li><%= link_to "Delete", survey, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "view", survey_attempt_path(id: recent_attempt.id, survey_id: survey.id) %></li>
         <% end %>
       </ul>
     </td>

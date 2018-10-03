@@ -10,19 +10,29 @@
   </h4>
   <hr/>
 
-  <table>
-    <colgroup>
-      <col>
-      <col width="250">
-    </colgroup>
-    <thead>
-      <tr>
-        <th><%= t('rapidfire.questions.question') -%></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: "question", collection: @questions %>
-    </tbody>
-  </table>
-</div>
+<div>
+  <%= link_to "cms".cms,
+                      main_app.show_cms_instance_keys_path(@survey.class.to_s, @survey.id),
+                      class: "btn btn-default",
+                      target: "_blank" %> <br/><br/>
+  <%= "survey_name:".cms %>&nbsp&nbsp
+  <%= @survey.cms_name %><br/>
+  <%= "introduction:".cms %>&nbsp&nbsp
+  <%= @survey.cms_introduction %>
+ </div>
+
+<table>
+  <colgroup>
+    <col>
+    <col width="250">
+  </colgroup>
+  <thead>
+    <tr>
+      <th><%= t('rapidfire.questions.question') -%></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "question", collection: @questions %>
+  </tbody>
+</table>
