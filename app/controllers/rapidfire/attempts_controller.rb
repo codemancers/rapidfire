@@ -3,11 +3,9 @@ module Rapidfire
     if Rails::VERSION::MAJOR ==  5
       before_action :find_survey!
       before_action :check_resubmit_availability, only: [:create]
-      after_action :update_created_data, only: [:create]
     else
       before_filter :find_survey!
       before_filter :check_resubmit_availability, only: [:create]
-      after_filter :update_created_data, only: [:create]
     end
 
     def new
@@ -16,8 +14,11 @@ module Rapidfire
 
     def create
       @attempt_builder = AttemptBuilder.new(attempt_params)
-
       if @attempt_builder.save
+        previous_attempt =  Rapidfire::Attempt.find_by(user_id: current_user.id, survey_id: params[:survey_id], active: 1)
+        previous_attempt.update(active: 0) if previous_attempt.present?
+
+        @attempt_builder.attempt.update(active: 1)
         #redirect_to after_answer_path_for
         respond_to do |format|
           format.js { render "rapidfire/attempts/success" }
@@ -60,17 +61,6 @@ module Rapidfire
           format.js { render "rapidfire/attempts/submitted" }
         end
       end
-    end
-
-    def update_created_data
-      previous_survey_attempt =  Rapidfire::Attempt.where(user_id: current_user.id, survey_id: params[:survey_id]).order("rapidfire_attempts.created_at desc limit 1,1")
-      if previous_survey_attempt.present?
-        previous_survey_attempt.active = 0
-        previous_survey_attempt.save
-      end
-      recent_survey_attempt = Rapidfire::Attempt.where(user_id: current_user.id, survey_id: params[:survey_id]).last
-      recent_survey_attempt.active = 1
-      recent_survey_attempt.save
     end
 
     def find_survey!
