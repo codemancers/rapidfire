@@ -2,6 +2,8 @@ module Rapidfire
   class AttemptsController < Rapidfire::ApplicationController
     if Rails::VERSION::MAJOR ==  5
       before_action :find_survey!
+      before_action :check_resubmit_availability, only: [:create]
+      after_action :update_created_data, only: [:create]
     else
       before_filter :find_survey!
       before_filter :check_resubmit_availability, only: [:create]
@@ -53,20 +55,19 @@ module Rapidfire
     private
 
     def check_resubmit_availability
-      attempted_survey = Rapidfire::Attempt.where(user_id: current_user.id, survey_id: params[:survey_id]).last
-      if attempted_survey.present?
-        if PyrCore::AppSetting.enable_survey_resubmission == "true"
-          attempted_survey.active = 0
-          attempted_survey.save
-        else
-          respond_to do |format|
-            format.js { render "rapidfire/attempts/submitted" }
-          end
+      if PyrCore::AppSetting.enable_survey_resubmission != "true"
+        respond_to do |format|
+          format.js { render "rapidfire/attempts/submitted" }
         end
       end
     end
 
     def update_created_data
+      previous_survey_attempt =  Rapidfire::Attempt.where(user_id: current_user.id, survey_id: params[:survey_id]).order("rapidfire_attempts.created_at desc limit 1,1")
+      if previous_survey_attempt.present?
+        previous_survey_attempt.active = 0
+        previous_survey_attempt.save
+      end
       recent_survey_attempt = Rapidfire::Attempt.where(user_id: current_user.id, survey_id: params[:survey_id]).last
       recent_survey_attempt.active = 1
       recent_survey_attempt.save
