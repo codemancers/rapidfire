@@ -1,21 +1,11 @@
-<h2>
-  Surveys
-</h2>
-<h3>
-  <% if can_administer? %>
+<div class="survey-attempt-form">
+<h2>Surveys</h2>
+<p class="survey-title"><% if can_administer? %>
     <%= link_to "New Survey", new_survey_path %>
   <% end %>
-</h3>
-<h4>
-  <%= link_to t('Back to home'), '/' %>
-</h4>
-<hr/>
-
-<table>
-  <colgroup>
-    <col>
-    <col width="250">
-  </colgroup>
+</p>
+<h4><%= link_to t('Back to home'), '/' %></h4>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Survey</th>
@@ -26,7 +16,7 @@
     <%= render partial: "survey", collection: @surveys %>
   </tbody>
 </table>
-
+</div>
 <% if defined?(Kaminari) %>
   <%= paginate @surveys %>
 <% end %>

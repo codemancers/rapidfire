@@ -1,13 +1,25 @@
-<h2>
-  <%= t('rapidfire.questions.header') -%>
-</h2>
-<h3>
-  <%= link_to t('rapidfire.questions.new'), new_survey_question_path(@survey) %>
-</h3>
-<h4>
-  <%= link_to t('rapidfire.questions.back'), surveys_path(@survey) %>
-</h4>
-<hr/>
+<div class="survey-attempt-form">
+  <h2>
+    <%= t('rapidfire.questions.header') -%>
+  </h2>
+  <h3>
+    <%= link_to t('rapidfire.questions.new'), new_survey_question_path(@survey) %>
+  </h3>
+  <h4>
+    <%= link_to t('rapidfire.questions.back'), surveys_path(@survey) %>
+  </h4>
+  <hr/>
+
+<div>
+  <%= link_to "cms".cms,
+                      main_app.show_cms_instance_keys_path(@survey.class.to_s, @survey.id),
+                      class: "btn btn-default",
+                      target: "_blank" %> <br/><br/>
+  <%= "survey_name:".cms %>&nbsp&nbsp
+  <%= @survey.cms_name %><br/>
+  <%= "introduction:".cms %>&nbsp&nbsp
+  <%= @survey.cms_introduction %>
+ </div>
 
 <table>
   <colgroup>

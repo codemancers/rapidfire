@@ -1,0 +1,11 @@
+<% answer = @attempt_answers.find_by(question_id: survey_questions.id).answer_text %>
+<div>
+  <tr id= "survey_answers-show">
+    <td>
+    <%= survey_questions.question_text %>&nbsp;&nbsp;
+    </td>
+    <td>
+      <%= answer %>
+    </td>
+  </tr>
+</div>

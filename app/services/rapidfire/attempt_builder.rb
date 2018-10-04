@@ -1,6 +1,6 @@
 module Rapidfire
   class AttemptBuilder < Rapidfire::BaseService
-    attr_accessor :user, :survey, :questions, :answers, :params, :attempt_id
+    attr_accessor :user, :survey, :questions, :answers, :params, :attempt_id, :attempt
 
     def initialize(params = {})
       super(params)

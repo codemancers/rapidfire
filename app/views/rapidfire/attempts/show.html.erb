@@ -1,0 +1,6 @@
+<div>
+	<%= "saved_answers".cms %>
+	<div>
+		<%= render partial: "survey_questions", collection: @survey_questions, locals: {answers: @attempt_answers} %>
+	</div>
+</div>
