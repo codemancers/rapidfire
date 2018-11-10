@@ -40,6 +40,12 @@ matrix:
     # Numeric incompatabilty with Rails 4.1.x
     - rvm: 2.4.5
       gemfile: gemfiles/Gemfile.rails-4.1.x
+    # Numeric incompatabilty with Rails 4.0.x
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile.rails-4.0.x
+    # Numeric incompatabilty with Rails 4.1.x
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile.rails-4.1.x
 
 before_script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
