@@ -40,6 +40,9 @@ matrix:
     # Numeric incompatabilty with Rails 4.1.x
     - rvm: 2.4.5
       gemfile: gemfiles/Gemfile.rails-4.1.x
+    # Integer is incompatabilty with Rails 3.2.x
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile.rails-3.2.x
     # Numeric incompatabilty with Rails 4.0.x
     - rvm: 2.5.3
       gemfile: gemfiles/Gemfile.rails-4.0.x
