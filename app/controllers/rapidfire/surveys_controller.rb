@@ -59,7 +59,7 @@ module Rapidfire
 
     def survey_params
       if Rails::VERSION::MAJOR >= 4
-        params.require(:survey).permit(:name, :introduction)
+        params.require(:survey).permit(:name, :introduction, :after_survey_content)
       else
         params[:survey]
       end
