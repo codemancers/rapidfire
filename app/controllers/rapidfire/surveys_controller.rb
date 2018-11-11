@@ -33,6 +33,25 @@ module Rapidfire
       end
     end
 
+    def edit
+      @survey = Survey.find(params[:id])
+    end
+
+    def update
+      @survey = Survey.find(params[:id])
+      if @survey.update(survey_params)
+        respond_to do |format|
+          format.html { redirect_to surveys_path }
+          format.js
+        end
+      else
+        respond_to do |format|
+          format.html { render :edit }
+          format.js
+        end
+      end
+    end
+
     def destroy
       @survey = Survey.find(params[:id])
       @survey.destroy
