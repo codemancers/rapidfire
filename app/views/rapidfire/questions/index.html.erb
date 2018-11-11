@@ -1,7 +1,12 @@
 <h2>
   <%= t('rapidfire.questions.header') -%>
-  <%= link_to t('rapidfire.questions.new'), new_survey_question_path(@survey) %>
 </h2>
+<h3>
+  <%= link_to t('rapidfire.questions.new'), new_survey_question_path(@survey) %>
+</h3>
+<h4>
+  <%= link_to t('rapidfire.questions.back'), surveys_path(@survey) %>
+</h4>
 <hr/>
 
 <table>

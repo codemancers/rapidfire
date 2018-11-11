@@ -46,7 +46,7 @@ module Dummy
     # Enforce whitelist mode for mass assignment.
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
-    # parameters by using an attr_accessible or attr_protected declaration.
+    # parameters by using an attr_accessor or attr_protected declaration.
     if Rails::VERSION::MAJOR == 3
       config.active_record.whitelist_attributes = true
     end

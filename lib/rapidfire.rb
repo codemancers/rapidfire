@@ -12,7 +12,7 @@ module Rapidfire
 
   # configuration for setting the layout
   mattr_accessor :layout
-  
+
   def self.config
     yield(self)
   end

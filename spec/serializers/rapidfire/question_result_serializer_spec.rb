@@ -19,8 +19,28 @@ describe Rapidfire::QuestionResultSerializer do
       results.select { |r| r.question.is_a?(Rapidfire::Questions::Radio) }.first
     end
 
+    let(:source) do
+      described_class.new(aggregatable_result)
+    end
+
     let(:json_data) do
-      ActiveSupport::JSON.decode(described_class.new(aggregatable_result).to_json)
+      ActiveSupport::JSON.decode(source.to_json)
+    end
+
+    it "has valid questions to work with" do
+      expect(@question_radio.question_text).to_not be_empty
+      expect(@question_radio.survey).to eql(survey)
+      expect(survey.questions.to_a).to_not be_empty
+    end
+
+    it "has valid results to work with" do
+      expect(results).to_not be_empty
+    end
+
+    it "generates json_data" do
+      expect(source).not_to be_nil
+      expect(source.to_json).not_to eql("null")
+      expect(json_data).not_to be_nil
     end
 
     it "converts to with a hash of results" do

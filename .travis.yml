@@ -12,16 +12,20 @@ gemfile:
   - gemfiles/Gemfile.rails-4.1.x
   - gemfiles/Gemfile.rails-4.2.x
   - gemfiles/Gemfile.rails-5.0.x
+  - gemfiles/Gemfile.rails-5.1.x
 
 matrix:
   exclude:
     # has test/unit/testcase removed, and also 3.2.x is too old to support
     # ruby 2.2.x. so ignoring this combination.
-    - rvm: 2.2.6
+    - rvm: 2.2.7
       gemfile: gemfiles/Gemfile.rails-3.2.x
     # rack with rails 5 cannot be installed in ruby versions prior to 2.2.2
     - rvm: 2.1.9
       gemfile: gemfiles/Gemfile.rails-5.0.x
+    # Numeric incompatabilty with Rails 5.1.x
+    - rvm: 2.1.9
+      gemfile: gemfiles/Gemfile.rails-5.1.x
     # Numeric incompatabilty with Rails 3.2.x
     - rvm: 2.4.1
       gemfile: gemfiles/Gemfile.rails-3.2.x
