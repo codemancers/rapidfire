@@ -1,9 +1,17 @@
 module Rapidfire
   class SurveysController < Rapidfire::ApplicationController
-    before_filter :authenticate_administrator!, except: :index
+    if Rails::VERSION::MAJOR == 5
+      before_action :authenticate_administrator!, except: :index
+    else
+      before_filter :authenticate_administrator!, except: :index
+    end
 
     def index
-      @surveys = Survey.all
+      @surveys = if defined?(Kaminari)
+        Survey.page(params[:page])
+      else
+        Survey.all
+      end
     end
 
     def new
