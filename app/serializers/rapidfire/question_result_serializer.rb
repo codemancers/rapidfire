@@ -1,7 +1,5 @@
 module Rapidfire
   class QuestionResultSerializer < ActiveModel::Serializer
-    self.root = false
-
     attributes :question_type, :question_text, :results
 
     def question_type
