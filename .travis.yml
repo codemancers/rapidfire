@@ -1,10 +1,11 @@
 language: ruby
 
 rvm:
-  - 2.1.9
-  - 2.2.7
-  - 2.3.4
-  - 2.4.1
+  - 2.1.10
+  - 2.2.10
+  - 2.3.8
+  - 2.4.5
+  - 2.5.3
 
 gemfile:
   - gemfiles/Gemfile.rails-3.2.x
@@ -13,27 +14,40 @@ gemfile:
   - gemfiles/Gemfile.rails-4.2.x
   - gemfiles/Gemfile.rails-5.0.x
   - gemfiles/Gemfile.rails-5.1.x
+  - gemfiles/Gemfile.rails-5.2.x
 
 matrix:
   exclude:
     # has test/unit/testcase removed, and also 3.2.x is too old to support
     # ruby 2.2.x. so ignoring this combination.
-    - rvm: 2.2.7
+    - rvm: 2.2.10
       gemfile: gemfiles/Gemfile.rails-3.2.x
     # rack with rails 5 cannot be installed in ruby versions prior to 2.2.2
-    - rvm: 2.1.9
+    - rvm: 2.1.10
       gemfile: gemfiles/Gemfile.rails-5.0.x
     # Numeric incompatabilty with Rails 5.1.x
-    - rvm: 2.1.9
+    - rvm: 2.1.10
       gemfile: gemfiles/Gemfile.rails-5.1.x
+    # Rails 5.2.x doesn't support ruby 2.1.x
+    - rvm: 2.1.10
+      gemfile: gemfiles/Gemfile.rails-5.2.x
     # Numeric incompatabilty with Rails 3.2.x
-    - rvm: 2.4.1
+    - rvm: 2.4.5
       gemfile: gemfiles/Gemfile.rails-3.2.x
     # Numeric incompatabilty with Rails 4.0.x
-    - rvm: 2.4.1
+    - rvm: 2.4.5
       gemfile: gemfiles/Gemfile.rails-4.0.x
     # Numeric incompatabilty with Rails 4.1.x
-    - rvm: 2.4.1
+    - rvm: 2.4.5
+      gemfile: gemfiles/Gemfile.rails-4.1.x
+    # Integer is incompatabilty with Rails 3.2.x
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile.rails-3.2.x
+    # Numeric incompatabilty with Rails 4.0.x
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile.rails-4.0.x
+    # Numeric incompatabilty with Rails 4.1.x
+    - rvm: 2.5.3
       gemfile: gemfiles/Gemfile.rails-4.1.x
 
 before_script:
