@@ -71,8 +71,8 @@ and you don't have to define it.
 Override path to redirect after answer the survey
 
 ```ruby
-# my_app/app/decorators/controllers/rapidfire/answer_groups_controller_decorator.rb
-Rapidfire::AnswerGroupsController.class_eval do
+# my_app/app/decorators/controllers/rapidfire/attempts_controller_decorator.rb
+Rapidfire::AttemptsController.class_eval do
   def after_answer_path_for
     main_app.root_path
   end
