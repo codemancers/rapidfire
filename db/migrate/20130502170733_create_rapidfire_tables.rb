@@ -1,4 +1,4 @@
-if Rails::VERSION::MAJOR == 5
+if Rails::VERSION::MAJOR >= 5
   version = [Rails::VERSION::MAJOR, Rails::VERSION::MINOR].join('.').to_f
   base = ActiveRecord::Migration[version]
 else

@@ -73,7 +73,7 @@ module Rapidfire
     end
 
     def question_params
-      if Rails::VERSION::MAJOR == 4 || Rails::VERSION::MAJOR == 5
+      if Rails::VERSION::MAJOR >= 4
         params.require(:question).permit!
       else
         params[:question]

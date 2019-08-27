@@ -12,7 +12,7 @@ describe Rapidfire::AttemptsController do
     it 'initializes answer builder with empty args' do
       survey = FactoryGirl.create(:survey)
 
-      if Rails::VERSION::MAJOR == 5
+      if Rails::VERSION::MAJOR >= 5
         expect {
           post :create, params: { survey_id: survey.id }
         }.not_to raise_error
