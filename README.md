@@ -4,7 +4,7 @@
 
 One stop solution for all survey related requirements! Its tad easy!
 
-This gem supports **rails 4.2.0+** and **rails5** with **ruby 2.4** and later.
+This gem supports **rails 4.2.0+**, **rails 5** and **rails 6** with **ruby 2.4** and later.
 
 You can see a demo of this gem [here](https://rapidfire.herokuapp.com).
 And the source code of demo [here](https://github.com/code-mancers/rapidfire-demo).
@@ -95,10 +95,10 @@ You can see them by running `bundle exec rake routes`.
    You can distribute this url so that survey takers can answer a particular survey
    of your interest.
 3. If you have an established application that uses route helpers and/or the
-   `url_for([@model1, @model2])` style, you can include your route helpers in 
-   RapidFire by adding `config/initializers/rapidfire.rb` with the 
+   `url_for([@model1, @model2])` style, you can include your route helpers in
+   RapidFire by adding `config/initializers/rapidfire.rb` with the
    following content:
-   
+
    ```ruby
    Rails.application.config.after_initialize do
      Rails.application.reload_routes!
