@@ -1,6 +1,6 @@
 module Rapidfire
   class QuestionsController < Rapidfire::ApplicationController
-    if Rails::VERSION::MAJOR ==  5
+    if Rails::VERSION::MAJOR >=  5
       before_action :authenticate_administrator!
       before_action :find_survey!
       before_action :find_question!, :only => [:edit, :update, :destroy]
