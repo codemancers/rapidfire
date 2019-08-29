@@ -1,10 +1,6 @@
 module Rapidfire
   class AttemptsController < Rapidfire::ApplicationController
-    if Rails::VERSION::MAJOR >= 5
-      before_action :find_survey!
-    else
-      before_filter :find_survey!
-    end
+    before_action :find_survey!
 
     def show
       @attempt = @survey.attempts.find_by(attempt_params_for_find)
