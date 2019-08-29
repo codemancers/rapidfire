@@ -32,7 +32,7 @@ module Rapidfire
       @attempt_builder = AttemptBuilder.new(attempt_params)
 
       if @attempt_builder.save
-        redirect_to surveys_path
+        redirect_to after_answer_path_for
       else
         render :edit
       end
@@ -57,8 +57,8 @@ module Rapidfire
 
     # Override path to redirect after answer the survey
     # Write:
-    #   # my_app/app/decorators/controllers/rapidfire/answer_groups_controller_decorator.rb
-    #   Rapidfire::AnswerGroupsController.class_eval do
+    #   # my_app/app/decorators/controllers/rapidfire/attempts_controller_decorator.rb
+    #   Rapidfire::AttemptsController.class_eval do
     #     def after_answer_path_for
     #       main_app.root_path
     #     end
