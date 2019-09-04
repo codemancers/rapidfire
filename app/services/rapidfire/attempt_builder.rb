@@ -23,6 +23,8 @@ module Rapidfire
           answer.answer_text =
             if text.is_a?(Array)
               strip_checkbox_answers(text).join(Rapidfire.answers_delimiter)
+            elsif text.is_a?(ActionController::Parameters)
+              text.values.join(Rapidfire.answers_delimiter)
             else
               text
             end
