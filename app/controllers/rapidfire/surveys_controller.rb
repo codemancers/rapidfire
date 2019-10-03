@@ -1,10 +1,6 @@
 module Rapidfire
   class SurveysController < Rapidfire::ApplicationController
-    if Rails::VERSION::MAJOR == 5
-      before_action :authenticate_administrator!, except: :index
-    else
-      before_filter :authenticate_administrator!, except: :index
-    end
+    before_action :authenticate_administrator!, except: :index
 
     def index
       @surveys = if defined?(Kaminari)
@@ -77,11 +73,7 @@ module Rapidfire
     private
 
     def survey_params
-      if Rails::VERSION::MAJOR >= 4
-        params.require(:survey).permit(:name, :introduction, :after_survey_content)
-      else
-        params[:survey]
-      end
+      params.require(:survey).permit(:name, :introduction, :after_survey_content)
     end
   end
 end
