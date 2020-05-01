@@ -7,7 +7,8 @@ module Rapidfire
     end
 
     def index
-      @surveys = owner_surveys_scope.all
+      params[:active] ||= "1"
+      @surveys = owner_surveys_scope.where(active: params[:active])
       @surveys = @surveys.page(params[:page]) if defined?(Kaminari)
       @surveys
     end
@@ -91,7 +92,7 @@ module Rapidfire
 
     def survey_params
       if Rails::VERSION::MAJOR >= 4
-        params.require(:survey).permit(:name, :introduction, :after_survey_content)
+        params.require(:survey).permit(:name, :introduction, :after_survey_content, :active)
       else
         params[:survey]
       end

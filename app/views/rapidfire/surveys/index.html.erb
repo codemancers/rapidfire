@@ -1,9 +1,14 @@
 <h2>
-  Surveys
+  <%= params[:active].to_i == 0 ? "In-A" : "A" %>ctive Surveys
 </h2>
 <h3>
   <% if can_administer? %>
-    <%= link_to "New Survey", new_survey_path %>
+    <%= link_to "New Survey", new_survey_path %> |
+    <% if params[:active].to_i == 0 %>
+      <%= link_to "View Active Surveys", surveys_path(active: 1) %>
+    <% else %>
+      <%= link_to "View Inactive Surveys", surveys_path(active: 0) %>
+    <% end %>
   <% end %>
 </h3>
 <h4>

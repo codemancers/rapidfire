@@ -14,6 +14,11 @@
         <li><%= link_to "Edit", edit_survey_path(survey) %></li>
         <li><%= link_to "Copy", surveys_path(copy_survey_id: survey), method: :post %></li>
         <li><%= link_to "Delete", survey, method: :delete %></li>
+        <% if survey.active? %>
+          <li><%= link_to "De-activate", survey_path(survey, survey: { active: 0 }), method: :patch %></li>
+        <% else %>
+          <li><%= link_to "Activate", survey_path(survey, survey: { active: 1 }), method: :patch %></li>
+        <% end %>
       <% end %>
     </ul>
   </td>
