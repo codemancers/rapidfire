@@ -1,41 +1,27 @@
 language: ruby
 
 rvm:
-  - 2.1.9
-  - 2.2.7
-  - 2.3.4
-  - 2.4.1
+  - 2.4.5
+  - 2.5.3
+  - 2.6.3
 
 gemfile:
-  - gemfiles/Gemfile.rails-3.2.x
-  - gemfiles/Gemfile.rails-4.0.x
-  - gemfiles/Gemfile.rails-4.1.x
   - gemfiles/Gemfile.rails-4.2.x
   - gemfiles/Gemfile.rails-5.0.x
   - gemfiles/Gemfile.rails-5.1.x
+  - gemfiles/Gemfile.rails-5.2.x
+  - gemfiles/Gemfile.rails-6.0.x
 
 matrix:
   exclude:
-    # has test/unit/testcase removed, and also 3.2.x is too old to support
-    # ruby 2.2.x. so ignoring this combination.
-    - rvm: 2.2.7
-      gemfile: gemfiles/Gemfile.rails-3.2.x
-    # rack with rails 5 cannot be installed in ruby versions prior to 2.2.2
-    - rvm: 2.1.9
-      gemfile: gemfiles/Gemfile.rails-5.0.x
-    # Numeric incompatabilty with Rails 5.1.x
-    - rvm: 2.1.9
-      gemfile: gemfiles/Gemfile.rails-5.1.x
-    # Numeric incompatabilty with Rails 3.2.x
-    - rvm: 2.4.1
-      gemfile: gemfiles/Gemfile.rails-3.2.x
-    # Numeric incompatabilty with Rails 4.0.x
-    - rvm: 2.4.1
-      gemfile: gemfiles/Gemfile.rails-4.0.x
-    # Numeric incompatabilty with Rails 4.1.x
-    - rvm: 2.4.1
-      gemfile: gemfiles/Gemfile.rails-4.1.x
-
+    # Travis by default installs bundler 2.1, rails 4.2 requires < 2.0
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile.rails-4.2.x
+    - rvm: 2.6.3
+      gemfile: gemfiles/Gemfile.rails-4.2.x
+    # Rails 6.0.x doesn't support ruby prior to ruby 2.5.0
+    - rvm: 2.4.5
+      gemfile: gemfiles/Gemfile.rails-6.0.x
 before_script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
 

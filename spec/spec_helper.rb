@@ -71,3 +71,12 @@ RSpec.configure do |config|
   #     end
   config.infer_spec_type_from_file_location!
 end
+
+
+# Configure shoulda matchers
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end

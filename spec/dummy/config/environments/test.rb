@@ -11,15 +11,7 @@ Dummy::Application.configure do
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
 
-  if Rails::VERSION::MAJOR == 4 || Rails::VERSION::MAJOR == 5
-    config.eager_load = false
-  else
-    # Log error messages when you accidentally call methods on nil
-    config.whiny_nils = true
-
-    # Raise exception on mass assignment protection for Active Record models
-    config.active_record.mass_assignment_sanitizer = :strict
-  end
+  config.eager_load = false
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true

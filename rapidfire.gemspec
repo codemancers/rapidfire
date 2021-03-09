@@ -20,9 +20,8 @@ There is breaking delimiter change when upgrading to version 2.0.0.
 Please see Readme for more information.
 PIM
 
-  s.add_dependency 'rails', '>= 3.2.13', '< 6.2'
-  s.add_dependency 'active_model_serializers', '~> 0.8.1'
-
+  s.add_dependency 'rails', '>= 3.2.13'
+  s.add_dependency 'active_model_serializers', '~> 0.10.0'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails', '~> 3.6.1'
   s.add_development_dependency 'shoulda'
