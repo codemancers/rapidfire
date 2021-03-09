@@ -8,7 +8,7 @@ namespace :rapidfire do
 
           new_answer_options = question.answer_options.split(',')
             .join(Rapidfire.answers_delimiter)
-          question.update_attributes!(answer_options: new_answer_options)
+          question.update!(answer_options: new_answer_options)
         end
       end
     end

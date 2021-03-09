@@ -48,7 +48,7 @@ module Rapidfire
     end
 
     def update_question
-      @question.update_attributes(to_question_params)
+      @question.update(to_question_params)
     end
 
     def to_question_params
