@@ -53,6 +53,7 @@ module Rapidfire
 
     def to_question_params
       {
+        :type => type,
         :survey => survey,
         :question_text  => question_text,
         :position => position,
