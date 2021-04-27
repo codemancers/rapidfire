@@ -9,6 +9,7 @@ module Rapidfire
        Rapidfire::Questions::Radio,
        Rapidfire::Questions::Select,
        Rapidfire::Questions::Short,
+       Rapidfire::Questions::Information,
       ]
 
     QUESTION_TYPES = AVAILABLE_QUESTIONS.inject({}) do |result, question|
