@@ -25,7 +25,7 @@ module Rapidfire
         header = []
         header += Rapidfire::Survey.csv_user_attributes
         questions.each do |question|
-          header << question.question_text
+          header << ActionView::Base.full_sanitizer.sanitize(question.question_text, :tags => [], :attributes => [])
         end
         csv << header
         attempts.where(SurveyResults.filter(filter, 'id')).each do |attempt|
