@@ -1,6 +1,6 @@
 require 'csv'
 module Rapidfire
-  class Survey < ActiveRecord::Base
+  class Survey < ApplicationRecord
     belongs_to :owner, :polymorphic => true
     has_many  :attempts
     has_many  :questions

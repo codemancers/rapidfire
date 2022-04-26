@@ -1,5 +1,5 @@
 module Rapidfire
-  class Question < ActiveRecord::Base
+  class Question < ApplicationRecord
     belongs_to :survey, :inverse_of => :questions
     has_many   :answers
 

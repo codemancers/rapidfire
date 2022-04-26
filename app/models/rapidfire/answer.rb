@@ -1,5 +1,5 @@
 module Rapidfire
-  class Answer < ActiveRecord::Base
+  class Answer < ApplicationRecord
     belongs_to :question
     belongs_to :attempt, inverse_of: :answers
 
