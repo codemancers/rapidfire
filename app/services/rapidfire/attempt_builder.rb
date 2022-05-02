@@ -30,7 +30,7 @@ module Rapidfire
           end
       end
 
-      @attempt.save!(options)
+      @attempt.save!
     end
 
     def save(options = {})
