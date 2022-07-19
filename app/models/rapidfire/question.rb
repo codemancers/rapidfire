@@ -20,7 +20,11 @@ module Rapidfire
     end
 
     def rules
-      validation_rules || {}
+      validation_rules.symbolize_keys || {}
+    end
+
+    def validation_rules=(val)
+      super(val.stringify_keys)
     end
 
     # answer will delegate its validation to question, and question
