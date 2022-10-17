@@ -27,6 +27,7 @@ module Rapidfire
         questions.each do |question|
           header << ActionView::Base.full_sanitizer.sanitize(question.question_text, :tags => [], :attributes => [])
         end
+        header << "results updated at"
         csv << header
         attempts.where(SurveyResults.filter(filter, 'id')).each do |attempt|
           this_attempt = []
@@ -39,6 +40,8 @@ module Rapidfire
             answer = attempt.answers.detect{|a| a.question_id == question.id }.try(:answer_text)
             this_attempt << answer
           end
+
+          this_attempt << attempt.updated_at
           csv << this_attempt
         end
       end
