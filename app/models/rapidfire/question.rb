@@ -1,11 +1,12 @@
 module Rapidfire
-  class Question < ActiveRecord::Base
+  class Question < ApplicationRecord
     belongs_to :survey, :inverse_of => :questions
     has_many   :answers
 
     default_scope { order(:position) }
 
     validates :survey, :question_text, :presence => true
+    validate :type_can_change
     serialize :validation_rules
 
     def self.inherited(child)
@@ -19,7 +20,11 @@ module Rapidfire
     end
 
     def rules
-      validation_rules || {}
+      validation_rules.symbolize_keys || {}
+    end
+
+    def validation_rules=(val)
+      super(val.stringify_keys)
     end
 
     # answer will delegate its validation to question, and question
@@ -34,6 +39,12 @@ module Rapidfire
         min_max[:maximum] = rules[:maximum].to_i if rules[:maximum].present?
 
         answer.validates_length_of :answer_text, min_max
+      end
+    end
+
+    def type_can_change
+      if type_changed? && answers.any?
+        errors.add(:type, "cannot change after answers have been added")
       end
     end
   end

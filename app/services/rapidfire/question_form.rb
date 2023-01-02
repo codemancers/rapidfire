@@ -9,6 +9,7 @@ module Rapidfire
        Rapidfire::Questions::Radio,
        Rapidfire::Questions::Select,
        Rapidfire::Questions::Short,
+       Rapidfire::Questions::Information,
       ]
 
     QUESTION_TYPES = AVAILABLE_QUESTIONS.inject({}) do |result, question|
@@ -48,11 +49,12 @@ module Rapidfire
     end
 
     def update_question
-      @question.update_attributes(to_question_params)
+      @question.update(to_question_params)
     end
 
     def to_question_params
       {
+        :type => type,
         :survey => survey,
         :question_text  => question_text,
         :position => position,

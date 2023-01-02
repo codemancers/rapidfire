@@ -206,7 +206,7 @@ app/controllers
 
 app/models
   Holds models that should be named like post.rb. Models descend from
-  ActiveRecord::Base by default.
+  ApplicationRecord by default.
 
 app/views
   Holds the template files for the view that should be named like

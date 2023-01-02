@@ -1,5 +1,5 @@
 <h1>Results</h1>
-
+<%= link_to "Download CSV", params.merge(format: :csv) %>
 <%- @survey_results.each do |result| %>
   <div>
     <h4><%= result.question.question_text %></h4>
@@ -16,6 +16,7 @@
             <tr>
               <th>Option</th>
               <th>Count</th>
+              <th>Filter</th>
             </tr>
           </thead>
           <tbody>
@@ -23,6 +24,7 @@
               <tr>
                 <td><%= option %></td>
                 <td><%= count %></td>
+                <td><%= filter_link(result.question.id, option) %></th>
               </tr>
             <% end %>
           </tbody>
