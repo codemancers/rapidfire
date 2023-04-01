@@ -20,7 +20,7 @@ module Rapidfire
     end
 
     def rules
-      validation_rules.symbolize_keys || {}
+      validation_rules.present? ? validation_rules.symbolize_keys : {}
     end
 
     def validation_rules=(val)
