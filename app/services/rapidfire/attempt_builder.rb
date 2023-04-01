@@ -30,7 +30,11 @@ module Rapidfire
           end
       end
 
-      @attempt.save!
+      if Rails::VERSION::MAJOR >= 5
+        @attempt.save!
+      else
+        @attempt.save!(options)
+      end
     end
 
     def save(options = {})

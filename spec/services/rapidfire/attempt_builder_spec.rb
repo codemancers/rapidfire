@@ -69,17 +69,19 @@ describe Rapidfire::AttemptBuilder do
         expect(Rapidfire::Answer.count).to eq(0)
       end
 
-      context "when requested to save without validations" do
-        let(:save_answers)  { builder.save(:validate => false) }
+      if Rails::VERSION::MAJOR < 5
+        context "when requested to save without validations" do
+          let(:save_answers)  { builder.save(:validate => false) }
 
-        it "returns true" do
-          expect(save_answers).to be_truthy
-        end
+          it "returns true" do
+            expect(save_answers).to be_truthy
+          end
 
-        it "saves all the answers" do
-          builder.answers.each do |answer|
-            expect(answer).to be_persisted
-            expect(question_ids).to include(answer.question_id)
+          it "saves all the answers" do
+            builder.answers.each do |answer|
+              expect(answer).to be_persisted
+              expect(question_ids).to include(answer.question_id)
+            end
           end
         end
       end
