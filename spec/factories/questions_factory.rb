@@ -26,5 +26,11 @@ FactoryGirl.define do
 
     factory :q_short, :class => "Rapidfire::Questions::Short" do
     end
+
+    factory :q_file, :class => "Rapidfire::Questions::File" do
+    end
+
+    factory :q_multifile, :class => "Rapidfire::Questions::MultiFile" do
+    end
   end
 end

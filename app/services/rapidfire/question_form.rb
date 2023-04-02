@@ -10,6 +10,8 @@ module Rapidfire
        Rapidfire::Questions::Select,
        Rapidfire::Questions::Short,
        Rapidfire::Questions::Information,
+       Rapidfire::Questions::File,
+       Rapidfire::Questions::MultiFile,
       ]
 
     QUESTION_TYPES = AVAILABLE_QUESTIONS.inject({}) do |result, question|

@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+def fixture_file_upload(path, mime_type)
+  Rack::Test::UploadedFile.new(Pathname.new(file_fixture_path).join(path), mime_type, false)
+end
+
 describe Rapidfire::AttemptBuilder do
   let(:survey)  { FactoryGirl.create(:survey) }
   let(:question1)  { FactoryGirl.create(:q_short, survey: survey) }
@@ -28,11 +32,6 @@ describe Rapidfire::AttemptBuilder do
     end
     let(:save_answers)  { builder.save }
 
-    before do
-      [question1, question2]
-      save_answers
-    end
-
     context "when all the answers are valid" do
       let(:answer_params) do
         {
@@ -46,6 +45,7 @@ describe Rapidfire::AttemptBuilder do
       end
 
       it "successfully saves answers" do
+        save_answers
         builder.answers.each do |answer|
           expect(answer).to be_persisted
           expect(question_ids).to include(answer.question_id)
@@ -66,6 +66,7 @@ describe Rapidfire::AttemptBuilder do
       end
 
       it "fails to save those answers" do
+        save_answers
         expect(Rapidfire::Answer.count).to eq(0)
       end
 
@@ -78,11 +79,56 @@ describe Rapidfire::AttemptBuilder do
           end
 
           it "saves all the answers" do
+            save_answers
             builder.answers.each do |answer|
               expect(answer).to be_persisted
               expect(question_ids).to include(answer.question_id)
             end
           end
+        end
+      end
+    end
+
+    if "#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}" >= "5.2"
+      context "with a single file upload question" do
+        let(:question3) { FactoryGirl.create(:q_file, survey: survey) }
+
+        let(:answer_params) do
+          {
+            question1.id.to_s => { :answer_text => "short answer" },
+            question2.id.to_s => { :answer_text => "long answer" },
+            question3.id.to_s => { :file => fixture_file_upload("one.txt", "text/plain") }
+          }
+        end
+
+        it "saves the file successfully" do
+          expect(save_answers).to be_truthy
+
+          answer = Rapidfire::Answer.last
+          expect(answer).to be_persisted
+          expect(answer.file.download).to eq("one\n")
+        end
+      end
+
+      context "with multiple files upload question" do
+        let(:question3) { FactoryGirl.create(:q_multifile, survey: survey) }
+
+        let(:answer_params) do
+          {
+            question1.id.to_s => { :answer_text => "short answer" },
+            question2.id.to_s => { :answer_text => "long answer" },
+            question3.id.to_s => { :files => [fixture_file_upload("one.txt", "text/plain"),
+                                              fixture_file_upload("two.txt", "text/plain")]}
+          }
+        end
+
+        it "saves the file successfully" do
+          expect(save_answers).to be_truthy
+
+          answer = Rapidfire::Answer.last
+          expect(answer).to be_persisted
+          expect(answer.files[0].download).to eq("one\n")
+          expect(answer.files[1].download).to eq("two\n")
         end
       end
     end

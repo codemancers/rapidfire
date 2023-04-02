@@ -28,6 +28,13 @@ module Rapidfire
           else
             text
           end
+
+        case answer.question
+        when Rapidfire::Questions::MultiFile
+          answer.files = answer_attributes[:files]
+        when Rapidfire::Questions::File
+          answer.file = answer_attributes[:file]
+        end
       end
 
       if Rails::VERSION::MAJOR >= 5
@@ -39,7 +46,7 @@ module Rapidfire
 
     def save(options = {})
       save!(options)
-    rescue ActiveRecord::ActiveRecordError => e
+    rescue ActiveRecord::ActiveRecordError => _e
       # repopulate answers here in case of failure as they are not getting updated
       @answers = @survey.questions.collect do |question|
         @attempt.answers.find { |a| a.question_id == question.id }
@@ -48,6 +55,7 @@ module Rapidfire
     end
 
     private
+
     def build_attempt(attempt_id)
       if attempt_id.present?
         @attempt = Attempt.find(attempt_id)
