@@ -23,6 +23,8 @@ jobs:
           - gemfiles/Gemfile.rails-5.1.x
           - gemfiles/Gemfile.rails-5.2.x
           - gemfiles/Gemfile.rails-6.0.x
+          - gemfiles/Gemfile.rails-6.1.x
+          - gemfiles/Gemfile.rails-7.0.x
     services:
       postgres:
         image: postgres:11-alpine
