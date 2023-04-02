@@ -44,6 +44,26 @@ jobs:
             ruby: 3.1.4
           - rails: 4.2.0
             ruby: 3.2.2
+          # rails 5.x.x won't support Ruby 3+
+          # https://github.com/rails/rails/issues/38426
+          - rails: 5.0.0
+            ruby: 3.0.6
+          - rails: 5.0.0
+            ruby: 3.1.4
+          - rails: 5.0.0
+            ruby: 3.2.2
+          - rails: 5.1.0
+            ruby: 3.0.6
+          - rails: 5.1.0
+            ruby: 3.1.4
+          - rails: 5.1.0
+            ruby: 3.2.2
+          - rails: 5.2.0
+            ruby: 3.0.6
+          - rails: 5.2.0
+            ruby: 3.1.4
+          - rails: 5.2.0
+            ruby: 3.2.2
           # Rails 6 needs ruby >= 2.5.0
           - rails: 6.0.0
             ruby: 2.4.10
