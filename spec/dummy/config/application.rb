@@ -49,7 +49,9 @@ module Dummy
     # Version of your assets, change this if you want to expire all your assets
     # config.assets.version = '1.0'
 
-    config.load_defaults 7.0
+    if Rails::VERSION::MAJOR >= 5
+      config.load_defaults "#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}"
+    end
   end
 end
 
