@@ -3,8 +3,7 @@ module Rapidfire
     before_action :authenticate_administrator!, except: :index
 
     def index
-      params[:active] ||= "1"
-      @surveys = owner_surveys_scope.where(active: params[:active])
+      @surveys = owner_surveys_scope.all
       @surveys = @surveys.page(params[:page]) if defined?(Kaminari)
       @surveys
     end

@@ -15,14 +15,10 @@ module Rapidfire
       question_id = question_id.to_s
       option = option.to_s
 
-      params[:filter] ||= {}
-      params[:filter][:question_ids] ||= []
-      params[:filter][:options] ||= []
-
-      params[:filter][:question_ids].map!(&:to_s)
-      params[:filter][:options].map!(&:to_s)
-
-      this_filter = params[:filter].deep_dup
+      this_filter = {
+        question_ids: (params.dig(:filter, :question_ids) || []).map(&:to_s),
+        options: (params.dig(:filter, :options) || []).map(&:to_s)
+      }
 
       if this_filter[:question_ids].include?(question_id) && this_filter[:options].include?(option)
         question_index = this_filter[:question_ids].index(question_id)
