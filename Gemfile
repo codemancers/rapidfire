@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
+gem 'rails', "~> #{ENV['RAILS_VERSION']}"
 gem 'pg'
 
 group :development, :test do
