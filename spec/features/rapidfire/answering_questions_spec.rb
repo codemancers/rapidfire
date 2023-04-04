@@ -2,20 +2,23 @@ require 'spec_helper'
 
 describe "Surveys" do
   let!(:survey) { FactoryGirl.create(:survey, name: "Question Set", introduction: "Some introduction") }
-  let!(:question1) { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question", validation_rules: { presence: "1" })  }
-  let!(:question2) { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
-  let!(:question3) { FactoryGirl.create(:q_checkbox, survey: survey, question_text: "Checkbox question") }
-  let!(:question4) { FactoryGirl.create(:q_checkbox, survey: survey, question_text: "Checkbox question", validation_rules: { presence: "1" }) }
-
-  before do
-    visit rapidfire.new_survey_attempt_path(survey)
-  end
 
   it "displays survey introduction" do
+    visit rapidfire.new_survey_attempt_path(survey)
+
     expect(page).to have_content "Some introduction"
   end
 
   describe "Answering Questions" do
+    let!(:question1) { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question", validation_rules: { presence: "1" })  }
+    let!(:question2) { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
+    let!(:question3) { FactoryGirl.create(:q_checkbox, survey: survey, question_text: "Checkbox question") }
+    let!(:question4) { FactoryGirl.create(:q_checkbox, survey: survey, question_text: "Checkbox question", validation_rules: { presence: "1" }) }
+
+    before do
+      visit rapidfire.new_survey_attempt_path(survey)
+    end
+
     context "when all questions are answered" do
       before do
         fill_in "attempt_#{question1.id}_answer_text", with: "Long Answer"
@@ -81,6 +84,43 @@ describe "Surveys" do
 
         it "redirects to question groups path" do
           expect(current_path).to eq(rapidfire.surveys_path)
+        end
+      end
+    end
+  end
+
+  if "#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}" >= "5.2"
+    describe "Answering File uploads" do
+      context "when the question is single file upload" do
+        let!(:question1) { FactoryGirl.create(:q_file,  survey: survey, question_text: "Avatar")  }
+
+        it "persistes the file" do
+          visit rapidfire.new_survey_attempt_path(survey)
+
+          attach_file "attempt_#{question1.id}_file", file_fixture("one.txt")
+          click_button "Save"
+
+          answer = Rapidfire::Answer.first
+          expect(answer).to be_persisted
+          expect(answer.file.download).to eq("one\n")
+        end
+      end
+
+      context "when the question is multi file upload" do
+        let!(:question1) { FactoryGirl.create(:q_multifile,  survey: survey, question_text: "Images")  }
+
+        it "persistes the file" do
+          visit rapidfire.new_survey_attempt_path(survey)
+
+          attach_file "attempt_#{question1.id}_files", [file_fixture("one.txt"), file_fixture("two.txt")]
+          click_button "Save"
+
+          answer = Rapidfire::Answer.first
+          expect(answer).to be_persisted
+          expect(answer.files.length).to eq 2
+
+          expect(answer.files[0].download).to eq("two\n")
+          expect(answer.files[1].download).to eq("one\n")
         end
       end
     end

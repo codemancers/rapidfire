@@ -1,0 +1,5 @@
+<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+<div class="form-group">
+<%= f.label :answer_text, answer.question.question_text.html_safe %>
+<%= f.file_field :files, multiple: true %>
+</div>
