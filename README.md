@@ -56,7 +56,6 @@ methods `current_user` and `can_administer?` on your `ApplicationController`
 1. `current_user` : the user who is answering the survey. can be `nil`
 2. `can_administer?` : a method which determines whether current user can
    create/update survey questions.
-3. `owner_surveys_scope` : the scope of surveys for this entity, for multi-tenancy. Defaults to `Survey`
 
 Typical implementation would be:
 
@@ -68,10 +67,6 @@ class ApplicationController < ActionController::Base
 
   def can_administer?
     current_user.try(:admin?)
-  end
-
-  def owner_surveys_scope
-    current_user.surveys
   end
 end
 ```

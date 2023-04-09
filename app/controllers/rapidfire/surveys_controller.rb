@@ -3,23 +3,23 @@ module Rapidfire
     before_action :authenticate_administrator!, except: :index
 
     def index
-      @surveys = owner_surveys_scope.all
+      @surveys = Rapidfire::Survey.all
       @surveys = @surveys.page(params[:page]) if defined?(Kaminari)
       @surveys
     end
 
     def new
-      @survey = owner_surveys_scope.new
+      @survey = Rapidfire::Survey.new
     end
 
     def create
       source_survey = nil
       if params[:copy_survey_id]
-        source_survey = owner_surveys_scope.find(params[:copy_survey_id])
-        params[:survey] = source_survey.attributes.except(*%w(created_at updated_at id owner_id owner_type))
+        source_survey = Rapidfire::Survey.find(params[:copy_survey_id])
+        params[:survey] = source_survey.attributes.except(*%w(created_at updated_at id))
         params[:survey][:name] = "Copy of #{params[:survey][:name]}"
       end
-      @survey = owner_surveys_scope.new(survey_params)
+      @survey = Rapidfire::Survey.new(survey_params)
 
       if source_survey
         source_survey.questions.each do |q|
@@ -41,11 +41,11 @@ module Rapidfire
     end
 
     def edit
-      @survey = owner_surveys_scope.find(params[:id])
+      @survey = Rapidfire::Survey.find(params[:id])
     end
 
     def update
-      @survey = owner_surveys_scope.find(params[:id])
+      @survey = Rapidfire::Survey.find(params[:id])
       if @survey.update(survey_params)
         respond_to do |format|
           format.html { redirect_to surveys_path }
@@ -60,7 +60,7 @@ module Rapidfire
     end
 
     def destroy
-      @survey = owner_surveys_scope.find(params[:id])
+      @survey = Rapidfire::Survey.find(params[:id])
       @survey.destroy
 
       respond_to do |format|
@@ -71,7 +71,7 @@ module Rapidfire
 
     def results
       params[:filter] ||= {}
-      @survey = owner_surveys_scope.find(params[:id])
+      @survey = Rapidfire::Survey.find(params[:id])
       @survey_results =
         SurveyResults.new(survey: @survey).extract(filter_params)
 
