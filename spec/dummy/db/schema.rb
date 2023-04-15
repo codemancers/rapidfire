@@ -79,8 +79,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_174122) do
     t.text "introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "owner_id"
-    t.string "owner_type"
     t.text "after_survey_content"
     t.boolean "active"
   end

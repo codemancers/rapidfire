@@ -4,6 +4,14 @@
 <p><%= @survey.introduction %></p>
 
 <%= form_for([@survey, @attempt_builder], method: method) do |f| %>
+  <%- if @attempt_builder.errors.present? %>
+    <ul>
+      <%- @attempt_builder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <%- @attempt_builder.answers.each do |answer| %>
     <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
       <%= render_answer_form_helper(answer, answer_form) %>

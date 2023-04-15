@@ -56,7 +56,7 @@ describe "Surveys" do
         end
 
         it "shows error for missing answers" do
-          expect(page).to have_content("can't be blank", count: 2)
+          expect(page).to have_content("can't be blank", count: 3)
         end
 
         it "shows already populated answers" do
@@ -121,6 +121,23 @@ describe "Surveys" do
 
           expect(answer.files[0].download).to eq("two\n")
           expect(answer.files[1].download).to eq("one\n")
+        end
+      end
+
+      context "when persisting a file fails" do
+        let!(:question1) { FactoryGirl.create(:q_file,  survey: survey, question_text: "Avatar")  }
+
+        it "bubbles up the error" do
+          visit rapidfire.new_survey_attempt_path(survey)
+
+          expect_any_instance_of(Rapidfire::Answer).to receive("file_attachment=") do
+            raise ActiveRecord::ActiveRecordError.new("Can't save the file")
+          end
+
+          attach_file "attempt_#{question1.id}_file", file_fixture("one.txt")
+          click_button "Save"
+
+          expect(page).to have_content("Can't save the file")
         end
       end
     end
