@@ -94,6 +94,21 @@ describe "Surveys" do
         expect(page).not_to have_link "New Survey"
       end
     end
+
+    context "when creating a survey fails" do
+      before do
+        allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
+      end
+
+      it "throws an error message" do
+        visit rapidfire.root_path
+        click_link "New Survey"
+
+        click_button "Create Survey"
+
+        expect(page).to have_content "Name can't be blank"
+      end
+    end
   end
 
   describe "EDITING Surveys" do
