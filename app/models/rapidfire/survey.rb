@@ -16,7 +16,7 @@ module Rapidfire
     end
 
     def self.csv_user_attributes
-      @@csv_user_attributes || []
+      @@csv_user_attributes ||= []
     end
 
     def results_to_csv(filter)
