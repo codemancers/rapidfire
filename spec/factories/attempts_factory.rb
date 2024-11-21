@@ -1,5 +1,5 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :attempt, :class => "Rapidfire::Attempt" do
-    survey  { FactoryGirl.create(:survey) }
+    survey  { FactoryBot.create(:survey) }
   end
 end

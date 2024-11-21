@@ -6,7 +6,7 @@ describe Rapidfire::Questions::Select do
   end
 
   describe "#options" do
-    let(:question)  { FactoryGirl.create(:q_select) }
+    let(:question)  { FactoryBot.create(:q_select) }
 
     it "returns options" do
       expect(question.options).to match_array(["mac", "windows"])
@@ -14,8 +14,8 @@ describe Rapidfire::Questions::Select do
   end
 
   describe "validate_answer" do
-    let(:question)  { FactoryGirl.create(:q_select, validation_rules: validation_rules) }
-    let(:answer)    { FactoryGirl.build(:answer, question: question, answer_text: answer_text) }
+    let(:question)  { FactoryBot.create(:q_select, validation_rules: validation_rules) }
+    let(:answer)    { FactoryBot.build(:answer, question: question, answer_text: answer_text) }
     before  { answer.valid? }
 
     context "when there are no validation rules" do

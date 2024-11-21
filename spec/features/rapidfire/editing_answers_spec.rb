@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe "Surveys" do
-  let(:survey)  { FactoryGirl.create(:survey, name: "Question Set") }
-  let(:question1)  { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question", validation_rules: { presence: "1" })  }
-  let(:question2)  { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
-  let(:attempt) { FactoryGirl.create(:attempt, survey: survey) }
-  let!(:answer1) { FactoryGirl.create(:answer, attempt: attempt, question: question1, answer_text: "Long Answer") }
-  let!(:answer2) { FactoryGirl.create(:answer, attempt: attempt, question: question2, answer_text: "Short Answer") }
+  let(:survey)  { FactoryBot.create(:survey, name: "Question Set") }
+  let(:question1)  { FactoryBot.create(:q_long,  survey: survey, question_text: "Long Question", validation_rules: { presence: "1" })  }
+  let(:question2)  { FactoryBot.create(:q_short, survey: survey, question_text: "Short Question") }
+  let(:attempt) { FactoryBot.create(:attempt, survey: survey) }
+  let!(:answer1) { FactoryBot.create(:answer, attempt: attempt, question: question1, answer_text: "Long Answer") }
+  let!(:answer2) { FactoryBot.create(:answer, attempt: attempt, question: question2, answer_text: "Short Answer") }
   before do
     visit rapidfire.edit_survey_attempt_path(survey, attempt)
   end

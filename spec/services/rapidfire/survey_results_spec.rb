@@ -4,7 +4,7 @@ describe Rapidfire::SurveyResults do
   include Rapidfire::QuestionSpecHelper
   include Rapidfire::AnswerSpecHelper
 
-  let(:survey) { FactoryGirl.create(:survey) }
+  let(:survey) { FactoryBot.create(:survey) }
 
   describe '#extract' do
     before do

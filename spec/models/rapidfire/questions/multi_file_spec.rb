@@ -16,8 +16,8 @@ describe Rapidfire::Questions::MultiFile do
 
   if "#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}" >= "5.2"
     describe "validate_answer" do
-      let(:question) { FactoryGirl.create(:q_multifile, validation_rules: validation_rules) }
-      let(:answer) { FactoryGirl.build(:answer, question: question, files: files) }
+      let(:question) { FactoryBot.create(:q_multifile, validation_rules: validation_rules) }
+      let(:answer) { FactoryBot.build(:answer, question: question, files: files) }
       before  { answer.valid? }
 
       context "when there are no validation rules" do

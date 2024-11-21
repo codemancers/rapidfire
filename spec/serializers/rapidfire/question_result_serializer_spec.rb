@@ -4,7 +4,7 @@ describe Rapidfire::QuestionResultSerializer do
   include Rapidfire::QuestionSpecHelper
   include Rapidfire::AnswerSpecHelper
 
-  let(:survey) { FactoryGirl.create(:survey) }
+  let(:survey) { FactoryBot.create(:survey) }
   let(:results) do
     Rapidfire::SurveyResults.new(survey: survey).extract
   end

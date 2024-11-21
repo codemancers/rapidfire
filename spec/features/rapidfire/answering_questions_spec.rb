@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Surveys" do
-  let!(:survey) { FactoryGirl.create(:survey, name: "Question Set", introduction: "Some introduction") }
+  let!(:survey) { FactoryBot.create(:survey, name: "Question Set", introduction: "Some introduction") }
 
   it "displays survey introduction" do
     visit rapidfire.new_survey_attempt_path(survey)
@@ -10,10 +10,10 @@ describe "Surveys" do
   end
 
   describe "Answering Questions" do
-    let!(:question1) { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question", validation_rules: { presence: "1" })  }
-    let!(:question2) { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
-    let!(:question3) { FactoryGirl.create(:q_checkbox, survey: survey, question_text: "Checkbox question") }
-    let!(:question4) { FactoryGirl.create(:q_checkbox, survey: survey, question_text: "Checkbox question", validation_rules: { presence: "1" }) }
+    let!(:question1) { FactoryBot.create(:q_long,  survey: survey, question_text: "Long Question", validation_rules: { presence: "1" })  }
+    let!(:question2) { FactoryBot.create(:q_short, survey: survey, question_text: "Short Question") }
+    let!(:question3) { FactoryBot.create(:q_checkbox, survey: survey, question_text: "Checkbox question") }
+    let!(:question4) { FactoryBot.create(:q_checkbox, survey: survey, question_text: "Checkbox question", validation_rules: { presence: "1" }) }
 
     before do
       visit rapidfire.new_survey_attempt_path(survey)
@@ -92,7 +92,7 @@ describe "Surveys" do
   if "#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}" >= "5.2"
     describe "Answering File uploads" do
       context "when the question is single file upload" do
-        let!(:question1) { FactoryGirl.create(:q_file,  survey: survey, question_text: "Avatar")  }
+        let!(:question1) { FactoryBot.create(:q_file,  survey: survey, question_text: "Avatar")  }
 
         it "persistes the file" do
           visit rapidfire.new_survey_attempt_path(survey)
@@ -107,7 +107,7 @@ describe "Surveys" do
       end
 
       context "when the question is multi file upload" do
-        let!(:question1) { FactoryGirl.create(:q_multifile,  survey: survey, question_text: "Images")  }
+        let!(:question1) { FactoryBot.create(:q_multifile,  survey: survey, question_text: "Images")  }
 
         it "persistes the file" do
           visit rapidfire.new_survey_attempt_path(survey)
@@ -125,7 +125,7 @@ describe "Surveys" do
       end
 
       context "when persisting a file fails" do
-        let!(:question1) { FactoryGirl.create(:q_file,  survey: survey, question_text: "Avatar")  }
+        let!(:question1) { FactoryBot.create(:q_file,  survey: survey, question_text: "Avatar")  }
 
         it "bubbles up the error" do
           visit rapidfire.new_survey_attempt_path(survey)

@@ -10,7 +10,7 @@ describe Rapidfire::AttemptsController do
   # any default value.
   context 'when no parameters are passed' do
     it 'initializes answer builder with empty args' do
-      survey = FactoryGirl.create(:survey)
+      survey = FactoryBot.create(:survey)
 
       if Rails::VERSION::MAJOR >= 5
         expect {

@@ -4,7 +4,7 @@ require File.expand_path("../dummy/config/environment", __FILE__)
 require 'rspec/rails'
 
 require 'capybara/rails'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'database_cleaner'
 require 'shoulda'
 

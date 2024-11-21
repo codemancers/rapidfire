@@ -7,7 +7,7 @@ module Rapidfire
 
     validates :survey, :question_text, :presence => true
     validate :type_can_change
-    serialize :validation_rules
+    serialize :validation_rules, coder: YAML
 
     def self.inherited(child)
       child.instance_eval do

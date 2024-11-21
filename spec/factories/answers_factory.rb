@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :answer, :class => "Rapidfire::Answer" do
-    attempt  { FactoryGirl.create(:attempt) }
-    question      { FactoryGirl.create(:q_long)       }
-    answer_text   "hello world"
+    attempt  { FactoryBot.create(:attempt) }
+    question      { FactoryBot.create(:q_long)       }
+    answer_text   { "hello world" }
   end
 end

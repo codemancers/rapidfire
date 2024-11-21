@@ -4,9 +4,9 @@ describe "Surveys" do
   include Rapidfire::QuestionSpecHelper
   include Rapidfire::AnswerSpecHelper
 
-  let(:survey)  { FactoryGirl.create(:survey, name: "Question Set") }
-  let(:question1)  { FactoryGirl.create(:q_long,  survey: survey, question_text: "Long Question")  }
-  let(:question2)  { FactoryGirl.create(:q_short, survey: survey, question_text: "Short Question") }
+  let(:survey)  { FactoryBot.create(:survey, name: "Question Set") }
+  let(:question1)  { FactoryBot.create(:q_long,  survey: survey, question_text: "Long Question")  }
+  let(:question2)  { FactoryBot.create(:q_short, survey: survey, question_text: "Short Question") }
   before do
     [question1, question2]
   end

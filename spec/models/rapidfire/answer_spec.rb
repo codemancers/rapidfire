@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Rapidfire::Answer do
   describe "Validations" do
-    subject { FactoryGirl.build(:answer) }
+    subject { FactoryBot.build(:answer) }
     it { is_expected.to validate_presence_of(:question)      }
     it { is_expected.to validate_presence_of(:attempt)  }
 
     context "when validations are run" do
-      let(:answer)  { FactoryGirl.build(:answer) }
+      let(:answer)  { FactoryBot.build(:answer) }
 
       it "delegates validation of answer text to question" do
         expect(answer.question).to receive(:validate_answer).with(answer).once

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Rapidfire::QuestionForm do
-  let(:survey)  { FactoryGirl.create(:survey) }
+  let(:survey)  { FactoryBot.create(:survey) }
 
   describe "Creation" do
     let(:proxy)  { described_class.new(survey: survey) }
@@ -19,7 +19,7 @@ describe Rapidfire::QuestionForm do
     end
 
     context "when a question is passed" do
-      let(:question)  { FactoryGirl.create(:q_checkbox, survey: survey) }
+      let(:question)  { FactoryBot.create(:q_checkbox, survey: survey) }
       let(:proxy)     { described_class.new(survey: survey, question: question) }
 
       it "persists question params" do
@@ -75,7 +75,7 @@ describe Rapidfire::QuestionForm do
     end
 
     context "updating a question" do
-      let(:question)  { FactoryGirl.create(:q_checkbox, survey: survey) }
+      let(:question)  { FactoryBot.create(:q_checkbox, survey: survey) }
       let(:proxy) do
         proxy_params = params.merge(survey: survey, question: question)
         described_class.new(proxy_params)

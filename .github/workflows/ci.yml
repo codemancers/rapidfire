@@ -1,8 +1,11 @@
 name: Tests
+
 on:
+  pull_request:
   push:
     branches:
       - master
+
 jobs:
   rspec:
     runs-on: ubuntu-latest
@@ -19,6 +22,7 @@ jobs:
           - 6.0.0
           - 6.1.0
           - 7.0.0
+          - 8.0.0
         # https://www.ruby-lang.org/en/downloads/
         ruby:
           - 2.4.10 # not maintained by ruby team
@@ -81,6 +85,17 @@ jobs:
             ruby: 2.5.9
           - rails: 7.0.0
             ruby: 2.6.10
+          # Rails 8 needs ruby >= 3.1.0
+          - rails: 8.0.0
+            ruby: 2.4.10
+          - rails: 8.0.0
+            ruby: 2.5.9
+          - rails: 8.0.0
+            ruby: 2.6.10
+          - rails: 8.0.0
+            ruby: 2.7.8
+          - rails: 8.0.0
+            ruby: 3.0.6
     services:
       postgres:
         image: postgres:11-alpine

@@ -11,7 +11,7 @@ describe Rapidfire::Question do
   end
 
   describe "#rules" do
-    let(:question)  { FactoryGirl.create(:q_long, validation_rules: validation_rules) }
+    let(:question)  { FactoryBot.create(:q_long, validation_rules: validation_rules) }
 
     context "when there are no validation rules" do
       let(:validation_rules) { {} }
@@ -33,8 +33,8 @@ describe Rapidfire::Question do
   end
 
   describe "validate_answer" do
-    let(:question)  { FactoryGirl.create(:q_long, validation_rules: validation_rules) }
-    let(:answer)    { FactoryGirl.build(:answer, question: question, answer_text: answer_text) }
+    let(:question)  { FactoryBot.create(:q_long, validation_rules: validation_rules) }
+    let(:answer)    { FactoryBot.build(:answer, question: question, answer_text: answer_text) }
     before  { answer.valid? }
 
     context "when there are no validation rules" do

@@ -2,8 +2,9 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rails', "~> #{ENV['RAILS_VERSION']}"
+gem 'rails', '~> 8.0.0'
 gem 'pg'
+gem 'ostruct'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

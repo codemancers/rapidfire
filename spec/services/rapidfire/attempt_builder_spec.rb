@@ -5,9 +5,9 @@ def fixture_file_upload(path, mime_type)
 end
 
 describe Rapidfire::AttemptBuilder do
-  let(:survey)  { FactoryGirl.create(:survey) }
-  let(:question1)  { FactoryGirl.create(:q_short, survey: survey) }
-  let(:question2)  { FactoryGirl.create(:q_long, survey: survey,
+  let(:survey)  { FactoryBot.create(:survey) }
+  let(:question1)  { FactoryBot.create(:q_short, survey: survey) }
+  let(:question2)  { FactoryBot.create(:q_long, survey: survey,
                                         validation_rules: { presence: "1" }) }
 
   describe "Creation" do
@@ -91,7 +91,7 @@ describe Rapidfire::AttemptBuilder do
 
     if "#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}" >= "5.2"
       context "with a single file upload question" do
-        let(:question3) { FactoryGirl.create(:q_file, survey: survey) }
+        let(:question3) { FactoryBot.create(:q_file, survey: survey) }
 
         let(:answer_params) do
           {
@@ -111,7 +111,7 @@ describe Rapidfire::AttemptBuilder do
       end
 
       context "with multiple files upload question" do
-        let(:question3) { FactoryGirl.create(:q_multifile, survey: survey) }
+        let(:question3) { FactoryBot.create(:q_multifile, survey: survey) }
 
         let(:answer_params) do
           {

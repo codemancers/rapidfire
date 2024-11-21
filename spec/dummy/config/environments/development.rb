@@ -21,5 +21,5 @@ Dummy::Application.configure do
   config.whiny_nils = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  # config.assets.debug = true
 end
