@@ -4,8 +4,8 @@ One stop solution for all survey related requirements! Its tad easy!
 
 This gem supports:
 
-- **rails**: 4.2, 5.0, 5.1, 5.2, 6.0, 6.1 and 7.0
-- **ruby**: 2.4, 2.5, 2.6, 2.7, 3.0, 3.1 and 3.2
+- **rails**: 7.0, 7.1, 7.2 and 8.0
+- **ruby**: 3.1, 3.2 and 3.3
 
 NOTE: Some combinations won't be supported. Please check CI for the ignored ones.
 
@@ -148,7 +148,7 @@ GET /rapidfire/surveys/<survey-id>/results
 
 This new api supports two formats: `html` and `json`. The `json` format can be used with any
 javascript based chart solutions like Chart.js. An example can be seen
-[here](https://github.com/code-mancers/rapidfire-app).
+[here](https://github.com/codemancers/rapidfire-app).
 
 Diving into details of `json` format, all the questions can be categorized into
 one of the two categories:
