@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rails', '~> 8.0.0'
+gem 'rails', "~> #{ENV['RAILS_VERSION']}"
 gem 'pg'
 gem 'ostruct'
 
