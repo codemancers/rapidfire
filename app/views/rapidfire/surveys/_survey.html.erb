@@ -13,7 +13,7 @@
         <li><%= link_to "Results", [:results, survey] %></li>
         <li><%= link_to "Edit", edit_survey_path(survey) %></li>
         <li><%= link_to "Copy", surveys_path(copy_survey_id: survey), method: :post %></li>
-        <li><%= link_to "Delete", survey, method: :delete %></li>
+        <li><%= button_to "Delete", survey, method: :delete %></li>
         <% if survey.active? %>
           <li><%= link_to "De-activate", survey_path(survey, survey: { active: 0 }), method: :patch %></li>
         <% else %>
