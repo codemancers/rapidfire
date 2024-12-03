@@ -14,7 +14,7 @@ describe "Questions" do
       visit rapidfire.survey_questions_path(survey)
 
       page.within("#question_#{question1.id}") do
-        click_link "Delete"
+        click_button "Delete"
       end
     end
 

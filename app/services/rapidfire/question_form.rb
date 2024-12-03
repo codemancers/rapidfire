@@ -22,7 +22,7 @@ module Rapidfire
 
     attr_accessor :survey, :question, :default_text, :placeholder,
       :type, :question_text, :position, :answer_options, :answer_presence,
-      :answer_minimum_length, :answer_maximum_length,
+      :answer_minimum_length, :answer_maximum_length, :files,
       :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
 
     delegate :valid?, :errors, :to => :question
@@ -47,11 +47,15 @@ module Rapidfire
         return false
       end
 
-      @question = klass.create(to_question_params)
+      @question = klass.create(to_question_params).tap do |new_question|
+        attach_files(new_question)
+      end
     end
 
     def update_question
-      @question.update(to_question_params)
+      result = @question.update(to_question_params)
+      attach_files(@question) if result
+      result
     end
 
     def to_question_params
@@ -73,11 +77,18 @@ module Rapidfire
       }
     end
 
+    def attach_files(question)
+      if files.present?
+        files.each { |f| question.files.attach(f) }
+      end
+    end
+
     def from_question_to_attributes(question)
       self.type = question.type
       self.survey  = question.survey
       self.question_text   = question.question_text
       self.position = question.position
+      self.files = question.files if question.files.attached?
       self.default_text    = question.default_text
       self.placeholder     = question.placeholder
       self.answer_options  = question.answer_options

@@ -39,6 +39,11 @@
     <%= f.text_area :answer_options, rows: 5 %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :files, "Attach Multiple Files" %>
+    <%= f.file_field :files, multiple: true %>
+  </div>
+
     <h4>Other options</h4>
     <hr/>
 
