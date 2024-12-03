@@ -2,6 +2,9 @@ module Rapidfire
   class Question < ApplicationRecord
     belongs_to :survey, :inverse_of => :questions
     has_many   :answers
+    
+    has_many_attached :files
+
 
     default_scope { order(:position) }
 

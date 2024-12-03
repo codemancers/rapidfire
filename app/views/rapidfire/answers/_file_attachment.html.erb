@@ -1,0 +1,8 @@
+<% if answer.question.files.attached? %>
+  <p><strong>Attached Files:</strong></p>
+  <% answer.question.files.each do |file| %>
+    <p>
+      <%= link_to file.filename.to_s, main_app.url_for(file), target: "_blank" %>
+    </p>
+  <% end %>
+<% end %>

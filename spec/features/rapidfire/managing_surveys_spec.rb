@@ -27,7 +27,7 @@ describe "Surveys" do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
 
         visit rapidfire.root_path
-        click_link "Delete"
+        click_button "Delete"
       end
 
       it "deletes the survey" do
