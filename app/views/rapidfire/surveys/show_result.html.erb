@@ -1,0 +1,17 @@
+<h1>Survey Result</h1>
+
+<p><strong>Survey Name:</strong> <%= @survey.name %></p>
+<p><strong>User ID:</strong> <%= @attempt.user_id %></p>
+
+<div>
+  <% @answers.each do |answer| %>
+    <div class="question-answer-pair">
+      <p><strong>Question:</strong> <%= answer.question.question_text %></p>
+      <p><strong>Answer:</strong> <%= answer.answer_text %></p>
+      <hr>
+    </div>
+  <% end %>
+</div>
+
+
+<%= link_to "Back to All Results", results_survey_path(@survey) %>

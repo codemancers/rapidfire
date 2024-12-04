@@ -72,6 +72,7 @@ module Rapidfire
     def results
       params[:filter] ||= {}
       @survey = Rapidfire::Survey.find(params[:id])
+      @survey_attempts = @survey.attempts
       @survey_results =
         SurveyResults.new(survey: @survey).extract(filter_params)
 
@@ -81,6 +82,12 @@ module Rapidfire
         format.js
         format.csv { send_data(@survey.results_to_csv(filter_params)) }
       end
+    end
+
+    def show_result
+      @survey = Rapidfire::Survey.find(params[:survey_id])
+      @attempt = Rapidfire::Attempt.find(params[:id])
+      @answers = @attempt.answers.includes(:question) 
     end
 
     private
