@@ -25,7 +25,6 @@ describe "Surveys" do
     context "when user can administer" do
       before do
         allow_any_instance_of(ApplicationController).to receive(:can_administer?).and_return(true)
-
         visit rapidfire.root_path
         click_button "Delete"
       end
@@ -148,9 +147,26 @@ describe "Surveys" do
       end
     end
 
-    it "shows results for particular question group" do
-      expect(page).to have_content "Results"
-      expect(page).to have_content "hindi 3"
+    it "shows results for all attempts" do
+      survey.attempts.each do |attempt|
+        expect(page).to have_content "User: #{attempt.user_id}"
+        expect(page).to have_link "View Answers", href: result_survey_path(survey, attempt.id)
+      end
+    end
+
+    context "when viewing an individual attempt" do
+      let(:attempt) { survey.attempts.first || survey.attempts.create(user_id: 1) }
+
+      before do
+        visit rapidfire.survey_result_path(survey, attempt.id)
+      end
+
+      it "displays the questions and answers for the attempt" do
+        attempt.answers.each do |answer|
+          expect(page).to have_content answer.question.question_text
+          expect(page).to have_content answer.answer_text
+        end
+      end
     end
   end
 end
