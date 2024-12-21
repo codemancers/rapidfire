@@ -1,10 +1,9 @@
 module Rapidfire
   class Question < ApplicationRecord
     belongs_to :survey, :inverse_of => :questions
-    has_many   :answers
-    
-    has_many_attached :files
+    has_many :answers
 
+    has_many_attached :files
 
     default_scope { order(:position) }
 
@@ -36,20 +35,12 @@ module Rapidfire
       if rules[:presence] == "1"
         case self
         when Rapidfire::Questions::File
-          if Rails::VERSION::MAJOR >= 6
-            answer.validates_presence_of :file
-          else
-            if !answer.file.attached?
-              answer.errors.add(:file, :blank)
-            end
+          if !answer.file.attached?
+            answer.errors.add(:file, :blank)
           end
         when Rapidfire::Questions::MultiFile
-          if Rails::VERSION::MAJOR >= 6
-            answer.validates_presence_of :files
-          else
-            if !answer.files.attached?
-              answer.errors.add(:files, :blank)
-            end
+          if !answer.files.attached?
+            answer.errors.add(:files, :blank)
           end
         else
           answer.validates_presence_of :answer_text
