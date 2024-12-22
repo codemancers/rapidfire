@@ -2,19 +2,19 @@ module Rapidfire
   class QuestionForm < Rapidfire::BaseService
     AVAILABLE_QUESTIONS =
       [
-       Rapidfire::Questions::Checkbox,
-       Rapidfire::Questions::Date,
-       Rapidfire::Questions::Long,
-       Rapidfire::Questions::Numeric,
-       Rapidfire::Questions::Radio,
-       Rapidfire::Questions::Select,
-       Rapidfire::Questions::Short,
-       Rapidfire::Questions::Information,
-       Rapidfire::Questions::File,
-       Rapidfire::Questions::MultiFile,
+        Rapidfire::Questions::Checkbox,
+        Rapidfire::Questions::Date,
+        Rapidfire::Questions::Long,
+        Rapidfire::Questions::Numeric,
+        Rapidfire::Questions::Radio,
+        Rapidfire::Questions::Select,
+        Rapidfire::Questions::Short,
+        Rapidfire::Questions::Information,
+        Rapidfire::Questions::File,
+        Rapidfire::Questions::MultiFile,
       ]
 
-    QUESTION_TYPES = AVAILABLE_QUESTIONS.inject({}) do |result, question|
+    QUESTION_TYPES = (AVAILABLE_QUESTIONS + Rapidfire.custom_question_types).uniq.inject({}) do |result, question|
       question_name = question.to_s.split("::").last
       result[question_name] = question.to_s
       result
@@ -38,6 +38,7 @@ module Rapidfire
     end
 
     private
+
     def create_question
       klass = nil
       if QUESTION_TYPES.values.include?(type)
@@ -62,18 +63,18 @@ module Rapidfire
       {
         :type => type,
         :survey => survey,
-        :question_text  => question_text,
+        :question_text => question_text,
         :position => position,
         :default_text => default_text,
         :placeholder => placeholder,
         :answer_options => answer_options,
         :validation_rules => {
           :presence => answer_presence,
-          :minimum  => answer_minimum_length,
-          :maximum  => answer_maximum_length,
+          :minimum => answer_minimum_length,
+          :maximum => answer_maximum_length,
           :greater_than_or_equal_to => answer_greater_than_or_equal_to,
-          :less_than_or_equal_to    => answer_less_than_or_equal_to
-        }
+          :less_than_or_equal_to => answer_less_than_or_equal_to,
+        },
       }
     end
 
@@ -85,18 +86,18 @@ module Rapidfire
 
     def from_question_to_attributes(question)
       self.type = question.type
-      self.survey  = question.survey
-      self.question_text   = question.question_text
+      self.survey = question.survey
+      self.question_text = question.question_text
       self.position = question.position
       self.files = question.files if question.files.attached?
-      self.default_text    = question.default_text
-      self.placeholder     = question.placeholder
-      self.answer_options  = question.answer_options
+      self.default_text = question.default_text
+      self.placeholder = question.placeholder
+      self.answer_options = question.answer_options
       self.answer_presence = question.rules[:presence]
       self.answer_minimum_length = question.rules[:minimum]
       self.answer_maximum_length = question.rules[:maximum]
       self.answer_greater_than_or_equal_to = question.rules[:greater_than_or_equal_to]
-      self.answer_less_than_or_equal_to    = question.rules[:less_than_or_equal_to]
+      self.answer_less_than_or_equal_to = question.rules[:less_than_or_equal_to]
     end
   end
 end

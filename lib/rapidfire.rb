@@ -13,6 +13,10 @@ module Rapidfire
   # configuration for setting the layout
   mattr_accessor :layout
 
+  #configuration for adding custom question types
+  mattr_accessor :custom_question_types
+  self.custom_question_types = []
+
   def self.config
     yield(self)
   end
