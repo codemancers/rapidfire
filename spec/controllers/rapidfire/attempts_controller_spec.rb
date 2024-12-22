@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Rapidfire::AttemptsController do
   before do
@@ -8,19 +8,13 @@ describe Rapidfire::AttemptsController do
   # this scenario is possible when there is only 1 radio button question, and
   # user has not selected any option. in this case, browser doesn't send
   # any default value.
-  context 'when no parameters are passed' do
-    it 'initializes answer builder with empty args' do
+  context "when no parameters are passed" do
+    it "initializes answer builder with empty args" do
       survey = FactoryBot.create(:survey)
 
-      if Rails::VERSION::MAJOR >= 5
-        expect {
-          post :create, params: { survey_id: survey.id }
-        }.not_to raise_error
-      else
-        expect {
-          post :create, survey_id: survey.id
-        }.not_to raise_error
-      end
+      expect {
+        post :create, params: { survey_id: survey.id }
+      }.not_to raise_error
     end
   end
 end

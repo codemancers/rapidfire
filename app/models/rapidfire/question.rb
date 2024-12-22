@@ -1,14 +1,12 @@
 module Rapidfire
   class Question < ApplicationRecord
-    belongs_to :survey, :inverse_of => :questions
-    has_many   :answers
-    
+    belongs_to :survey, inverse_of: :questions
+    has_many :answers
     has_many_attached :files
-
 
     default_scope { order(:position) }
 
-    validates :survey, :question_text, :presence => true
+    validates :survey, :question_text, presence: true
     validate :type_can_change
     serialize :validation_rules, coder: YAML
 
@@ -36,21 +34,9 @@ module Rapidfire
       if rules[:presence] == "1"
         case self
         when Rapidfire::Questions::File
-          if Rails::VERSION::MAJOR >= 6
-            answer.validates_presence_of :file
-          else
-            if !answer.file.attached?
-              answer.errors.add(:file, :blank)
-            end
-          end
+          answer.validates_presence_of :file
         when Rapidfire::Questions::MultiFile
-          if Rails::VERSION::MAJOR >= 6
-            answer.validates_presence_of :files
-          else
-            if !answer.files.attached?
-              answer.errors.add(:files, :blank)
-            end
-          end
+          answer.validates_presence_of :files
         else
           answer.validates_presence_of :answer_text
         end

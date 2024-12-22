@@ -22,8 +22,7 @@ module Rapidfire
         # strings. we will store answers as one big string separated
         # by delimiter.
         text = text.values if text.is_a?(ActionController::Parameters)
-        answer.answer_text =
-          if text.is_a?(Array)
+        answer.answer_text = if text.is_a?(Array)
             strip_checkbox_answers(text).join(Rapidfire.answers_delimiter)
           else
             text
@@ -37,11 +36,7 @@ module Rapidfire
         end
       end
 
-      if Rails::VERSION::MAJOR >= 5
-        @attempt.save!
-      else
-        @attempt.save!(options)
-      end
+      @attempt.save!
     end
 
     def save(options = {})

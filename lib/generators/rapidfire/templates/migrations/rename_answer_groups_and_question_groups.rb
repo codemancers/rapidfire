@@ -1,11 +1,4 @@
-if Rails::VERSION::MAJOR >= 5
-  version = [Rails::VERSION::MAJOR, Rails::VERSION::MINOR].join('.').to_f
-  base = ActiveRecord::Migration[version]
-else
-  base = ActiveRecord::Migration
-end
-
-class RenameAnswerGroupsAndQuestionGroups < base
+class RenameAnswerGroupsAndQuestionGroups < ActiveRecord::Migration[7.0]
   def change
     rename_table :rapidfire_answer_groups, :rapidfire_attempts
     rename_table :rapidfire_question_groups, :rapidfire_surveys
