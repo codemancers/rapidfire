@@ -1,5 +1,7 @@
 # Rapidfire
 
+This repository was touched by a sandbox connectivity test.
+
 One stop solution for all survey related requirements! Its tad easy!
 
 This gem supports:
